@@ -1,0 +1,30 @@
+PROJECT_COMPILER_FLAGS=$(FLAGS_DOPT) $(FLAGS_CV) $(FLAGS_MPI)
+
+PROJECTNAME=simpen
+
+#OVERRIDE the path to sources if necessary
+SRCPATHS=..
+
+#DEFINE THE ROOTPATH - This is the top level where there will be a make, dist, and others
+APPHOME=apps
+ROOTPATH=../..
+
+#DEFINE THE sources
+SRCS=prefexcept.cpp \
+	main.cpp \
+	simpen.cpp \
+	simpenmath.cpp \
+	simpenmdr.cpp \
+	simpreferences.cpp \
+	stringmanip.cpp
+
+#OVERRIDE the path to sources if necessary
+SRCPATHS=.. . ../galib
+
+EXTERNAL_LINKS=/home/torstenson/projects/MdrPdt/bin/lib/libga.a
+
+MAKEPATH=$(ROOTPATH)
+include $(MAKEPATH)/make.base
+
+
+

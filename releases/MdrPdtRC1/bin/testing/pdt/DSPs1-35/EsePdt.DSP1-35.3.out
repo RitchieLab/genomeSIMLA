@@ -1,0 +1,382 @@
+mdr-pdt - Multifactor Dimensionality Reduction - Pedigree Disequilibrium Test: 1.0 (0)
+Vanderbilt University
+Center for Human Genetics Research
+Marylyn Ritchie (ritchie@chgr.mc.vanderbilt.edu) & Eric Torstenson (torstenson@chgr.mc.vanderbilt.edu)
+
+Configuration:
+                                Data Source: [DSPs.Model1.35.ped]
+                            Input File Type: Pedigree Format
+                                             * Trios were expanded to valid
+                                               DSPs where parental data was present
+                    Value Denoting Affected: 2
+                  Value Denoting Unaffected: 1
+                     Total Individuals Seen: 400
+   Total individuals to be used in analysis: 400
+                            Affected Individuals: 200
+                          Unaffected Individuals: 200
+              Number of SNPS per individual: 10
+                                Results Log: Standard Out
+                           Distribution Log: EsePdt.DSP1-35.3.pdist
+                               Pedigree Log: EsePdt.DSP1-35.3.pedigree
+                                 Model Size: 1-3
+                             Risk Assesment: Based on each model's local threshold
+                             Analysis Style: Pedigree Analysis using PDT statistic
+           Model   T Statistic
+               1       9      43       9   1.372
+             1x2      18      58      18   2.364
+           1x2x3      43      79      43   4.838
+           1x2x4      36      70      36   4.303
+           1x2x5      32      64      32       4
+           1x2x6      32      74      32    3.72
+           1x2x7      30      86      30   3.235
+           1x2x8      29      75      29   3.349
+           1x2x9      32      84      32   3.491
+          1x2x10      30      64      30    3.75
+             1x3      27      65      27   3.349
+           1x3x4      42      88      42   4.477
+           1x3x5      43      83      43    4.72
+           1x3x6      39      85      39    4.23
+           1x3x7      44      96      44   4.491
+           1x3x8      39      85      39    4.23
+           1x3x9      42      88      42   4.477
+          1x3x10      40      96      40   4.082
+             1x4      16      66      16   1.969
+           1x4x5      24      54      24   3.266
+           1x4x6      20      66      20   2.462
+           1x4x7      41      85      41   4.447
+           1x4x8      24      72      24   2.828
+           1x4x9      30      96      30   3.062
+          1x4x10      32      84      32   3.491
+             1x5      14      54      14   1.905
+           1x5x6      34      80      34   3.801
+           1x5x7      28      72      28     3.3
+           1x5x8      23      71      23    2.73
+           1x5x9      36     104      36    3.53
+          1x5x10     100     104     100   9.806
+             1x6      12      66      12   1.477
+           1x6x7      34      76      34     3.9
+           1x6x8      33      89      33   3.498
+           1x6x9      30      84      30   3.273
+          1x6x10      28      82      28   3.092
+             1x7      16      54      16   2.177
+           1x7x8      27      93      27     2.8
+           1x7x9      30      82      30   3.313
+          1x7x10      25      83      25   2.744
+             1x8      16      60      16   2.066
+           1x8x9      32      90      32   3.373
+          1x8x10      31      83      31   3.403
+             1x9      14      80      14   1.565
+          1x9x10      34      86      34   3.666
+            1x10      14      70      14   1.673
+               2      14      36      14   2.333
+             2x3      32      76      32   3.671
+           2x3x4      44      84      44   4.801
+           2x3x5      41      75      41   4.734
+           2x3x6      47      89      47   4.982
+           2x3x7      45      85      45   4.881
+           2x3x8      44      84      44   4.801
+           2x3x9      44      82      44   4.859
+          2x3x10      46      94      46   4.745
+             2x4      29      71      29   3.442
+           2x4x5      36      74      36   4.185
+           2x4x6      41      91      41   4.298
+           2x4x7      48      88      48   5.117
+           2x4x8      38      76      38   4.359
+           2x4x9      42      80      42   4.696
+          2x4x10      42      86      42   4.529
+             2x5      16      52      16   2.219
+           2x5x6      34      76      34     3.9
+           2x5x7      37     101      37   3.682
+           2x5x8      28      58      28   3.677
+           2x5x9      35      83      35   3.842
+          2x5x10      99      99      99    9.95
+             2x6      24      78      24   2.717
+           2x6x7      38      80      38   4.249
+           2x6x8      37      63      37   4.662
+           2x6x9      37      79      37   4.163
+          2x6x10      38      74      38   4.417
+             2x7      22      82      22   2.429
+           2x7x8      35      83      35   3.842
+           2x7x9      37      87      37   3.967
+          2x7x10      34      76      34     3.9
+             2x8      20      50      20   2.828
+           2x8x9      42      84      42   4.583
+          2x8x10      31      67      31   3.787
+             2x9      26      68      26   3.153
+          2x9x10      40      88      40   4.264
+            2x10      24      62      24   3.048
+               3      19      87      19   2.037
+             3x4      23      73      23   2.692
+           3x4x5      35      97      35   3.554
+           3x4x6      31      81      31   3.444
+           3x4x7      42      98      42   4.243
+           3x4x8      32      92      32   3.336
+           3x4x9      42      94      42   4.332
+          3x4x10      39      91      39   4.088
+             3x5      23      79      23   2.588
+           3x5x6      45      97      45   4.569
+           3x5x7      40      94      40   4.126
+           3x5x8      31      87      31   3.324
+           3x5x9      34      84      34    3.71
+          3x5x10      97      97      97   9.849
+             3x6      25      89      25    2.65
+           3x6x7      44      88      44    4.69
+           3x6x8      38      84      38   4.146
+           3x6x9      39      87      39   4.181
+          3x6x10      39      95      39   4.001
+             3x7      31      85      31   3.362
+           3x7x8      39      83      39   4.281
+           3x7x9      40      80      40   4.472
+          3x7x10      40      98      40   4.041
+             3x8      25      73      25   2.926
+           3x8x9      46      70      46   5.498
+          3x8x10      32      90      32   3.373
+             3x9      27      75      27   3.118
+          3x9x10      42      90      42   4.427
+            3x10      27     101      27   2.687
+               4       4      32       4  0.7071
+             4x5      10      58      10   1.313
+           4x5x6      28      78      28    3.17
+           4x5x7      38      84      38   4.146
+           4x5x8      25      81      25   2.778
+           4x5x9      35      79      35   3.938
+          4x5x10      98     106      98   9.519
+             4x6      13      59      13   1.692
+           4x6x7      44      84      44   4.801
+           4x6x8      32      76      32   3.671
+           4x6x9      26      76      26   2.982
+          4x6x10      35      83      35   3.842
+             4x7      31      75      31    3.58
+           4x7x8      37      85      37   4.013
+           4x7x9      39      79      39   4.388
+          4x7x10      46      88      46   4.904
+             4x8      10      44      10   1.508
+           4x8x9      33      91      33   3.459
+          4x8x10      34      78      34    3.85
+             4x9      18      78      18   2.038
+          4x9x10      44     104      44   4.315
+            4x10      23      81      23   2.556
+               5       8      44       8   1.206
+             5x6      19      87      19   2.037
+           5x6x7      38      98      38   3.839
+           5x6x8      36      86      36   3.882
+           5x6x9      35      95      35   3.591
+          5x6x10      97      97      97   9.849
+             5x7      16      80      16   1.789
+           5x7x8      42      88      42   4.477
+           5x7x9      34      96      34    3.47
+          5x7x10      99     105      99   9.661
+             5x8      16      74      16    1.86
+           5x8x9      33      95      33   3.386
+          5x8x10      97      97      97   9.849
+             5x9      17      69      17   2.047
+          5x9x10      97      97      97   9.849
+            5x10      97      97      97   9.849
+               6      11      49      11   1.571
+             6x7      22      56      22    2.94
+           6x7x8      34      90      34   3.584
+           6x7x9      35      73      35   4.096
+          6x7x10      41     105      41   4.001
+             6x8      23      69      23   2.769
+           6x8x9      39      89      39   4.134
+          6x8x10      32      74      32    3.72
+             6x9      18      68      18   2.183
+          6x9x10      36      88      36   3.838
+            6x10      16      78      16   1.812
+               7      10      84      10   1.091
+             7x8      16      72      16   1.886
+           7x8x9      38      78      38   4.303
+          7x8x10      30      62      30    3.81
+             7x9      15      73      15   1.756
+          7x9x10      34      82      34   3.755
+            7x10      15      89      15    1.59
+               8      10      44      10   1.508
+             8x9      25      89      25    2.65
+          8x9x10      36      82      36   3.976
+            8x10      17      67      17   2.077
+               9      13      75      13   1.501
+            9x10      25      63      25    3.15
+              10      13      73      13   1.522
+
+
+Model Details
+	Model ID: 2            
+	Total Affected: 200(100.000%)       Total Unaffected: 200(100.000%)
+          Genotype 
+                2       Affected  Unaffected       Total       Ratio
+               1/1 *          49          46          95      1.0652
+               1/2 *         118         107         225      1.1028
+               2/2            33          47          80      0.7021
+		*Indicates models that are determined to be High Risk
+
+		 Heterozygote alleles are not necessarily ordered the
+		 same as they were found in the original data
+
+
+Classification Details:
+                     Correctly       Incorrectly
+                    Classified        Classified
+    Affected   167 ('High-Risk')    33 ('Low-Risk') 
+  Unaffected    47 ('Low-Risk')    153 ('High-Risk')
+              53.5000%            46.5000%         of 400
+
+
+Matched Odds Ratio: 
+                       Unaffected
+     Affected      Exposed    Unexposed      (Total)
+      Exposed          142           25          167
+    Unexposed           11           22           33
+      (Total)          153           47          200
+Matched Odds Ratio:        2.2727
+Summary: 
+  Model ID: 2
+                 Sum(D): 14
+               Sum(D*D): 36
+            T-Statistic: 2.3333
+
+
+Model Details
+	Model ID: 5x10            
+	Total Affected: 200(100.000%)       Total Unaffected: 200(100.000%)
+          Genotype 
+           5   10       Affected  Unaffected       Total       Ratio
+         1/1   1/1             0          11          11      0.0000
+         1/1   1/2 *          56          28          84      2.0000
+         1/1   2/2             0          15          15      0.0000
+         1/2   1/1 *          36          23          59      1.5652
+         1/2   1/2             0          39          39      0.0000
+         1/2   2/2 *          56          24          80      2.3333
+         2/2   1/1             0          12          12      0.0000
+         2/2   1/2 *          52          28          80      1.8571
+         2/2   2/2             0          20          20      0.0000
+		*Indicates models that are determined to be High Risk
+
+		 Heterozygote alleles are not necessarily ordered the
+		 same as they were found in the original data
+
+
+Classification Details:
+                     Correctly       Incorrectly
+                    Classified        Classified
+    Affected   200 ('High-Risk')     0 ('Low-Risk') 
+  Unaffected    97 ('Low-Risk')    103 ('High-Risk')
+              74.2500%            25.7500%         of 400
+
+
+Matched Odds Ratio: 
+                       Unaffected
+     Affected      Exposed    Unexposed      (Total)
+      Exposed          103           97          200
+    Unexposed            0            0            0
+      (Total)          103           97          200
+Matched Odds Ratio:           inf
+Summary: 
+  Model ID: 5x10
+                 Sum(D): 97
+               Sum(D*D): 97
+            T-Statistic: 9.8489
+
+
+Model Details
+	Model ID: 2x5x10            
+	Total Affected: 200(100.000%)       Total Unaffected: 200(100.000%)
+          Genotype 
+      2    5   10       Affected  Unaffected       Total       Ratio
+   1/1   1/1   1/1             0           3           3      0.0000
+   1/1   1/1   1/2 *          13           7          20      1.8571
+   1/1   1/1   2/2             0           3           3      0.0000
+   1/1   1/2   1/1 *          12           4          16      3.0000
+   1/1   1/2   1/2             0           8           8      0.0000
+   1/1   1/2   2/2 *           9           4          13      2.2500
+   1/1   2/2   1/1             0           3           3      0.0000
+   1/1   2/2   1/2 *          15           9          24      1.6667
+   1/1   2/2   2/2             0           5           5      0.0000
+   1/2   1/1   1/1             0           6           6      0.0000
+   1/2   1/1   1/2 *          30          11          41      2.7273
+   1/2   1/1   2/2             0          11          11      0.0000
+   1/2   1/2   1/1 *          19          16          35      1.1875
+   1/2   1/2   1/2             0          25          25      0.0000
+   1/2   1/2   2/2 *          39          14          53      2.7857
+   1/2   2/2   1/1             0           4           4      0.0000
+   1/2   2/2   1/2 *          30          10          40      3.0000
+   1/2   2/2   2/2             0          10          10      0.0000
+   2/2   1/1   1/1             0           2           2      0.0000
+   2/2   1/1   1/2 *          13          10          23      1.3000
+   2/2   1/1   2/2             0           1           1      0.0000
+   2/2   1/2   1/1 *           5           3           8      1.6667
+   2/2   1/2   1/2             0           6           6      0.0000
+   2/2   1/2   2/2 *           8           6          14      1.3333
+   2/2   2/2   1/1             0           5           5      0.0000
+   2/2   2/2   1/2             7           9          16      0.7778
+   2/2   2/2   2/2             0           5           5      0.0000
+		*Indicates models that are determined to be High Risk
+
+		 Heterozygote alleles are not necessarily ordered the
+		 same as they were found in the original data
+
+
+Classification Details:
+                     Correctly       Incorrectly
+                    Classified        Classified
+    Affected   193 ('High-Risk')     7 ('Low-Risk') 
+  Unaffected   106 ('Low-Risk')     94 ('High-Risk')
+              74.7500%            25.2500%         of 400
+
+
+Matched Odds Ratio: 
+                       Unaffected
+     Affected      Exposed    Unexposed      (Total)
+      Exposed           94           99          193
+    Unexposed            0            7            7
+      (Total)           94          106          200
+Matched Odds Ratio:           inf
+Summary: 
+  Model ID: 2x5x10
+                 Sum(D): 99
+               Sum(D*D): 99
+            T-Statistic: 9.9499
+
+
+Pedigree Search of 175 : 175 completed in 0.3800 seconds
+
+
+Performing 10 Permutation Tests:
+Test #  Load Time (s)             Execution Time(s)    Models Seen
+     0          0.010333                         0.390            175
+     1          0.000333                         0.420            175
+     2          0.000333                         0.460            175
+     3          0.000333                         0.410            175
+     4          0.000333                         0.370            175
+     5          0.010333                         0.380            175
+     6          0.000333                         0.340            175
+     7          0.010333                         0.400            175
+     8          0.010333                         0.430            175
+     9          0.000333                         0.430            175
+
+
+Distribution Report 1 SNP(s) per model
+	* Only models with a p-value < 0.050 are reported. 
+           T         Statistical
+Model   Statistic    Significance
+  None found
+
+
+Distribution Report 2 SNP(s) per model
+	* Only models with a p-value < 0.050 are reported. 
+               T         Statistical
+   Model   Statistic    Significance
+  None found
+
+
+Distribution Report 3 SNP(s) per model
+	* Only models with a p-value < 0.050 are reported. 
+                   T         Statistical
+       Model   Statistic    Significance
+  None found
+
+
+Top Model of the PDT Search:
+       Model  T Statstic     p Value
+           2      2.3333     p < 0.1000
+        5x10      9.8489     p < 0.1000
+      2x5x10      9.9499     p < 0.1000

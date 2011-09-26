@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>MdrPDT Change Report</title>
+</head>
+<body>
+<h1>MdrPDT Change Report</h1>
+Listed below are the changes made to MdrPDT and the versions at which
+they became available to users. The final number in the version string
+is the build number, and is automatically updated during compilation on
+certain systems. This number might increase non-sequentially for
+released builds (though, they will always increase). This is not an
+error-also, not all builds will be made available to the public
+(intermittent build increments are very possible during testing and
+verification of multiple changes). <br>
+<br>
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2"
+ cellspacing="2" rules="rows">
+  <tbody>
+    <tr>
+      <th style="background-color: rgb(168, 176, 148); width: 120px;">Date</th>
+      <th style="background-color: rgb(168, 176, 148);">Software Version</th>
+      <th style="background-color: rgb(168, 176, 148);">Problem</th>
+      <th style="background-color: rgb(168, 176, 148);">Solution</th>
+    </tr>
+    <tr>
+      <td>Jun 10, 2010</td>
+      <td>2.0.1.20</td>
+      <td>Program Segfaults when genotpes are improperly encoded</td>
+      <td>Added a check to verify each allele's encoding and reports
+correct format before exiting.</td>
+    </tr>
+    <tr>
+      <td>Jun 10, 2010</td>
+      <td>2.0.1.20</td>
+      <td>Unable to compile MdrPDT for parallelel systems</td>
+      <td>Updated make system to provide parallel capability</td>
+    </tr>
+    <tr>
+      <td>Jun 10, 2010</td>
+      <td>2.0.1.20</td>
+      <td>Manual incorrectly references CMake</td>
+      <td>Updated manual to reflect current build system</td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

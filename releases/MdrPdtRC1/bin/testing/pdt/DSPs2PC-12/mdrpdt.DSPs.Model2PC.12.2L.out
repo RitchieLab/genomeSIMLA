@@ -1,0 +1,534 @@
+copyright © Vanderbilt University 2001
+All Rights Reserved.
+Multifactor Dimensionality Reduction -PDT-II TM 
+Version 1.24b
+Compile Date: Mar 15, 2006
+
+This software is for academic use only.
+===========Reading Parameters from mdrpdt.DSPs.Model2PC.12.2L============
+INPUTFILE = DSPs.Model2PC.12.ped
+INDIVIDLIMIT = 10000
+INPUTTYPE = Extended Siblings - ped(4)
+AFFECTEDINPUTVALUE = 2
+UNAFFECTEDINPUTVALUE = 1
+Undefined parameter [GENOPDT] in custom config file [mdrpdt.DSPs.Model2PC.12.2L] on line #26
+MDRPDTTHRESH = 5.025710
+SHOWTRANSFER = ON
+LEGALMAXGENOTYPE = 3
+LEGALMINGENOTYPE = 0
+FORCEPT OFF
+MDRRANDOMSEED = 2
+RANDOMSHUFFLE = OFF
+LOCICONSIDERED = 2
+FORCELOCI = OFF
+THRESHOLDRATIO = 0.000000
+NOTRECOGNIZEDRESPONSE = -1 (Classify as *Unidentified*)
+TIECELLVALUE = 1 (Classify as *Affected*)
+MISSINGALLELECODE = 0
+MISSINGGENOTYPECODE = 0
+MISSINGACTION = 1 (Remove the missing genotype from all model evaluation.
+SHOWBESTPARTITION = ON
+SHOWCOMBOMISCLASS = ON
+SHOWMAINEFFECT = ON
+VERBOSE = OFF
+CROSSVALTESTINGCOUNT = 0
+400 paired individuals (200 pairs) produced with 10 genotypes from 400 data elements.
+200 unaffected individuals and 200 affected individuals were acquired.
+Transformed Transfer Pairs:
+ Input Line:   0 Family/Ind: 0/1 Affected Status=  Affected, Loci-> 11  11  22  12  12  12  12  12  12  12 
+ Input Line:   1 Family/Ind: 0/2 Affected Status=Unaffected, Loci-> 12  12  22  11  22  12  22  12  12  12 
+ Input Line:   0 Family/Ind: 1/1 Affected Status=  Affected, Loci-> 12  12  11  12  22  12  12  12  22  12 
+ Input Line:   3 Family/Ind: 1/2 Affected Status=Unaffected, Loci-> 12  12  12  11  11  12  12  12  22  12 
+ Input Line:   5 Family/Ind: 2/2 Affected Status=  Affected, Loci-> 12  12  12  12  12  12  12  22  12  12 
+ Input Line:   0 Family/Ind: 2/1 Affected Status=Unaffected, Loci-> 12  22  12  12  12  11  12  22  22  12 
+ Input Line:   7 Family/Ind: 3/2 Affected Status=  Affected, Loci-> 12  22  12  12  12  12  12  11  12  12 
+ Input Line:   0 Family/Ind: 3/1 Affected Status=Unaffected, Loci-> 22  22  12  22  22  22  12  11  12  11 
+ Input Line:   0 Family/Ind: 4/1 Affected Status=  Affected, Loci-> 22  12  12  12  22  12  22  22  22  11 
+ Input Line:   9 Family/Ind: 4/2 Affected Status=Unaffected, Loci-> 12  11  22  12  22  12  22  22  22  22 
+ Input Line:  11 Family/Ind: 5/2 Affected Status=  Affected, Loci-> 12  12  22  22  22  12  12  11  12  12 
+ Input Line:   0 Family/Ind: 5/1 Affected Status=Unaffected, Loci-> 11  12  22  12  22  11  22  12  12  12 
+ Input Line:  13 Family/Ind: 6/2 Affected Status=  Affected, Loci-> 11  22  22  22  11  11  12  12  12  12 
+ Input Line:   0 Family/Ind: 6/1 Affected Status=Unaffected, Loci-> 11  12  22  22  11  12  12  22  11  12 
+ Input Line:   0 Family/Ind: 7/1 Affected Status=  Affected, Loci-> 12  22  12  22  11  12  22  12  22  11 
+ Input Line:  15 Family/Ind: 7/2 Affected Status=Unaffected, Loci-> 22  22  12  12  11  12  22  11  22  12 
+ Input Line:  17 Family/Ind: 8/2 Affected Status=  Affected, Loci-> 12  22  11  12  22  12  12  12  12  12 
+ Input Line:   0 Family/Ind: 8/1 Affected Status=Unaffected, Loci-> 22  12  11  12  22  22  12  22  12  12 
+ Input Line:  19 Family/Ind: 9/2 Affected Status=  Affected, Loci-> 11  11  12  22  12  22  11  12  22  12 
+ Input Line:   0 Family/Ind: 9/1 Affected Status=Unaffected, Loci-> 12  11  12  12  11  12  11  22  22  12 
+ Input Line:   0 Family/Ind: 10/1 Affected Status=  Affected, Loci-> 12  12  12  11  12  11  12  11  22  12 
+ Input Line:  21 Family/Ind: 10/2 Affected Status=Unaffected, Loci-> 12  12  22  11  12  12  12  22  22  22 
+ Input Line:   0 Family/Ind: 11/1 Affected Status=  Affected, Loci-> 11  12  12  12  22  11  22  12  12  12 
+ Input Line:  23 Family/Ind: 11/2 Affected Status=Unaffected, Loci-> 11  12  12  12  22  11  22  12  12  22 
+ Input Line:   0 Family/Ind: 12/1 Affected Status=  Affected, Loci-> 12  12  12  11  11  12  11  12  22  12 
+ Input Line:  25 Family/Ind: 12/2 Affected Status=Unaffected, Loci-> 12  12  12  11  22  11  12  11  12  12 
+ Input Line:  27 Family/Ind: 13/2 Affected Status=  Affected, Loci-> 12  11  11  22  12  12  22  11  22  12 
+ Input Line:   0 Family/Ind: 13/1 Affected Status=Unaffected, Loci-> 11  12  11  11  12  22  22  11  12  12 
+ Input Line:   0 Family/Ind: 14/1 Affected Status=  Affected, Loci-> 12  12  12  12  12  11  22  11  22  12 
+ Input Line:  29 Family/Ind: 14/2 Affected Status=Unaffected, Loci-> 11  12  12  12  22  11  22  22  12  12 
+ Input Line:   0 Family/Ind: 15/1 Affected Status=  Affected, Loci-> 11  22  22  12  11  12  12  22  11  22 
+ Input Line:  31 Family/Ind: 15/2 Affected Status=Unaffected, Loci-> 12  12  22  22  12  12  11  22  11  22 
+ Input Line:  33 Family/Ind: 16/2 Affected Status=  Affected, Loci-> 22  11  11  22  22  12  11  11  12  12 
+ Input Line:   0 Family/Ind: 16/1 Affected Status=Unaffected, Loci-> 22  12  11  12  12  12  11  12  12  11 
+ Input Line:   0 Family/Ind: 17/1 Affected Status=  Affected, Loci-> 12  12  11  11  22  11  12  11  22  22 
+ Input Line:  35 Family/Ind: 17/2 Affected Status=Unaffected, Loci-> 12  12  11  12  12  11  12  11  12  22 
+ Input Line:   0 Family/Ind: 18/1 Affected Status=  Affected, Loci-> 22  12  22  11  12  22  12  22  12  12 
+ Input Line:  37 Family/Ind: 18/2 Affected Status=Unaffected, Loci-> 22  22  12  11  11  12  22  12  22  12 
+ Input Line:   0 Family/Ind: 19/1 Affected Status=  Affected, Loci-> 22  12  12  12  11  22  12  11  11  11 
+ Input Line:  39 Family/Ind: 19/2 Affected Status=Unaffected, Loci-> 22  12  12  22  12  22  11  11  11  11 
+ Input Line:  41 Family/Ind: 20/2 Affected Status=  Affected, Loci-> 22  11  11  12  12  12  11  22  22  12 
+ Input Line:   0 Family/Ind: 20/1 Affected Status=Unaffected, Loci-> 12  11  11  22  12  12  12  22  22  12 
+ Input Line:   0 Family/Ind: 21/1 Affected Status=  Affected, Loci-> 12  12  12  11  22  12  12  12  11  11 
+ Input Line:  43 Family/Ind: 21/2 Affected Status=Unaffected, Loci-> 11  11  12  11  12  12  12  12  11  12 
+ Input Line:   0 Family/Ind: 22/1 Affected Status=  Affected, Loci-> 11  12  12  11  11  12  11  11  12  12 
+ Input Line:  45 Family/Ind: 22/2 Affected Status=Unaffected, Loci-> 11  11  22  12  11  11  12  11  22  12 
+ Input Line:  47 Family/Ind: 23/2 Affected Status=  Affected, Loci-> 12  11  11  22  22  12  22  12  11  12 
+ Input Line:   0 Family/Ind: 23/1 Affected Status=Unaffected, Loci-> 12  11  12  22  22  11  11  12  12  12 
+ Input Line:   0 Family/Ind: 24/1 Affected Status=  Affected, Loci-> 12  12  11  22  11  12  11  12  12  12 
+ Input Line:  49 Family/Ind: 24/2 Affected Status=Unaffected, Loci-> 22  12  12  12  12  12  11  11  12  22 
+ Input Line:  51 Family/Ind: 25/2 Affected Status=  Affected, Loci-> 11  22  11  12  12  12  22  11  12  12 
+ Input Line:   0 Family/Ind: 25/1 Affected Status=Unaffected, Loci-> 12  22  12  11  11  12  22  12  22  22 
+ Input Line:   0 Family/Ind: 26/1 Affected Status=  Affected, Loci-> 22  12  12  12  12  11  12  12  12  11 
+ Input Line:  53 Family/Ind: 26/2 Affected Status=Unaffected, Loci-> 22  12  12  22  12  11  11  22  11  12 
+ Input Line:   0 Family/Ind: 27/1 Affected Status=  Affected, Loci-> 22  22  12  22  12  12  11  11  12  12 
+ Input Line:  55 Family/Ind: 27/2 Affected Status=Unaffected, Loci-> 12  22  22  12  12  12  12  11  12  22 
+ Input Line:  57 Family/Ind: 28/2 Affected Status=  Affected, Loci-> 22  11  12  12  22  11  12  22  12  11 
+ Input Line:   0 Family/Ind: 28/1 Affected Status=Unaffected, Loci-> 12  11  12  11  22  11  11  22  12  22 
+ Input Line:  59 Family/Ind: 29/2 Affected Status=  Affected, Loci-> 22  12  12  11  12  12  12  11  11  22 
+ Input Line:   0 Family/Ind: 29/1 Affected Status=Unaffected, Loci-> 22  12  22  11  12  12  22  11  12  11 
+ Input Line:   0 Family/Ind: 30/1 Affected Status=  Affected, Loci-> 11  12  12  12  11  12  12  11  12  12 
+ Input Line:  61 Family/Ind: 30/2 Affected Status=Unaffected, Loci-> 11  11  12  22  11  11  11  12  12  22 
+ Input Line:  63 Family/Ind: 31/2 Affected Status=  Affected, Loci-> 12  12  12  11  12  22  12  12  12  11 
+ Input Line:   0 Family/Ind: 31/1 Affected Status=Unaffected, Loci-> 22  12  12  12  12  12  12  12  11  11 
+ Input Line:  65 Family/Ind: 32/2 Affected Status=  Affected, Loci-> 22  11  22  22  11  12  11  12  12  11 
+ Input Line:   0 Family/Ind: 32/1 Affected Status=Unaffected, Loci-> 22  12  22  22  22  12  11  11  12  11 
+ Input Line:   0 Family/Ind: 33/1 Affected Status=  Affected, Loci-> 22  22  12  22  12  12  11  12  12  22 
+ Input Line:  67 Family/Ind: 33/2 Affected Status=Unaffected, Loci-> 22  22  12  22  22  12  11  12  12  22 
+ Input Line:  69 Family/Ind: 34/2 Affected Status=  Affected, Loci-> 22  12  22  12  11  12  12  11  22  11 
+ Input Line:   0 Family/Ind: 34/1 Affected Status=Unaffected, Loci-> 12  11  22  12  22  11  12  12  12  12 
+ Input Line:  71 Family/Ind: 35/2 Affected Status=  Affected, Loci-> 11  12  22  11  11  12  11  12  22  12 
+ Input Line:   0 Family/Ind: 35/1 Affected Status=Unaffected, Loci-> 11  22  22  12  12  12  12  22  12  12 
+ Input Line:  73 Family/Ind: 36/2 Affected Status=  Affected, Loci-> 12  12  12  12  12  12  22  12  12  12 
+ Input Line:   0 Family/Ind: 36/1 Affected Status=Unaffected, Loci-> 12  12  22  12  11  12  12  12  12  11 
+ Input Line:   0 Family/Ind: 37/1 Affected Status=  Affected, Loci-> 22  12  12  11  12  12  11  22  22  12 
+ Input Line:  75 Family/Ind: 37/2 Affected Status=Unaffected, Loci-> 22  11  12  11  12  11  12  22  22  12 
+ Input Line:  77 Family/Ind: 38/2 Affected Status=  Affected, Loci-> 12  12  22  22  12  12  22  11  22  22 
+ Input Line:   0 Family/Ind: 38/1 Affected Status=Unaffected, Loci-> 12  12  11  12  22  12  22  12  22  22 
+ Input Line:   0 Family/Ind: 39/1 Affected Status=  Affected, Loci-> 12  11  22  12  12  11  22  12  22  11 
+ Input Line:  79 Family/Ind: 39/2 Affected Status=Unaffected, Loci-> 11  11  22  12  22  11  22  12  12  22 
+ Input Line:   0 Family/Ind: 40/1 Affected Status=  Affected, Loci-> 11  11  12  12  12  12  11  12  11  22 
+ Input Line:  81 Family/Ind: 40/2 Affected Status=Unaffected, Loci-> 12  12  12  12  12  12  12  11  12  12 
+ Input Line:   0 Family/Ind: 41/1 Affected Status=  Affected, Loci-> 22  22  22  12  11  22  11  22  12  12 
+ Input Line:  83 Family/Ind: 41/2 Affected Status=Unaffected, Loci-> 12  22  22  12  12  22  12  22  12  22 
+ Input Line:   0 Family/Ind: 42/1 Affected Status=  Affected, Loci-> 12  12  12  11  12  12  12  12  12  12 
+ Input Line:  85 Family/Ind: 42/2 Affected Status=Unaffected, Loci-> 12  12  12  11  12  12  11  22  12  12 
+ Input Line:   0 Family/Ind: 43/1 Affected Status=  Affected, Loci-> 11  12  12  12  12  12  12  11  12  12 
+ Input Line:  87 Family/Ind: 43/2 Affected Status=Unaffected, Loci-> 12  11  22  22  11  12  12  12  12  11 
+ Input Line:   0 Family/Ind: 44/1 Affected Status=  Affected, Loci-> 12  22  12  11  22  12  22  12  12  12 
+ Input Line:  89 Family/Ind: 44/2 Affected Status=Unaffected, Loci-> 22  22  22  12  12  12  22  12  12  22 
+ Input Line:   0 Family/Ind: 45/1 Affected Status=  Affected, Loci-> 12  22  22  22  12  12  12  12  11  11 
+ Input Line:  91 Family/Ind: 45/2 Affected Status=Unaffected, Loci-> 22  22  22  12  12  11  11  12  11  11 
+ Input Line:  93 Family/Ind: 46/2 Affected Status=  Affected, Loci-> 12  12  22  12  12  12  11  12  11  12 
+ Input Line:   0 Family/Ind: 46/1 Affected Status=Unaffected, Loci-> 12  12  12  12  12  12  11  12  11  12 
+ Input Line:   0 Family/Ind: 47/1 Affected Status=  Affected, Loci-> 22  12  12  11  12  22  12  11  11  11 
+ Input Line:  95 Family/Ind: 47/2 Affected Status=Unaffected, Loci-> 11  11  11  11  12  11  22  11  11  11 
+ Input Line:   0 Family/Ind: 48/1 Affected Status=  Affected, Loci-> 12  12  11  12  12  12  22  12  22  11 
+ Input Line:  97 Family/Ind: 48/2 Affected Status=Unaffected, Loci-> 11  12  11  12  12  12  12  12  12  11 
+ Input Line:  99 Family/Ind: 49/2 Affected Status=  Affected, Loci-> 11  12  12  11  11  12  11  22  11  12 
+ Input Line:   0 Family/Ind: 49/1 Affected Status=Unaffected, Loci-> 11  12  22  12  11  22  11  12  12  12 
+ Input Line: 101 Family/Ind: 50/2 Affected Status=  Affected, Loci-> 22  12  12  12  12  12  11  11  11  22 
+ Input Line:   0 Family/Ind: 50/1 Affected Status=Unaffected, Loci-> 22  22  12  11  11  12  11  11  11  12 
+ Input Line: 103 Family/Ind: 51/2 Affected Status=  Affected, Loci-> 12  12  11  11  11  22  12  11  11  12 
+ Input Line:   0 Family/Ind: 51/1 Affected Status=Unaffected, Loci-> 12  22  22  12  12  12  12  12  12  12 
+ Input Line: 105 Family/Ind: 52/2 Affected Status=  Affected, Loci-> 12  11  12  12  22  12  12  12  22  12 
+ Input Line:   0 Family/Ind: 52/1 Affected Status=Unaffected, Loci-> 12  12  11  12  22  12  11  11  12  12 
+ Input Line: 107 Family/Ind: 53/2 Affected Status=  Affected, Loci-> 22  12  11  12  22  11  11  12  11  11 
+ Input Line:   0 Family/Ind: 53/1 Affected Status=Unaffected, Loci-> 22  22  11  11  22  22  12  22  11  11 
+ Input Line:   0 Family/Ind: 54/1 Affected Status=  Affected, Loci-> 11  22  22  22  12  22  11  22  12  12 
+ Input Line: 109 Family/Ind: 54/2 Affected Status=Unaffected, Loci-> 12  22  22  22  11  12  11  22  12  22 
+ Input Line: 111 Family/Ind: 55/2 Affected Status=  Affected, Loci-> 12  12  11  22  12  12  11  22  22  11 
+ Input Line:   0 Family/Ind: 55/1 Affected Status=Unaffected, Loci-> 22  11  12  12  12  12  12  22  22  12 
+ Input Line: 113 Family/Ind: 56/2 Affected Status=  Affected, Loci-> 12  12  12  12  12  12  12  22  22  12 
+ Input Line:   0 Family/Ind: 56/1 Affected Status=Unaffected, Loci-> 12  12  22  12  12  11  11  12  12  12 
+ Input Line: 115 Family/Ind: 57/2 Affected Status=  Affected, Loci-> 12  12  22  22  22  12  11  12  22  12 
+ Input Line:   0 Family/Ind: 57/1 Affected Status=Unaffected, Loci-> 12  12  12  22  12  22  11  12  22  12 
+ Input Line:   0 Family/Ind: 58/1 Affected Status=  Affected, Loci-> 22  12  12  12  12  12  11  11  12  22 
+ Input Line: 117 Family/Ind: 58/2 Affected Status=Unaffected, Loci-> 12  12  12  11  12  22  11  12  22  12 
+ Input Line:   0 Family/Ind: 59/1 Affected Status=  Affected, Loci-> 11  12  11  12  11  12  12  12  12  22 
+ Input Line: 119 Family/Ind: 59/2 Affected Status=Unaffected, Loci-> 11  22  22  22  11  12  11  12  22  22 
+ Input Line:   0 Family/Ind: 60/1 Affected Status=  Affected, Loci-> 12  11  11  22  12  22  22  12  11  22 
+ Input Line: 121 Family/Ind: 60/2 Affected Status=Unaffected, Loci-> 22  11  12  12  12  12  22  12  11  22 
+ Input Line:   0 Family/Ind: 61/1 Affected Status=  Affected, Loci-> 11  22  11  12  12  22  22  12  11  12 
+ Input Line: 123 Family/Ind: 61/2 Affected Status=Unaffected, Loci-> 11  22  11  22  12  22  22  22  12  12 
+ Input Line: 125 Family/Ind: 62/2 Affected Status=  Affected, Loci-> 12  12  11  11  11  11  12  22  12  12 
+ Input Line:   0 Family/Ind: 62/1 Affected Status=Unaffected, Loci-> 22  11  11  12  12  11  11  22  12  11 
+ Input Line: 127 Family/Ind: 63/2 Affected Status=  Affected, Loci-> 22  12  12  12  11  12  22  12  12  22 
+ Input Line:   0 Family/Ind: 63/1 Affected Status=Unaffected, Loci-> 22  11  12  12  11  12  22  12  12  22 
+ Input Line:   0 Family/Ind: 64/1 Affected Status=  Affected, Loci-> 12  12  22  11  11  22  12  22  12  11 
+ Input Line: 129 Family/Ind: 64/2 Affected Status=Unaffected, Loci-> 12  12  22  12  22  22  12  22  22  12 
+ Input Line:   0 Family/Ind: 65/1 Affected Status=  Affected, Loci-> 12  11  11  12  11  22  12  22  11  22 
+ Input Line: 131 Family/Ind: 65/2 Affected Status=Unaffected, Loci-> 12  12  11  12  12  12  22  12  11  22 
+ Input Line:   0 Family/Ind: 66/1 Affected Status=  Affected, Loci-> 22  12  22  11  12  22  22  11  12  22 
+ Input Line: 133 Family/Ind: 66/2 Affected Status=Unaffected, Loci-> 22  22  22  11  12  22  22  11  12  22 
+ Input Line: 135 Family/Ind: 67/2 Affected Status=  Affected, Loci-> 22  12  22  11  11  12  12  11  12  12 
+ Input Line:   0 Family/Ind: 67/1 Affected Status=Unaffected, Loci-> 22  12  22  22  12  12  11  12  12  12 
+ Input Line:   0 Family/Ind: 68/1 Affected Status=  Affected, Loci-> 11  11  22  11  12  12  12  11  22  12 
+ Input Line: 137 Family/Ind: 68/2 Affected Status=Unaffected, Loci-> 11  12  12  11  12  11  12  12  12  12 
+ Input Line:   0 Family/Ind: 69/1 Affected Status=  Affected, Loci-> 11  22  12  22  12  12  22  22  11  12 
+ Input Line: 139 Family/Ind: 69/2 Affected Status=Unaffected, Loci-> 11  22  12  22  12  11  22  22  11  12 
+ Input Line:   0 Family/Ind: 70/1 Affected Status=  Affected, Loci-> 22  22  12  22  11  22  12  12  12  12 
+ Input Line: 141 Family/Ind: 70/2 Affected Status=Unaffected, Loci-> 22  22  12  22  11  22  12  11  12  22 
+ Input Line:   0 Family/Ind: 71/1 Affected Status=  Affected, Loci-> 22  22  12  12  12  22  22  22  11  12 
+ Input Line: 143 Family/Ind: 71/2 Affected Status=Unaffected, Loci-> 22  22  11  12  12  22  22  22  11  12 
+ Input Line: 145 Family/Ind: 72/2 Affected Status=  Affected, Loci-> 12  11  22  12  12  12  12  11  11  11 
+ Input Line:   0 Family/Ind: 72/1 Affected Status=Unaffected, Loci-> 12  11  22  12  22  12  11  11  11  11 
+ Input Line: 147 Family/Ind: 73/2 Affected Status=  Affected, Loci-> 11  22  11  12  22  22  22  11  12  12 
+ Input Line:   0 Family/Ind: 73/1 Affected Status=Unaffected, Loci-> 12  22  12  12  22  12  12  11  11  22 
+ Input Line:   0 Family/Ind: 74/1 Affected Status=  Affected, Loci-> 11  11  22  12  11  22  12  12  12  11 
+ Input Line: 149 Family/Ind: 74/2 Affected Status=Unaffected, Loci-> 22  12  12  11  12  22  12  22  12  11 
+ Input Line: 151 Family/Ind: 75/2 Affected Status=  Affected, Loci-> 12  12  12  11  12  12  22  11  22  22 
+ Input Line:   0 Family/Ind: 75/1 Affected Status=Unaffected, Loci-> 12  12  11  11  12  11  11  11  22  22 
+ Input Line:   0 Family/Ind: 76/1 Affected Status=  Affected, Loci-> 12  12  11  12  22  12  12  11  11  11 
+ Input Line: 153 Family/Ind: 76/2 Affected Status=Unaffected, Loci-> 12  12  22  12  22  12  12  11  11  11 
+ Input Line: 155 Family/Ind: 77/2 Affected Status=  Affected, Loci-> 12  12  22  12  22  12  12  22  12  22 
+ Input Line:   0 Family/Ind: 77/1 Affected Status=Unaffected, Loci-> 12  11  22  11  12  12  22  22  12  12 
+ Input Line:   0 Family/Ind: 78/1 Affected Status=  Affected, Loci-> 12  11  12  12  11  11  11  12  12  11 
+ Input Line: 157 Family/Ind: 78/2 Affected Status=Unaffected, Loci-> 22  11  12  12  22  11  12  12  12  11 
+ Input Line:   0 Family/Ind: 79/1 Affected Status=  Affected, Loci-> 22  12  12  12  12  12  12  12  11  12 
+ Input Line: 159 Family/Ind: 79/2 Affected Status=Unaffected, Loci-> 12  12  12  12  12  11  12  12  11  11 
+ Input Line:   0 Family/Ind: 80/1 Affected Status=  Affected, Loci-> 22  11  12  12  11  11  12  12  12  11 
+ Input Line: 161 Family/Ind: 80/2 Affected Status=Unaffected, Loci-> 22  11  12  22  11  12  11  11  12  11 
+ Input Line: 163 Family/Ind: 81/2 Affected Status=  Affected, Loci-> 22  22  12  22  22  12  22  12  11  12 
+ Input Line:   0 Family/Ind: 81/1 Affected Status=Unaffected, Loci-> 22  12  22  12  22  12  22  22  11  12 
+ Input Line: 165 Family/Ind: 82/2 Affected Status=  Affected, Loci-> 22  12  22  12  12  22  22  12  12  12 
+ Input Line:   0 Family/Ind: 82/1 Affected Status=Unaffected, Loci-> 22  11  12  12  11  22  12  12  11  12 
+ Input Line: 167 Family/Ind: 83/2 Affected Status=  Affected, Loci-> 12  11  22  22  22  12  12  12  22  11 
+ Input Line:   0 Family/Ind: 83/1 Affected Status=Unaffected, Loci-> 12  12  22  12  22  12  12  12  12  12 
+ Input Line: 169 Family/Ind: 84/2 Affected Status=  Affected, Loci-> 12  22  11  12  11  12  11  22  22  12 
+ Input Line:   0 Family/Ind: 84/1 Affected Status=Unaffected, Loci-> 12  22  12  12  12  11  11  12  12  12 
+ Input Line:   0 Family/Ind: 85/1 Affected Status=  Affected, Loci-> 11  12  12  22  12  11  22  22  12  22 
+ Input Line: 171 Family/Ind: 85/2 Affected Status=Unaffected, Loci-> 11  11  12  22  12  12  12  22  12  12 
+ Input Line:   0 Family/Ind: 86/1 Affected Status=  Affected, Loci-> 12  22  11  12  12  12  12  12  22  12 
+ Input Line: 173 Family/Ind: 86/2 Affected Status=Unaffected, Loci-> 11  11  12  22  12  12  22  22  12  11 
+ Input Line:   0 Family/Ind: 87/1 Affected Status=  Affected, Loci-> 12  11  22  11  22  22  12  22  12  12 
+ Input Line: 175 Family/Ind: 87/2 Affected Status=Unaffected, Loci-> 12  11  11  12  22  12  12  12  11  22 
+ Input Line:   0 Family/Ind: 88/1 Affected Status=  Affected, Loci-> 12  12  22  22  11  11  12  11  11  12 
+ Input Line: 177 Family/Ind: 88/2 Affected Status=Unaffected, Loci-> 12  22  11  22  12  11  12  12  11  11 
+ Input Line: 179 Family/Ind: 89/2 Affected Status=  Affected, Loci-> 11  22  11  12  12  12  11  12  22  12 
+ Input Line:   0 Family/Ind: 89/1 Affected Status=Unaffected, Loci-> 11  12  12  11  11  12  12  12  22  12 
+ Input Line: 181 Family/Ind: 90/2 Affected Status=  Affected, Loci-> 12  12  12  12  12  12  11  12  12  22 
+ Input Line:   0 Family/Ind: 90/1 Affected Status=Unaffected, Loci-> 12  12  12  12  12  11  11  22  12  22 
+ Input Line:   0 Family/Ind: 91/1 Affected Status=  Affected, Loci-> 12  12  12  12  22  12  11  11  12  12 
+ Input Line: 183 Family/Ind: 91/2 Affected Status=Unaffected, Loci-> 11  12  12  12  12  22  12  11  12  12 
+ Input Line: 185 Family/Ind: 92/2 Affected Status=  Affected, Loci-> 11  11  11  22  11  22  12  11  12  12 
+ Input Line:   0 Family/Ind: 92/1 Affected Status=Unaffected, Loci-> 11  11  11  11  11  12  22  11  12  12 
+ Input Line: 187 Family/Ind: 93/2 Affected Status=  Affected, Loci-> 11  12  12  11  22  12  12  12  11  11 
+ Input Line:   0 Family/Ind: 93/1 Affected Status=Unaffected, Loci-> 11  11  11  12  22  12  12  12  11  11 
+ Input Line: 189 Family/Ind: 94/2 Affected Status=  Affected, Loci-> 11  11  11  12  22  22  12  22  11  22 
+ Input Line:   0 Family/Ind: 94/1 Affected Status=Unaffected, Loci-> 11  12  11  22  22  12  22  22  12  12 
+ Input Line: 191 Family/Ind: 95/2 Affected Status=  Affected, Loci-> 22  11  11  12  12  12  12  12  12  11 
+ Input Line:   0 Family/Ind: 95/1 Affected Status=Unaffected, Loci-> 12  12  11  22  12  22  12  12  12  11 
+ Input Line: 193 Family/Ind: 96/2 Affected Status=  Affected, Loci-> 11  12  12  11  12  22  12  12  12  12 
+ Input Line:   0 Family/Ind: 96/1 Affected Status=Unaffected, Loci-> 12  12  12  12  12  22  12  12  12  12 
+ Input Line:   0 Family/Ind: 97/1 Affected Status=  Affected, Loci-> 12  12  12  22  12  22  11  22  22  22 
+ Input Line: 195 Family/Ind: 97/2 Affected Status=Unaffected, Loci-> 12  12  22  11  22  22  11  22  12  12 
+ Input Line:   0 Family/Ind: 98/1 Affected Status=  Affected, Loci-> 12  12  22  11  12  22  12  22  11  11 
+ Input Line: 197 Family/Ind: 98/2 Affected Status=Unaffected, Loci-> 12  12  22  22  22  12  22  22  12  11 
+ Input Line:   0 Family/Ind: 99/1 Affected Status=  Affected, Loci-> 12  12  12  11  22  11  22  22  11  11 
+ Input Line: 199 Family/Ind: 99/2 Affected Status=Unaffected, Loci-> 12  12  11  11  12  11  12  22  11  11 
+ Input Line:   0 Family/Ind: 100/1 Affected Status=  Affected, Loci-> 12  11  11  12  22  22  22  11  12  22 
+ Input Line: 201 Family/Ind: 100/2 Affected Status=Unaffected, Loci-> 12  11  11  11  11  22  12  11  11  12 
+ Input Line: 203 Family/Ind: 101/2 Affected Status=  Affected, Loci-> 12  12  11  12  12  11  12  12  11  12 
+ Input Line:   0 Family/Ind: 101/1 Affected Status=Unaffected, Loci-> 11  12  12  12  12  12  22  12  12  11 
+ Input Line:   0 Family/Ind: 102/1 Affected Status=  Affected, Loci-> 22  22  12  22  12  11  22  12  22  12 
+ Input Line: 205 Family/Ind: 102/2 Affected Status=Unaffected, Loci-> 12  12  12  12  12  11  12  12  22  12 
+ Input Line:   0 Family/Ind: 103/1 Affected Status=  Affected, Loci-> 11  12  12  12  22  11  12  22  11  11 
+ Input Line: 207 Family/Ind: 103/2 Affected Status=Unaffected, Loci-> 12  12  11  22  22  12  12  22  12  12 
+ Input Line: 209 Family/Ind: 104/2 Affected Status=  Affected, Loci-> 11  22  11  12  12  11  11  22  11  12 
+ Input Line:   0 Family/Ind: 104/1 Affected Status=Unaffected, Loci-> 11  12  11  22  22  11  11  22  12  12 
+ Input Line:   0 Family/Ind: 105/1 Affected Status=  Affected, Loci-> 11  12  11  12  22  11  11  12  11  11 
+ Input Line: 211 Family/Ind: 105/2 Affected Status=Unaffected, Loci-> 11  12  11  22  22  12  22  12  11  12 
+ Input Line:   0 Family/Ind: 106/1 Affected Status=  Affected, Loci-> 11  11  11  22  11  11  12  12  11  22 
+ Input Line: 213 Family/Ind: 106/2 Affected Status=Unaffected, Loci-> 12  12  12  22  11  11  12  12  11  22 
+ Input Line:   0 Family/Ind: 107/1 Affected Status=  Affected, Loci-> 12  22  11  11  12  22  12  11  11  12 
+ Input Line: 215 Family/Ind: 107/2 Affected Status=Unaffected, Loci-> 12  22  11  11  12  22  12  11  11  11 
+ Input Line:   0 Family/Ind: 108/1 Affected Status=  Affected, Loci-> 11  11  11  22  12  12  12  11  12  12 
+ Input Line: 217 Family/Ind: 108/2 Affected Status=Unaffected, Loci-> 11  11  11  12  12  12  12  11  12  22 
+ Input Line:   0 Family/Ind: 109/1 Affected Status=  Affected, Loci-> 11  12  11  12  12  11  22  12  12  12 
+ Input Line: 219 Family/Ind: 109/2 Affected Status=Unaffected, Loci-> 12  12  11  12  12  11  22  22  12  12 
+ Input Line:   0 Family/Ind: 110/1 Affected Status=  Affected, Loci-> 22  22  11  12  22  12  12  22  22  11 
+ Input Line: 221 Family/Ind: 110/2 Affected Status=Unaffected, Loci-> 12  22  11  12  22  12  12  12  22  11 
+ Input Line:   0 Family/Ind: 111/1 Affected Status=  Affected, Loci-> 11  22  22  22  11  12  12  12  12  22 
+ Input Line: 223 Family/Ind: 111/2 Affected Status=Unaffected, Loci-> 12  22  12  22  11  12  11  11  22  22 
+ Input Line: 225 Family/Ind: 112/2 Affected Status=  Affected, Loci-> 22  12  11  11  11  12  12  12  11  22 
+ Input Line:   0 Family/Ind: 112/1 Affected Status=Unaffected, Loci-> 22  12  11  12  22  12  12  11  11  12 
+ Input Line: 227 Family/Ind: 113/2 Affected Status=  Affected, Loci-> 11  12  11  12  11  12  12  11  11  22 
+ Input Line:   0 Family/Ind: 113/1 Affected Status=Unaffected, Loci-> 11  12  12  22  12  11  12  11  11  12 
+ Input Line: 229 Family/Ind: 114/2 Affected Status=  Affected, Loci-> 11  11  12  11  11  12  12  12  11  22 
+ Input Line:   0 Family/Ind: 114/1 Affected Status=Unaffected, Loci-> 12  11  12  11  11  12  22  12  12  22 
+ Input Line:   0 Family/Ind: 115/1 Affected Status=  Affected, Loci-> 12  11  12  12  12  12  11  12  12  12 
+ Input Line: 231 Family/Ind: 115/2 Affected Status=Unaffected, Loci-> 22  11  22  11  12  12  11  12  12  11 
+ Input Line: 233 Family/Ind: 116/2 Affected Status=  Affected, Loci-> 12  12  12  22  22  11  11  12  11  11 
+ Input Line:   0 Family/Ind: 116/1 Affected Status=Unaffected, Loci-> 12  22  12  12  22  11  22  12  11  12 
+ Input Line: 235 Family/Ind: 117/2 Affected Status=  Affected, Loci-> 22  11  12  11  12  22  12  12  22  12 
+ Input Line:   0 Family/Ind: 117/1 Affected Status=Unaffected, Loci-> 22  11  12  22  12  22  12  22  11  22 
+ Input Line: 237 Family/Ind: 118/2 Affected Status=  Affected, Loci-> 22  12  11  22  12  12  12  11  12  12 
+ Input Line:   0 Family/Ind: 118/1 Affected Status=Unaffected, Loci-> 22  22  11  12  12  12  12  11  12  22 
+ Input Line:   0 Family/Ind: 119/1 Affected Status=  Affected, Loci-> 22  12  12  22  12  11  12  12  22  12 
+ Input Line: 239 Family/Ind: 119/2 Affected Status=Unaffected, Loci-> 22  11  11  22  12  12  12  12  22  12 
+ Input Line: 241 Family/Ind: 120/2 Affected Status=  Affected, Loci-> 11  12  11  22  12  22  12  12  11  12 
+ Input Line:   0 Family/Ind: 120/1 Affected Status=Unaffected, Loci-> 11  22  22  12  12  22  22  11  22  22 
+ Input Line: 243 Family/Ind: 121/2 Affected Status=  Affected, Loci-> 11  12  22  12  12  11  12  11  22  12 
+ Input Line:   0 Family/Ind: 121/1 Affected Status=Unaffected, Loci-> 11  22  12  12  12  12  11  12  11  11 
+ Input Line: 245 Family/Ind: 122/2 Affected Status=  Affected, Loci-> 12  12  11  12  11  22  12  22  12  22 
+ Input Line:   0 Family/Ind: 122/1 Affected Status=Unaffected, Loci-> 12  22  11  11  12  22  12  22  11  12 
+ Input Line:   0 Family/Ind: 123/1 Affected Status=  Affected, Loci-> 22  12  11  22  12  12  11  12  22  12 
+ Input Line: 247 Family/Ind: 123/2 Affected Status=Unaffected, Loci-> 12  12  12  12  22  12  11  12  11  11 
+ Input Line:   0 Family/Ind: 124/1 Affected Status=  Affected, Loci-> 12  11  22  11  22  12  11  11  12  11 
+ Input Line: 249 Family/Ind: 124/2 Affected Status=Unaffected, Loci-> 22  11  22  12  22  12  12  11  22  11 
+ Input Line:   0 Family/Ind: 125/1 Affected Status=  Affected, Loci-> 12  12  22  12  12  22  12  22  22  12 
+ Input Line: 251 Family/Ind: 125/2 Affected Status=Unaffected, Loci-> 11  12  22  12  12  11  11  22  12  12 
+ Input Line: 253 Family/Ind: 126/2 Affected Status=  Affected, Loci-> 22  12  12  12  12  22  12  12  12  12 
+ Input Line:   0 Family/Ind: 126/1 Affected Status=Unaffected, Loci-> 22  22  22  11  12  12  11  22  12  11 
+ Input Line: 255 Family/Ind: 127/2 Affected Status=  Affected, Loci-> 22  12  12  11  22  12  12  11  12  11 
+ Input Line:   0 Family/Ind: 127/1 Affected Status=Unaffected, Loci-> 22  12  12  12  22  12  12  11  12  11 
+ Input Line:   0 Family/Ind: 128/1 Affected Status=  Affected, Loci-> 12  12  12  12  22  11  11  12  12  11 
+ Input Line: 257 Family/Ind: 128/2 Affected Status=Unaffected, Loci-> 12  12  12  22  12  12  12  12  12  22 
+ Input Line:   0 Family/Ind: 129/1 Affected Status=  Affected, Loci-> 11  11  12  22  11  22  12  22  22  22 
+ Input Line: 259 Family/Ind: 129/2 Affected Status=Unaffected, Loci-> 12  11  12  22  12  12  12  12  11  22 
+ Input Line:   0 Family/Ind: 130/1 Affected Status=  Affected, Loci-> 22  12  12  11  12  12  22  12  12  12 
+ Input Line: 261 Family/Ind: 130/2 Affected Status=Unaffected, Loci-> 12  22  12  11  22  12  22  12  22  11 
+ Input Line:   0 Family/Ind: 131/1 Affected Status=  Affected, Loci-> 12  12  11  11  22  12  12  22  22  11 
+ Input Line: 263 Family/Ind: 131/2 Affected Status=Unaffected, Loci-> 11  12  12  11  12  22  22  12  22  12 
+ Input Line: 265 Family/Ind: 132/2 Affected Status=  Affected, Loci-> 12  11  11  12  12  12  12  11  22  12 
+ Input Line:   0 Family/Ind: 132/1 Affected Status=Unaffected, Loci-> 12  12  22  12  12  12  12  12  22  12 
+ Input Line:   0 Family/Ind: 133/1 Affected Status=  Affected, Loci-> 12  12  22  11  11  11  22  11  12  22 
+ Input Line: 267 Family/Ind: 133/2 Affected Status=Unaffected, Loci-> 22  12  22  12  12  11  22  12  11  22 
+ Input Line: 269 Family/Ind: 134/2 Affected Status=  Affected, Loci-> 11  22  12  11  12  22  12  12  22  12 
+ Input Line:   0 Family/Ind: 134/1 Affected Status=Unaffected, Loci-> 11  12  12  11  11  22  12  11  11  12 
+ Input Line:   0 Family/Ind: 135/1 Affected Status=  Affected, Loci-> 12  22  12  12  12  12  22  11  12  12 
+ Input Line: 271 Family/Ind: 135/2 Affected Status=Unaffected, Loci-> 11  12  11  12  12  11  22  11  12  12 
+ Input Line: 273 Family/Ind: 136/2 Affected Status=  Affected, Loci-> 11  12  12  22  11  22  11  22  12  22 
+ Input Line:   0 Family/Ind: 136/1 Affected Status=Unaffected, Loci-> 12  12  12  12  11  12  11  12  12  11 
+ Input Line:   0 Family/Ind: 137/1 Affected Status=  Affected, Loci-> 11  12  22  12  11  22  12  11  22  22 
+ Input Line: 275 Family/Ind: 137/2 Affected Status=Unaffected, Loci-> 12  12  22  12  11  22  22  12  12  12 
+ Input Line: 277 Family/Ind: 138/2 Affected Status=  Affected, Loci-> 11  12  12  11  22  12  12  11  12  11 
+ Input Line:   0 Family/Ind: 138/1 Affected Status=Unaffected, Loci-> 11  11  11  11  22  12  12  12  12  12 
+ Input Line:   0 Family/Ind: 139/1 Affected Status=  Affected, Loci-> 22  12  12  12  12  11  11  12  22  12 
+ Input Line: 279 Family/Ind: 139/2 Affected Status=Unaffected, Loci-> 22  12  12  22  11  12  11  22  22  11 
+ Input Line: 281 Family/Ind: 140/2 Affected Status=  Affected, Loci-> 11  11  12  12  12  11  12  12  12  12 
+ Input Line:   0 Family/Ind: 140/1 Affected Status=Unaffected, Loci-> 11  22  12  12  11  12  12  12  12  12 
+ Input Line: 283 Family/Ind: 141/2 Affected Status=  Affected, Loci-> 22  12  11  12  12  11  11  22  12  12 
+ Input Line:   0 Family/Ind: 141/1 Affected Status=Unaffected, Loci-> 12  22  12  12  11  11  11  22  22  22 
+ Input Line:   0 Family/Ind: 142/1 Affected Status=  Affected, Loci-> 22  11  11  12  12  12  22  12  12  12 
+ Input Line: 285 Family/Ind: 142/2 Affected Status=Unaffected, Loci-> 11  11  11  12  12  12  22  12  12  12 
+ Input Line:   0 Family/Ind: 143/1 Affected Status=  Affected, Loci-> 11  12  12  22  12  22  11  11  12  12 
+ Input Line: 287 Family/Ind: 143/2 Affected Status=Unaffected, Loci-> 11  12  12  12  12  22  11  11  12  12 
+ Input Line:   0 Family/Ind: 144/1 Affected Status=  Affected, Loci-> 11  12  22  11  12  11  22  12  12  12 
+ Input Line: 289 Family/Ind: 144/2 Affected Status=Unaffected, Loci-> 11  12  22  11  12  11  12  12  11  22 
+ Input Line: 291 Family/Ind: 145/2 Affected Status=  Affected, Loci-> 12  22  22  12  12  12  12  22  12  12 
+ Input Line:   0 Family/Ind: 145/1 Affected Status=Unaffected, Loci-> 12  12  12  12  12  22  12  22  22  12 
+ Input Line:   0 Family/Ind: 146/1 Affected Status=  Affected, Loci-> 11  12  12  12  12  11  12  11  12  12 
+ Input Line: 293 Family/Ind: 146/2 Affected Status=Unaffected, Loci-> 11  12  12  12  12  11  22  12  11  22 
+ Input Line:   0 Family/Ind: 147/1 Affected Status=  Affected, Loci-> 12  12  22  11  11  12  11  22  22  22 
+ Input Line: 295 Family/Ind: 147/2 Affected Status=Unaffected, Loci-> 12  22  22  11  11  12  11  22  22  22 
+ Input Line: 297 Family/Ind: 148/2 Affected Status=  Affected, Loci-> 22  11  12  22  11  11  11  12  11  22 
+ Input Line:   0 Family/Ind: 148/1 Affected Status=Unaffected, Loci-> 22  11  12  22  12  11  12  22  11  22 
+ Input Line:   0 Family/Ind: 149/1 Affected Status=  Affected, Loci-> 12  22  12  12  12  22  12  12  12  12 
+ Input Line: 299 Family/Ind: 149/2 Affected Status=Unaffected, Loci-> 11  22  12  11  11  22  12  11  22  12 
+ Input Line: 301 Family/Ind: 150/2 Affected Status=  Affected, Loci-> 12  11  22  11  12  22  12  12  12  12 
+ Input Line:   0 Family/Ind: 150/1 Affected Status=Unaffected, Loci-> 12  11  22  12  12  12  11  11  12  12 
+ Input Line:   0 Family/Ind: 151/1 Affected Status=  Affected, Loci-> 12  22  12  11  12  12  12  22  22  12 
+ Input Line: 303 Family/Ind: 151/2 Affected Status=Unaffected, Loci-> 12  22  12  11  12  22  11  22  12  11 
+ Input Line: 305 Family/Ind: 152/2 Affected Status=  Affected, Loci-> 11  12  11  11  12  11  11  22  12  12 
+ Input Line:   0 Family/Ind: 152/1 Affected Status=Unaffected, Loci-> 11  12  11  11  22  11  11  22  22  12 
+ Input Line: 307 Family/Ind: 153/2 Affected Status=  Affected, Loci-> 11  12  12  11  11  11  11  11  22  22 
+ Input Line:   0 Family/Ind: 153/1 Affected Status=Unaffected, Loci-> 12  11  12  11  11  11  11  11  12  12 
+ Input Line:   0 Family/Ind: 154/1 Affected Status=  Affected, Loci-> 12  11  12  22  12  11  22  12  12  12 
+ Input Line: 309 Family/Ind: 154/2 Affected Status=Unaffected, Loci-> 12  12  22  22  12  11  12  22  11  11 
+ Input Line:   0 Family/Ind: 155/1 Affected Status=  Affected, Loci-> 22  11  11  12  11  12  11  12  12  22 
+ Input Line: 311 Family/Ind: 155/2 Affected Status=Unaffected, Loci-> 22  11  11  12  22  12  11  12  12  22 
+ Input Line:   0 Family/Ind: 156/1 Affected Status=  Affected, Loci-> 12  22  12  12  12  12  12  22  12  12 
+ Input Line: 313 Family/Ind: 156/2 Affected Status=Unaffected, Loci-> 11  12  12  11  22  12  12  12  12  12 
+ Input Line: 315 Family/Ind: 157/2 Affected Status=  Affected, Loci-> 11  11  12  22  22  22  12  12  22  11 
+ Input Line:   0 Family/Ind: 157/1 Affected Status=Unaffected, Loci-> 12  12  11  12  22  22  12  11  12  11 
+ Input Line:   0 Family/Ind: 158/1 Affected Status=  Affected, Loci-> 22  11  22  12  11  22  11  12  22  22 
+ Input Line: 317 Family/Ind: 158/2 Affected Status=Unaffected, Loci-> 12  11  22  22  11  12  11  12  22  22 
+ Input Line:   0 Family/Ind: 159/1 Affected Status=  Affected, Loci-> 22  12  12  22  12  11  22  11  11  12 
+ Input Line: 319 Family/Ind: 159/2 Affected Status=Unaffected, Loci-> 12  12  11  12  12  12  12  12  12  12 
+ Input Line: 321 Family/Ind: 160/2 Affected Status=  Affected, Loci-> 12  12  22  12  11  11  12  22  12  22 
+ Input Line:   0 Family/Ind: 160/1 Affected Status=Unaffected, Loci-> 12  12  22  22  22  11  12  22  12  22 
+ Input Line:   0 Family/Ind: 161/1 Affected Status=  Affected, Loci-> 11  11  12  12  12  22  11  12  12  12 
+ Input Line: 323 Family/Ind: 161/2 Affected Status=Unaffected, Loci-> 12  11  12  12  12  22  11  11  12  12 
+ Input Line:   0 Family/Ind: 162/1 Affected Status=  Affected, Loci-> 12  22  22  12  12  12  12  12  12  12 
+ Input Line: 325 Family/Ind: 162/2 Affected Status=Unaffected, Loci-> 12  12  22  12  22  12  12  11  12  12 
+ Input Line: 327 Family/Ind: 163/2 Affected Status=  Affected, Loci-> 12  12  22  22  11  11  12  11  11  22 
+ Input Line:   0 Family/Ind: 163/1 Affected Status=Unaffected, Loci-> 12  12  12  22  11  11  12  11  11  22 
+ Input Line:   0 Family/Ind: 164/1 Affected Status=  Affected, Loci-> 11  12  12  12  12  11  12  12  12  12 
+ Input Line: 329 Family/Ind: 164/2 Affected Status=Unaffected, Loci-> 11  12  12  12  12  12  12  12  12  12 
+ Input Line: 331 Family/Ind: 165/2 Affected Status=  Affected, Loci-> 12  22  12  12  12  12  11  22  11  12 
+ Input Line:   0 Family/Ind: 165/1 Affected Status=Unaffected, Loci-> 12  22  12  12  12  22  12  12  12  12 
+ Input Line: 333 Family/Ind: 166/2 Affected Status=  Affected, Loci-> 11  11  12  22  11  11  11  11  12  22 
+ Input Line:   0 Family/Ind: 166/1 Affected Status=Unaffected, Loci-> 11  11  11  12  11  22  11  11  12  22 
+ Input Line:   0 Family/Ind: 167/1 Affected Status=  Affected, Loci-> 12  11  22  12  12  22  22  22  22  12 
+ Input Line: 335 Family/Ind: 167/2 Affected Status=Unaffected, Loci-> 12  11  12  22  22  22  22  22  22  12 
+ Input Line: 337 Family/Ind: 168/2 Affected Status=  Affected, Loci-> 22  22  11  12  22  11  12  12  22  11 
+ Input Line:   0 Family/Ind: 168/1 Affected Status=Unaffected, Loci-> 22  22  12  11  22  11  12  12  22  11 
+ Input Line: 339 Family/Ind: 169/2 Affected Status=  Affected, Loci-> 12  22  11  11  11  11  11  12  12  22 
+ Input Line:   0 Family/Ind: 169/1 Affected Status=Unaffected, Loci-> 12  22  11  11  11  11  11  12  12  11 
+ Input Line: 341 Family/Ind: 170/2 Affected Status=  Affected, Loci-> 11  12  12  22  22  22  12  12  11  11 
+ Input Line:   0 Family/Ind: 170/1 Affected Status=Unaffected, Loci-> 11  11  22  22  12  22  12  12  11  12 
+ Input Line:   0 Family/Ind: 171/1 Affected Status=  Affected, Loci-> 12  11  12  11  22  12  12  11  22  11 
+ Input Line: 343 Family/Ind: 171/2 Affected Status=Unaffected, Loci-> 11  12  12  11  22  12  11  11  22  12 
+ Input Line:   0 Family/Ind: 172/1 Affected Status=  Affected, Loci-> 11  12  22  22  12  22  11  12  11  12 
+ Input Line: 345 Family/Ind: 172/2 Affected Status=Unaffected, Loci-> 11  12  22  22  12  12  11  12  11  11 
+ Input Line: 347 Family/Ind: 173/2 Affected Status=  Affected, Loci-> 12  12  22  11  11  12  11  22  22  22 
+ Input Line:   0 Family/Ind: 173/1 Affected Status=Unaffected, Loci-> 12  12  22  22  12  12  12  12  22  12 
+ Input Line: 349 Family/Ind: 174/2 Affected Status=  Affected, Loci-> 12  12  12  12  12  12  22  11  11  12 
+ Input Line:   0 Family/Ind: 174/1 Affected Status=Unaffected, Loci-> 12  12  22  11  12  22  22  11  12  22 
+ Input Line:   0 Family/Ind: 175/1 Affected Status=  Affected, Loci-> 12  11  12  12  12  11  22  22  12  12 
+ Input Line: 351 Family/Ind: 175/2 Affected Status=Unaffected, Loci-> 12  12  12  12  12  11  11  22  12  12 
+ Input Line: 353 Family/Ind: 176/2 Affected Status=  Affected, Loci-> 12  11  12  22  22  12  12  12  12  11 
+ Input Line:   0 Family/Ind: 176/1 Affected Status=Unaffected, Loci-> 12  11  11  22  12  12  12  22  12  11 
+ Input Line:   0 Family/Ind: 177/1 Affected Status=  Affected, Loci-> 12  11  12  22  12  11  12  12  12  12 
+ Input Line: 355 Family/Ind: 177/2 Affected Status=Unaffected, Loci-> 12  12  12  12  11  12  12  12  12  12 
+ Input Line: 357 Family/Ind: 178/2 Affected Status=  Affected, Loci-> 12  11  22  11  12  12  12  22  12  12 
+ Input Line:   0 Family/Ind: 178/1 Affected Status=Unaffected, Loci-> 12  11  22  11  22  12  11  12  12  12 
+ Input Line: 359 Family/Ind: 179/2 Affected Status=  Affected, Loci-> 12  22  11  11  12  11  12  22  22  12 
+ Input Line:   0 Family/Ind: 179/1 Affected Status=Unaffected, Loci-> 12  22  11  12  12  11  12  22  22  12 
+ Input Line:   0 Family/Ind: 180/1 Affected Status=  Affected, Loci-> 11  12  22  12  22  12  11  11  12  11 
+ Input Line: 361 Family/Ind: 180/2 Affected Status=Unaffected, Loci-> 11  22  11  12  22  12  11  11  22  12 
+ Input Line:   0 Family/Ind: 181/1 Affected Status=  Affected, Loci-> 12  11  22  12  12  22  11  22  12  12 
+ Input Line: 363 Family/Ind: 181/2 Affected Status=Unaffected, Loci-> 12  12  22  11  11  22  12  22  22  12 
+ Input Line: 365 Family/Ind: 182/2 Affected Status=  Affected, Loci-> 22  12  12  22  12  12  12  12  12  12 
+ Input Line:   0 Family/Ind: 182/1 Affected Status=Unaffected, Loci-> 22  12  22  12  12  12  11  12  22  12 
+ Input Line: 367 Family/Ind: 183/2 Affected Status=  Affected, Loci-> 11  12  12  22  11  11  11  12  22  22 
+ Input Line:   0 Family/Ind: 183/1 Affected Status=Unaffected, Loci-> 11  12  12  22  12  11  11  22  12  22 
+ Input Line:   0 Family/Ind: 184/1 Affected Status=  Affected, Loci-> 12  11  11  22  12  11  12  11  12  12 
+ Input Line: 369 Family/Ind: 184/2 Affected Status=Unaffected, Loci-> 11  11  11  12  12  11  11  11  12  22 
+ Input Line:   0 Family/Ind: 185/1 Affected Status=  Affected, Loci-> 12  11  22  22  12  22  22  12  12  12 
+ Input Line: 371 Family/Ind: 185/2 Affected Status=Unaffected, Loci-> 12  12  22  22  22  22  12  12  12  12 
+ Input Line:   0 Family/Ind: 186/1 Affected Status=  Affected, Loci-> 22  12  12  11  12  11  12  22  12  12 
+ Input Line: 373 Family/Ind: 186/2 Affected Status=Unaffected, Loci-> 22  12  12  22  12  12  11  12  12  22 
+ Input Line: 375 Family/Ind: 187/2 Affected Status=  Affected, Loci-> 11  12  22  12  12  12  12  12  22  12 
+ Input Line:   0 Family/Ind: 187/1 Affected Status=Unaffected, Loci-> 12  22  12  12  12  12  12  12  22  12 
+ Input Line:   0 Family/Ind: 188/1 Affected Status=  Affected, Loci-> 12  11  12  11  22  22  12  11  12  11 
+ Input Line: 377 Family/Ind: 188/2 Affected Status=Unaffected, Loci-> 12  11  12  12  22  12  12  11  12  11 
+ Input Line: 379 Family/Ind: 189/2 Affected Status=  Affected, Loci-> 12  12  12  12  12  22  22  12  12  12 
+ Input Line:   0 Family/Ind: 189/1 Affected Status=Unaffected, Loci-> 12  12  12  11  12  12  22  12  12  12 
+ Input Line: 381 Family/Ind: 190/2 Affected Status=  Affected, Loci-> 22  11  22  11  12  11  22  12  22  12 
+ Input Line:   0 Family/Ind: 190/1 Affected Status=Unaffected, Loci-> 22  12  12  11  11  11  12  22  12  12 
+ Input Line:   0 Family/Ind: 191/1 Affected Status=  Affected, Loci-> 11  22  12  12  12  12  22  22  11  12 
+ Input Line: 383 Family/Ind: 191/2 Affected Status=Unaffected, Loci-> 12  12  12  22  12  12  12  22  12  12 
+ Input Line:   0 Family/Ind: 192/1 Affected Status=  Affected, Loci-> 11  11  12  12  12  12  12  12  22  12 
+ Input Line: 385 Family/Ind: 192/2 Affected Status=Unaffected, Loci-> 11  12  12  12  12  11  22  12  22  12 
+ Input Line: 387 Family/Ind: 193/2 Affected Status=  Affected, Loci-> 12  11  11  12  11  12  12  12  12  22 
+ Input Line:   0 Family/Ind: 193/1 Affected Status=Unaffected, Loci-> 12  11  12  22  11  12  12  12  12  12 
+ Input Line:   0 Family/Ind: 194/1 Affected Status=  Affected, Loci-> 22  12  11  12  12  12  12  12  11  12 
+ Input Line: 389 Family/Ind: 194/2 Affected Status=Unaffected, Loci-> 12  12  12  12  12  12  22  12  12  12 
+ Input Line: 391 Family/Ind: 195/2 Affected Status=  Affected, Loci-> 12  22  22  12  12  12  12  12  11  12 
+ Input Line:   0 Family/Ind: 195/1 Affected Status=Unaffected, Loci-> 22  22  11  11  12  12  12  12  12  12 
+ Input Line: 393 Family/Ind: 196/2 Affected Status=  Affected, Loci-> 11  11  12  12  11  22  11  11  22  22 
+ Input Line:   0 Family/Ind: 196/1 Affected Status=Unaffected, Loci-> 11  11  22  12  11  22  11  11  12  22 
+ Input Line:   0 Family/Ind: 197/1 Affected Status=  Affected, Loci-> 12  22  11  12  11  22  11  12  12  22 
+ Input Line: 395 Family/Ind: 197/2 Affected Status=Unaffected, Loci-> 22  11  12  12  11  22  11  22  12  22 
+ Input Line: 397 Family/Ind: 198/2 Affected Status=  Affected, Loci-> 12  12  12  12  11  12  12  12  12  22 
+ Input Line:   0 Family/Ind: 198/1 Affected Status=Unaffected, Loci-> 11  12  12  12  12  11  12  12  12  12 
+ Input Line:   0 Family/Ind: 199/1 Affected Status=  Affected, Loci-> 12  12  12  12  22  12  12  22  22  11 
+ Input Line: 399 Family/Ind: 199/2 Affected Status=Unaffected, Loci-> 12  12  12  22  11  12  11  11  12  11 
+Total Individuals = 400 (200 affected & 200 unaffected)
+The data included 10 variables/loci.
+Error:  The configuration file (mdrpdt.DSPs.Model2PC.12.2L) describes a file with 10000 individuals,
+        but the data file (i.e. DSPs.Model2PC.12.ped) has 400 individuals,
+        This *MAY* be normal if your data is triad-ped data and being transformed into transfer pairs.
+===================================================
+Combinatorial Search misclassifications
+Loci Combination : Misclassification  MDRPDT Stat
+| 1 | 2 |: 44.999999   2.357023
+| 1 | 3 |: 46.000001   1.835326
+| 1 | 4 |: 47.499999   1.104315
+| 1 | 5 |: 46.500000   1.673320
+| 1 | 6 |: 47.250000   1.287453
+| 1 | 7 |: 44.250000   2.655811
+| 1 | 8 |: 46.250001   1.780172
+| 1 | 9 |: 46.250001   1.687632
+| 1 |10 |: 45.750001   1.912649
+| 2 | 3 |: 46.500000   1.697749
+| 2 | 4 |: 45.249999   1.991741
+| 2 | 5 |: 44.999999   2.324953
+| 2 | 6 |: 46.500000   1.905159
+| 2 | 7 |: 46.500000   1.565248
+| 2 | 8 |: 44.749999   2.362684
+| 2 | 9 |: 44.499999   2.592725
+| 2 |10 |: 42.750001   3.073994
+| 3 | 4 |: 46.250001   1.732051
+| 3 | 5 |: 43.500000   2.771609
+| 3 | 6 |: 46.500000   1.807392
+| 3 | 7 |: 45.249999   2.193931
+| 3 | 8 |: 46.500000   1.723281
+| 3 | 9 |: 46.250001   1.780172
+| 3 |10 |: 45.500001   2.250000
+| 4 | 5 |: 47.250000   1.808389
+| 4 | 6 |: 46.500000   1.585188
+| 4 | 7 |: 44.749999   2.305049
+| 4 | 8 |: 44.000000   2.558408
+| 4 | 9 |: 46.250001   1.709409
+| 4 |10 |: 45.750001   1.962991
+| 5 | 6 |: 45.249999   2.165251
+| 5 | 7 |: 44.999999   2.500000
+| 5 | 8 |: 45.500001   2.405351
+| 5 | 9 |: 44.000000   2.828427
+Suprathreshold MDR-PDT T:   5  10  :5.748657  CE: 0.367500
+| 5 |10 |: 36.750001   5.748657
+| 6 | 7 |: 46.250001   1.755617
+| 6 | 8 |: 44.250000   2.555556
+| 6 | 9 |: 45.249999   2.432701
+| 6 |10 |: 45.750001   2.108591
+| 7 | 8 |: 45.500001   2.064742
+| 7 | 9 |: 45.500001   2.250000
+| 7 |10 |: 45.500001   2.363516
+| 8 | 9 |: 46.750000   1.542816
+| 8 |10 |: 46.000001   1.940285
+| 9 |10 |: 45.249999   2.473589
+Final Summary:  5 10 36.75 5.74866 Missing: 0
+Suprathreshold MDR-PDT T:   5  10  :5.748657  CE: 0.367500
+========================Final Result =================
+During model generation a threshold ratio of 0.000000 
+was used (as specified in the configuration file.)
+During this final evaluation of the model and 
+data set, 1.000000 was used as the threshold ratio.
+Final Loci:   5  10 
+
+==================== Category Distribution ============
+NOTE:  These categories do not include empty cells that may have been categorized.
+ The ratio threshold used was 0.000000 with a ties being 
+any affected/unaffected ratio within [-0.000250:0.000250]
+     Part          [  5| 10 ] |  Aff   Una = Total    Ratio 
+  0      High-Risk:[ 1 |  1 ] |   25 +  16  =    41    1.56
+  1       Low-Risk:[ 1 |  2 ] |   13 +  27  =    40    0.48
+  2       Low-Risk:[ 1 |  3 ] |    4 +  10  =    14    0.40
+  3       Low-Risk:[ 2 |  1 ] |   10 +  23  =    33    0.43
+  4      High-Risk:[ 2 |  2 ] |   84 +  54  =   138    1.56
+  5       Low-Risk:[ 2 |  3 ] |   12 +  26  =    38    0.46
+  6      High-Risk:[ 3 |  1 ] |    8 +   7  =    15    1.14
+  7       Low-Risk:[ 3 |  2 ] |   15 +  21  =    36    0.71
+  8      High-Risk:[ 3 |  3 ] |   29 +  16  =    45    1.81
+Suprathreshold MDR-PDT T:   5  10  :5.748657  CE: 0.367500
+ A breakdown of the individuals being partitioned.
+             Correctly               Incorrectly 
+             Classified              Classified
+     Affected  146 ('High-Risk')        54 ('Low-Risk')
+   Unaffected  107 ('Low-Risk')         93 ('High-Risk')
+               63.25%                  36.75% of 400
+  These statistics were calculated during 
+  model generation so there aren't any unrecognized patterns.
+
+ 0 cells that contained data were treated as *affected* cells because
+ they contained an equal number of affected and unaffected individuals.
+T:    5.74866,  Uninformative Genotype/Risk 74/115
+0 individuals in 0 multi-locus genotypes had missing data.
+85 informative pairs were used.
+The distribution of affected-unaffected by locus & genotype.
+            Genotypes
+  Locus     1   2   3 
+    5  :  -11   3   8 
+   10  :   -3  10  -7 

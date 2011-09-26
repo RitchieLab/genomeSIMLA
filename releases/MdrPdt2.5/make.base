@@ -1,0 +1,168 @@
+##########################################################
+#
+# Filename:		make.base
+# Author:		Eric Torstenson
+# Purpose:		Provides basic make targets and behavior useful to track down and ease the process of building
+#	
+
+STRIP=strip
+
+
+ifdef USE_DOPT
+	FLAGS_DOPT=-D USE_DOPTIMIZATION
+	DOPT_DESC="w/ D Optimization"
+endif
+
+ifdef ENABLE_CV
+	FLAGS_CV=-D CROSS_VALIDATION
+	CV_DESC="w/ Cross Validation"
+endif
+
+ifdef VAMPIRE
+    MPI_LIBS= -lmpich -lpthread
+    MPI_INC=-I/usr/local/mpich-ether/p4/absoft_gcc/include/
+    CL=mpiCC
+	VMP_DESC="for Vampire"
+else
+    MPI_LIBS=-lmpichcxx -lmpich -lpthread
+    MPI_INC=
+	CL=$(CPP)
+endif
+
+ifeq ($(USE_MPI), 1)
+	FLAGS_MPI=-D USE_MPI
+	MPI_LINK=$(MPI_LIBS)
+	EXEC_PREFIX=p
+	MPIPATH=parallel
+	MPI_DESC="w/ MPI"
+else
+	MPI_LINK=
+	EXEC_PREFIX=s
+	MPIPATH=serial
+	MPI_DESC="w/o MPI"
+endif
+
+ifndef OBJS
+	OBJS=$(patsubst %,$(OBJECT_PATH)/%,$(notdir $(SRCS:.cpp=.o))) $(ADDITIONAL_OBJECTS)
+endif 
+
+#This didn't work perfectly, since some objects don't have matching .h files
+#HDRS=$(SRCS:.cpp=.h)
+
+CPPFLAGS= -Wall $(MODE_FLAG) $(INCLUDES) $(PREPROC_FLAG) $(COMPILER_FLAGS)
+APPFLAGS=-L$(LIBPATH) $(TESTLINKS) 
+# -lboost_thread
+DEPEND= $(CL) -MM 
+
+
+VALGRIND_OPTIONS = -v --leak-check=full 
+
+AR_FLAGS=-rsv
+DEBUGLIB=$(BINPATH)/lib$(EXEC_PREFIX)$(PROJECTNAME)$(DEBUGSUFFIX).a
+
+include $(MAKEPATH)/make.directory
+
+
+
+#OK, gcc version 3 seems to uses drand for stl random functions (random_shuffle), while
+#version 4 uses drand48....nice! Let's set the right macro so we can set the right seed
+#err....is it the other way around?
+GCC_VERSION=$(shell $(CPP) --version | grep GCC | cut -f3 -d\ | cut -f1 -d. )
+ifeq ($(GCC_VERSION), 3)
+	#This is required for certain distributions of the stdlib it seems- but not all
+	FLAGS_RAND=-D MDRPDT_STL_USES_RAND48
+	RAND_DESC="STL uses Rand48"
+else
+#ifdef DEBUG
+#	FLAGS_RAND=-D MDRPDT_STL_USES_RAND48
+#	RAND_DESC="STL uses Rand48"
+#else
+	RAND_DESC="STL uses Rand"
+#endif
+endif
+
+ifdef USE_DRAND48
+	override FLAGS_RAND=-D MDRPDT_STL_USES_RAND48
+endif
+
+LIBNAME=lib$(PROJECTNAME)$(LIBSUFFIX).a
+RLABLIBS=$(patsubst %,$(LIBPATH)/lib%$(LIBSUFFIX).a, $(LOCAL_LIBS))
+
+.PHONY:	clean debug all test tell release remake depend
+
+STARTPATH=$(CURDIR)
+
+all:	$(MAINTARGET)
+
+release:
+	@(SUPRESS)make remake RELEASE=1
+
+remake:
+	@(SUPRESS)rm -f $(OBJS) $(MAINTARGET)
+	@(SUPRESS)make	
+
+
+$(LIBPATH)/$(TESTPREFIX)$(LIBNAME): $(OBJS)
+	@echo "Compiling $(LIBNAME) "
+	@echo "  Selected Options: $(MPI_DESC) $(VMP_DESC) $(CV_DESC) $(DOPT_DESC) $(RAND_DESC)"
+	$(SUPRESS)mkdir -p $(LIBPATH)
+	$(SUPRESS)ar -rsv $@ $^
+
+$(OBJS): $(SRCS) $(HDRS) .depend
+#	$(SUPRESS)echo "You are using a version $(GCC_VERSION) compiler"
+	$(SUPRESS)mkdir -p $(OBJECT_PATH)
+	$(SUPRESS)$(CL) -c $(CPPFLAGS) $(filter %$(*F).cpp, $^) -o $(OBJECT_PATH)/$(*F)$(CMP_EXT)  $(MPI_INC) $(FLAGS_RAND)
+	$(SUPRESS)echo $(OBJECT_PATH)/$(*F)$(CMP_EXT)	$(MPI_DESC) $(VMP_DESC) $(CV_DESC) $(DOPT_DESC) $(RAND_DESC)
+
+$(BINPATH)/$(TESTPREFIX)$(EXENAME)$(EXEC_PREFIX):  $(OBJS) $(RLABLIBS)
+	@echo "Linking $(TESTPREFIX)$(EXENAME)$(EXEC_PREFIX) "
+	@echo "  Selected Options: $(MPI_DESC) $(VMP_DESC) $(CV_DESC) $(DOPT_DESC) $(RAND_DESC)"
+	$(SUPRESS)mkdir -p $(BINPATH)
+	$(SUPRESS)$(CL) $(LINKER_FLAGS) -o $@ $(OBJS) -L$(LIBPATH) $(RLABLIBS) $(MPI_LINK) $(EXTERNAL_LINKS)
+	$(SUPRESS)echo $@
+
+
+depend : 
+	$(SUPRESS) rm -f .depend
+	$(SUPRESS) $(MAKE) .depend
+
+tell:
+	$(SUPRESS)echo ""
+	$(SUPRESS)echo ""
+	$(SUPRESS)echo "TARGET:"
+	$(SUPRESS)echo "$(MAINTARGET)"
+	$(SUPRESS)echo "SRCS: "
+	$(SUPRESS)echo $(SRCS)
+	$(SUPRESS)echo "OBJS:"
+	$(SUPRESS)echo "$(OBJS)"
+	$(SUPRESS)echo "LIBS:           $(RLABLIBS)"
+	$(SUPRESS)echo "Compile Flags:"
+	$(SUPRESS)echo $(CPPFLAGS)
+	$(SUPRESS)echo "Link Flags:"
+	$(SUPRESS)echo $(LINKER_FLAGS)
+
+test: 
+#$(BINPATH)/$(EXENAME)
+	$(SUPRESS)$(MAKE) TEST=1
+
+memtest: $(BINPATH)/test$(EXENAME)
+	$(SUPRESS)cd $(BINPATH);	valgrind $(VALGRIND_OPTIONS) ./test$(EXENAME) > ./$(EXENAME).valgrind.output
+	#> $(EXENAME).test.output
+	$(SUPRESS)cd $(STARTPATH)
+
+runtest: $(BINPATH)/$(EXENAME)
+	$(SUPRESS)cd $(BINPATH);./$(EXENAME) > $(EXENAME).test.output
+	#cd $(STARTPATH)
+
+clean:
+	$(SUPRESS)rm -f $(OBJS) $(MAINTARGET)
+	$(SUPRESS)rm -f .depend
+
+cleantmps:
+	$(SUPRESS)rm -f .*.tmp
+
+.depend: $(SRCS)
+	$(SUPRESS)rm -f .depend
+	$(SUPRESS)$(DEPEND) $(CPPFLAGS) $(SRCS)  >> .depend
+
+include .depend

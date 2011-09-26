@@ -1,0 +1,466 @@
+mdr-pdt - Multifactor Dimensionality Reduction - Pedigree Disequilibrium Test: 1.0 (0)
+Vanderbilt University
+Center for Human Genetics Research
+Marylyn Ritchie (ritchie@chgr.mc.vanderbilt.edu) & Eric Torstenson (torstenson@chgr.mc.vanderbilt.edu)
+
+Configuration:
+                                Data Source: [DSPs.Model2PC.12.ped]
+                            Input File Type: Pedigree Format
+                                             * Trios were expanded to valid
+                                               DSPs where parental data was present
+                    Value Denoting Affected: 2
+                  Value Denoting Unaffected: 1
+                     Total Individuals Seen: 400
+   Total individuals to be used in analysis: 400
+                            Affected Individuals: 200
+                          Unaffected Individuals: 200
+              Number of SNPS per individual: 10
+                                Results Log: Standard Out
+                           Distribution Log: EsePdt.DSP12PC-12.pdist
+                               Pedigree Log: EsePdt.DSP12PC-12.pedigree
+                                 Model Size: 1-3
+                             Risk Assesment: Based on each model's local threshold
+                             Analysis Style: Pedigree Analysis using PDT statistic
+  Searching
+
+
+Model Details
+	Model ID: 5            
+	Total Affected: 200(100.000%)       Total Unaffected: 200(100.000%)
+          Genotype 
+                5       Affected  Unaffected       Total       Ratio
+               1/1 *          52          44          96      1.1818
+               1/2 *         106         103         209      1.0291
+               2/2            42          53          95      0.7925
+		*Indicates models that are determined to be High Risk
+
+		 Heterozygote alleles are not necessarily ordered the
+		 same as they were found in the original data
+
+
+Classification Details:
+                     Correctly       Incorrectly
+                    Classified        Classified
+    Affected   158 ('High-Risk')    42 ('Low-Risk') 
+  Unaffected    53 ('Low-Risk')    147 ('High-Risk')
+              52.7500%            47.2500%         of 400
+
+
+Matched Odds Ratio: 
+                       Unaffected
+     Affected      Exposed    Unexposed      (Total)
+      Exposed          132           26          158
+    Unexposed           15           27           42
+      (Total)          147           53          200
+Matched Odds Ratio:        1.7333
+Summary: 
+  Model ID: 5
+                 Sum(D): 11
+               Sum(D*D): 41
+            T-Statistic: 1.7179
+
+
+Model Details
+	Model ID: 5x10            
+	Total Affected: 200(100.000%)       Total Unaffected: 200(100.000%)
+          Genotype 
+           5   10       Affected  Unaffected       Total       Ratio
+         1/1   1/1 *           8           7          15      1.1429
+         1/1   1/2            15          21          36      0.7143
+         1/1   2/2 *          29          16          45      1.8125
+         1/2   1/1            10          23          33      0.4348
+         1/2   1/2 *          84          54         138      1.5556
+         1/2   2/2            12          26          38      0.4615
+         2/2   1/1 *          25          16          41      1.5625
+         2/2   1/2            13          27          40      0.4815
+         2/2   2/2             4          10          14      0.4000
+		*Indicates models that are determined to be High Risk
+
+		 Heterozygote alleles are not necessarily ordered the
+		 same as they were found in the original data
+
+
+Classification Details:
+                     Correctly       Incorrectly
+                    Classified        Classified
+    Affected   146 ('High-Risk')    54 ('Low-Risk') 
+  Unaffected   107 ('Low-Risk')     93 ('High-Risk')
+              63.2500%            36.7500%         of 400
+
+
+Matched Odds Ratio: 
+                       Unaffected
+     Affected      Exposed    Unexposed      (Total)
+      Exposed           77           69          146
+    Unexposed           16           38           54
+      (Total)           93          107          200
+Matched Odds Ratio:        4.3125
+Summary: 
+  Model ID: 5x10
+                 Sum(D): 53
+               Sum(D*D): 85
+            T-Statistic: 5.7487
+
+
+Model Details
+	Model ID: 2x5x10            
+	Total Affected: 200(100.000%)       Total Unaffected: 200(100.000%)
+          Genotype 
+      2    5   10       Affected  Unaffected       Total       Ratio
+   1/1   1/1   1/1 *           4           2           6      2.0000
+   1/1   1/1   1/2             1           7           8      0.1429
+   1/1   1/1   2/2 *          10           7          17      1.4286
+   1/1   1/2   1/1             3           5           8      0.6000
+   1/1   1/2   1/2 *          23          11          34      2.0909
+   1/1   1/2   2/2             2           6           8      0.3333
+   1/1   2/2   1/1 *           7           5          12      1.4000
+   1/1   2/2   1/2             4           5           9      0.8000
+   1/1   2/2   2/2             2           5           7      0.4000
+   1/2   1/1   1/1             3           4           7      0.7500
+   1/2   1/1   1/2 *          10           9          19      1.1111
+   1/2   1/1   2/2 *          15           2          17      7.5000
+   1/2   1/2   1/1             6          12          18      0.5000
+   1/2   1/2   1/2 *          38          31          69      1.2258
+   1/2   1/2   2/2             9          14          23      0.6429
+   1/2   2/2   1/1 *          16           6          22      2.6667
+   1/2   2/2   1/2             5          20          25      0.2500
+   1/2   2/2   2/2             2           3           5      0.6667
+   2/2   1/1   1/1 *           1           1           2      1.0000
+   2/2   1/1   1/2             4           5           9      0.8000
+   2/2   1/1   2/2             4           7          11      0.5714
+   2/2   1/2   1/1             1           6           7      0.1667
+   2/2   1/2   1/2 *          23          12          35      1.9167
+   2/2   1/2   2/2             1           6           7      0.1667
+   2/2   2/2   1/1             2           5           7      0.4000
+   2/2   2/2   1/2 *           4           2           6      2.0000
+   2/2   2/2   2/2             0           2           2      0.0000
+		*Indicates models that are determined to be High Risk
+
+		 Heterozygote alleles are not necessarily ordered the
+		 same as they were found in the original data
+
+
+Classification Details:
+                     Correctly       Incorrectly
+                    Classified        Classified
+    Affected   151 ('High-Risk')    49 ('Low-Risk') 
+  Unaffected   112 ('Low-Risk')     88 ('High-Risk')
+              65.7500%            34.2500%         of 400
+
+
+Matched Odds Ratio: 
+                       Unaffected
+     Affected      Exposed    Unexposed      (Total)
+      Exposed           73           78          151
+    Unexposed           15           34           49
+      (Total)           88          112          200
+Matched Odds Ratio:        5.2000
+Summary: 
+  Model ID: 2x5x10
+                 Sum(D): 63
+               Sum(D*D): 93
+            T-Statistic: 6.5328
+
+
+Pedigree Search of 175 : 175 completed in 0.3900 seconds
+
+
+Performing 100 Permutation Tests:
+Test #  Load Time (s)             Execution Time(s)    Models Seen
+     0          0.000333                         0.390            175
+     1          0.000333                         0.360            175
+     2          0.010333                         0.340            175
+     3          0.000333                         0.370            175
+     4          0.000333                         0.330            175
+     5          0.000333                         0.260            175
+     6          0.000333                         0.310            175
+     7          0.000333                         0.290            175
+     8          0.000333                         0.310            175
+     9          0.010333                         0.310            175
+    10          0.000333                         0.300            175
+    11          0.000333                         0.290            175
+    12          0.010333                         0.290            175
+    13          0.010333                         0.320            175
+    14          0.000333                         0.300            175
+    15          0.000333                         0.310            175
+    16          0.000333                         0.340            175
+    17          0.000333                         0.330            175
+    18          0.000333                         0.310            175
+    19          0.010333                         0.370            175
+    20          0.000333                         0.230            175
+    21          0.000333                         0.280            175
+    22          0.000333                         0.230            175
+    23          0.000333                         0.230            175
+    24          0.000333                         0.350            175
+    25          0.000333                         0.230            175
+    26          0.000333                         0.330            175
+    27          0.000333                         0.280            175
+    28          0.000333                         0.240            175
+    29          0.000333                         0.260            175
+    30          0.000333                         0.310            175
+    31          0.000333                         0.270            175
+    32          0.000333                         0.290            175
+    33          0.000333                         0.320            175
+    34          0.000333                         0.350            175
+    35          0.000333                         0.330            175
+    36          0.000333                         0.350            175
+    37          0.000333                         0.290            175
+    38          0.010333                         0.330            175
+    39          0.000333                         0.350            175
+    40          0.000333                         0.320            175
+    41          0.000333                         0.350            175
+    42          0.000333                         0.300            175
+    43          0.000333                         0.390            175
+    44          0.000333                         0.390            175
+    45          0.000333                         0.340            175
+    46          0.010333                         0.400            175
+    47          0.000333                         0.480            175
+    48          0.000333                         0.380            175
+    49          0.000333                         0.330            175
+    50          0.000333                         0.390            175
+    51          0.000333                         0.390            175
+    52          0.000333                         0.370            175
+    53          0.000333                         0.350            175
+    54          0.000333                         0.320            175
+    55          0.000333                         0.290            175
+    56          0.000333                         0.270            175
+    57          0.000333                         0.310            175
+    58          0.000333                         0.310            175
+    59          0.000333                         0.410            175
+    60          0.000333                         0.310            175
+    61          0.000333                         0.380            175
+    62          0.000333                         0.350            175
+    63          0.000333                         0.350            175
+    64          0.000333                         0.410            175
+    65          0.000333                         0.300            175
+    66          0.000333                         0.320            175
+    67          0.000333                         0.330            175
+    68          0.000333                         0.360            175
+    69          0.000333                         0.350            175
+    70          0.000333                         0.400            175
+    71          0.000333                         0.360            175
+    72          0.000333                         0.400            175
+    73          0.000333                         0.330            175
+    74          0.000333                         0.310            175
+    75          0.000333                         0.310            175
+    76          0.000333                         0.270            175
+    77          0.010333                         0.270            175
+    78          0.000333                         0.390            175
+    79          0.000333                         0.350            175
+    80          0.000333                         0.350            175
+    81          0.000333                         0.350            175
+    82          0.010333                         0.320            175
+    83          0.010333                         0.390            175
+    84          0.010333                         0.340            175
+    85          0.000333                         0.300            175
+    86          0.000333                         0.330            175
+    87          0.000333                         0.230            175
+    88          0.000333                         0.240            175
+    89          0.000333                         0.200            175
+    90          0.000333                         0.260            175
+    91          0.000333                         0.180            175
+    92          0.000333                         0.230            175
+    93          0.000333                         0.310            175
+    94          0.000333                         0.310            175
+    95          0.000333                         0.370            175
+    96          0.000333                         0.370            175
+    97          0.010333                         0.340            175
+    98          0.000333                         0.290            175
+    99          0.000333                         0.320            175
+
+
+Distribution Report 1 SNP(s) per model
+	* Only models with a p-value < 0.050 are reported. 
+           T         Statistical
+Model   Statistic    Significance
+   5       1.718       p < 0.010
+   9       1.543       p < 0.010
+   7       1.359       p < 0.010
+   8       1.265       p < 0.010
+  10       1.179       p < 0.010
+   6       1.151       p < 0.010
+   2       1.000       p < 0.010
+   3       0.926       p < 0.010
+   1       0.707       p < 0.010
+
+
+Distribution Report 2 SNP(s) per model
+	* Only models with a p-value < 0.050 are reported. 
+               T         Statistical
+   Model   Statistic    Significance
+    5x10       5.749       p < 0.010
+    2x10       3.074       p < 0.010
+     5x9       2.828       p < 0.010
+     3x5       2.772       p < 0.010
+     1x7       2.656       p < 0.010
+     2x9       2.593       p < 0.010
+     4x8       2.558       p < 0.010
+     6x8       2.556       p < 0.010
+     5x7       2.500       p < 0.010
+    9x10       2.474       p < 0.010
+     6x9       2.433       p < 0.010
+     5x8       2.405       p < 0.010
+    7x10       2.364       p < 0.010
+     2x8       2.363       p < 0.010
+     1x2       2.357       p < 0.010
+     2x5       2.325       p < 0.010
+     4x7       2.305       p < 0.010
+     7x9       2.250       p < 0.010
+    3x10       2.250       p < 0.010
+     3x7       2.194       p < 0.010
+     5x6       2.165       p < 0.010
+    6x10       2.109       p < 0.010
+     7x8       2.065       p < 0.010
+     2x4       1.992       p < 0.010
+    4x10       1.963       p < 0.010
+    8x10       1.940       p < 0.010
+    1x10       1.913       p < 0.010
+     2x6       1.905       p < 0.010
+     1x3       1.835       p < 0.010
+     4x5       1.808       p < 0.010
+     3x6       1.807       p < 0.010
+     3x9       1.780       p < 0.010
+     1x8       1.780       p < 0.010
+     6x7       1.756       p < 0.010
+     3x4       1.732       p < 0.010
+     3x8       1.723       p < 0.010
+     4x9       1.709       p < 0.010
+     2x3       1.698       p < 0.010
+     1x9       1.688       p < 0.010
+     1x5       1.673       p < 0.010
+     4x6       1.585       p < 0.010
+     2x7       1.565       p < 0.010
+     8x9       1.543       p < 0.010
+     1x6       1.287       p < 0.010
+
+
+Distribution Report 3 SNP(s) per model
+	* Only models with a p-value < 0.050 are reported. 
+                   T         Statistical
+       Model   Statistic    Significance
+      2x5x10       6.533       p < 0.010
+      3x5x10       6.325       p < 0.010
+      5x9x10       6.183       p < 0.010
+      5x7x10       6.124       p < 0.010
+      4x5x10       6.114       p < 0.010
+      5x6x10       5.982       p < 0.010
+      1x5x10       5.903       p < 0.010
+      5x8x10       5.897       p < 0.010
+       2x5x9       4.838       p < 0.010
+      2x9x10       4.800       p < 0.010
+       3x4x8       4.720       p < 0.010
+       2x4x8       4.610       p < 0.010
+       5x6x9       4.588       p < 0.010
+       1x4x7       4.445       p < 0.010
+       4x5x7       4.417       p < 0.010
+       1x3x5       4.417       p < 0.010
+      1x2x10       4.379       p < 0.010
+       4x6x8       4.364       p < 0.010
+       4x7x8       4.364       p < 0.010
+       3x5x9       4.364       p < 0.010
+       3x6x8       4.281       p < 0.010
+       1x2x7       4.264       p < 0.010
+       5x8x9       4.230       p < 0.010
+       1x2x5       4.230       p < 0.010
+      2x8x10       4.216       p < 0.010
+       3x5x6       4.216       p < 0.010
+      2x6x10       4.200       p < 0.010
+       2x6x9       4.185       p < 0.010
+       2x6x8       4.181       p < 0.010
+      7x8x10       4.163       p < 0.010
+       2x3x5       4.146       p < 0.010
+      2x3x10       4.134       p < 0.010
+       2x5x8       4.129       p < 0.010
+      1x3x10       4.111       p < 0.010
+       2x4x9       4.111       p < 0.010
+      6x7x10       4.106       p < 0.010
+       1x5x7       4.098       p < 0.010
+       2x5x6       4.098       p < 0.010
+       5x7x8       4.096       p < 0.010
+      4x8x10       4.088       p < 0.010
+       4x6x7       4.041       p < 0.010
+       4x8x9       3.989       p < 0.010
+       1x2x9       3.976       p < 0.010
+       2x3x8       3.967       p < 0.010
+      3x7x10       3.967       p < 0.010
+       5x7x9       3.967       p < 0.010
+       3x5x8       3.938       p < 0.010
+       6x8x9       3.916       p < 0.010
+       2x3x9       3.900       p < 0.010
+       3x5x7       3.881       p < 0.010
+      4x6x10       3.879       p < 0.010
+      1x7x10       3.879       p < 0.010
+      4x7x10       3.850       p < 0.010
+      1x6x10       3.796       p < 0.010
+       1x7x8       3.796       p < 0.010
+       4x5x9       3.795       p < 0.010
+       1x5x9       3.771       p < 0.010
+       1x5x6       3.750       p < 0.010
+      2x4x10       3.719       p < 0.010
+      1x9x10       3.713       p < 0.010
+       5x6x8       3.713       p < 0.010
+       4x5x8       3.710       p < 0.010
+      3x9x10       3.710       p < 0.010
+       2x8x9       3.669       p < 0.010
+       2x7x9       3.669       p < 0.010
+       2x3x7       3.623       p < 0.010
+       1x2x6       3.622       p < 0.010
+       2x4x6       3.591       p < 0.010
+       2x5x7       3.580       p < 0.010
+      6x9x10       3.579       p < 0.010
+       1x2x8       3.579       p < 0.010
+       1x2x3       3.579       p < 0.010
+       6x7x9       3.578       p < 0.010
+       2x3x4       3.545       p < 0.010
+      2x7x10       3.507       p < 0.010
+       1x3x6       3.498       p < 0.010
+       1x3x7       3.470       p < 0.010
+       3x7x8       3.459       p < 0.010
+       4x7x9       3.441       p < 0.010
+      3x6x10       3.435       p < 0.010
+       2x4x5       3.422       p < 0.010
+      3x4x10       3.411       p < 0.010
+       3x7x9       3.411       p < 0.010
+       3x8x9       3.394       p < 0.010
+      6x8x10       3.362       p < 0.010
+       7x8x9       3.347       p < 0.010
+       1x6x8       3.324       p < 0.010
+       6x7x8       3.324       p < 0.010
+       2x7x8       3.313       p < 0.010
+       1x6x7       3.313       p < 0.010
+       3x4x6       3.300       p < 0.010
+      3x8x10       3.273       p < 0.010
+      7x9x10       3.273       p < 0.010
+       1x4x8       3.266       p < 0.010
+       3x4x5       3.263       p < 0.010
+       1x8x9       3.250       p < 0.010
+       1x2x4       3.222       p < 0.010
+      8x9x10       3.212       p < 0.010
+       2x6x7       3.183       p < 0.010
+      1x4x10       3.162       p < 0.010
+       1x6x9       3.160       p < 0.010
+       1x4x6       3.160       p < 0.010
+       5x6x7       3.145       p < 0.010
+       3x4x7       3.130       p < 0.010
+       4x5x6       3.116       p < 0.010
+       2x4x7       3.085       p < 0.010
+       1x7x9       3.074       p < 0.010
+      1x8x10       3.064       p < 0.010
+       1x5x8       3.030       p < 0.010
+       2x3x6       3.022       p < 0.010
+       3x4x9       3.007       p < 0.010
+       3x6x7       2.982       p < 0.010
+       4x6x9       2.982       p < 0.010
+       1x3x8       2.967       p < 0.010
+       1x3x9       2.871       p < 0.010
+      4x9x10       2.741       p < 0.010
+       3x6x9       2.683       p < 0.010
+       1x4x5       2.630       p < 0.010
+       1x3x4       2.557       p < 0.010
+
+
+Top Model of the PDT Search:
+       Model  T Statstic     p Value
+           5      1.7179     p < 0.0100
+        5x10      5.7487     p < 0.0100
+      2x5x10      6.5328     p < 0.0100

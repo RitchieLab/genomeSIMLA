@@ -1,0 +1,49 @@
+/******************** Basic Settings
+ * Describe the type of models of interest. Models consist on 1 or more SNPs.
+ * The minimum number of SNPs in a model to be investigated. Valid settings: 1..COMBO_END
+COMBO_START            1
+ *  The maximum number of SNPs to be considered. Valid settings: COMBO_START...
+COMBO_END              3
+ *  If the data has little or no missing data, it will run faster by using the overall threshold
+USE_MODEL_THRESHOLD    ON
+ *  The value used to indicate that an individual is affected
+AFFECTED_VALUE         2
+ *  The value used to indicate that an individual is unaffected
+UNAFFECTED_VALUE       1
+ *  All other individuals will be considered to be of unknown status and will not contribute to the calculations
+
+
+/****************** Input format
+ * PEDIGREE   - For PDT anayses there is only one format supported
+INPUTFORMAT            PEDIGREE
+ *  The name of the input file where your SNP data is to be found. This file must be space delimited
+INPUTFILE              DSPs.Model1.35.ped
+ *  There is only one Pedigree analysis currently available
+ANALYSISSTYLE          PDT
+ *  Turn On/Off Triad expansion
+EXPAND_TRIADS          Yes
+ *  Experimental Optimization. Valid Optimization settings (0.1 - 0.9). 
+DOPTIMIZATION			0.10
+ *  Matched Odds Verbose On/Off. Turning this on generates the table of pair contributions
+VERBOSE_MATCHED_ODDS_RATIO Off
+ *  Evaluation Verbose Yes/No
+VERBOSE_EVALUATION     YES
+
+
+/****************** Reporting
+ * Reports are set up in the form: REPORT_NAME.EXT Each type or report has it's own different extension.
+ * Any report whose extension is STDOUT will be redirected to standard out instead of written to a file.
+ * By default, REPORT_NAME is just the name of the configuration file
+ *REPORT_NAME MyReportName
+EXT_DISTRIBUTION       pdist      //This is where the distribution of the p-tests is written
+EXT_REPORT             STDOUT     //This is where the final results are written
+EXT_PEDIGREE          pedigree      //Pedigree related errors and notes are logged here
+
+
+/****************** Permutation Tests
+ * Number of permutation runs to be executed. 1000 is recommended.
+PTEST_COUNT            10
+ * The seed associated with the tests. Each test gets a new seed
+PTEST_SEED             333
+ * Reporting can be done based on a p-value threshold. Any model whose significance exceeds this value will be reported.
+PVAL_THRESHOLD         0.05

@@ -1,0 +1,5 @@
+ldspline.o: ldspline.cpp ldspline.h ../../utility/strings.h \
+  ../../utility/types.h locuslookup.h snpspline.h
+locuslookup.o: locuslookup.cpp locuslookup.h snpspline.h \
+  ../../utility/strings.h ../../utility/types.h
+snpspline.o: snpspline.cpp snpspline.h

@@ -1,0 +1,63 @@
+INCLUDES=-I$(SRCPATH) -I$(ROOTPATH) $(patsubst %,-I%, $(SRCPATHS))
+
+SRCPATH=.
+
+
+DEBUGSUFFIX=d
+ifdef COMPAT
+	CPP=g++$(COMPAT)
+else
+	CPP=g++
+endif
+
+ifdef TEST
+	TESTPREFIX=
+	#test		--This isn't working so let's scrap it for now
+	COMPILER_FLAGS=$(PROJECT_COMPILER_FLAGS) -D TEST_APP=1
+	TESTLINKS=-L/usr/local/lib/libcppunit -lcppunit -ld
+else
+	TESTPREFIX=
+	TESTLINKS=	
+	COMPILER_FLAGS=$(PROJECT_COMPILER_FLAGS)
+endif
+
+LIBPATH=$(ROOTPATH)/bin/lib
+BINPATH=$(ROOTPATH)/bin/$(APPHOME)
+
+ifeq ($(RELEASE), 1)
+	FAST_EXEC=-O3 -march=i686 -fomit-frame-pointer -funroll-loops -fforce-addr -fexpensive-optimizations
+	MODE_FLAG=$(FAST_EXEC)
+	OBJECT_PATH=$(ROOTPATH)/build/$(CPP)/$(PROJECTNAME)-$(MPIPATH)/release
+	LIBSUFFIX=$(COMPAT)$(EXEC_PREFIX)
+else
+	MODE_FLAG=-g
+	OBJECT_PATH=$(ROOTPATH)/build/$(CPP)/$(PROJECTNAME)-$(MPIPATH)/debug
+	LIBSUFFIX=$(COMPAT)$(EXEC_PREFIX)$(DEBUGSUFFIX)
+endif
+
+ifeq ($(VERBOSE), 1)
+	SUPRESS=
+else
+	SUPRESS=@
+endif
+
+ifeq ($(PREPROCESS), 1)
+	PREPROC_FLAG=-E
+	CMP_EXT=.i
+else
+	PREPROC_FLAG=
+	CMP_EXT=.o
+endif
+
+ifeq ($(LIBRARY_MAKE), 1)
+	MAINTARGET=$(LIBPATH)/$(TESTPREFIX)$(LIBNAME)
+	LINKER_FLAGS=$(AR_FLAGS)
+	TEST_CALL=
+else
+	EXENAME=$(PROJECTNAME)
+	MAINTARGET=$(BINPATH)/$(TESTPREFIX)$(EXENAME)$(EXEC_PREFIX)
+	LINKER_FLAGS=$(APPFLAGS)
+	TEST_CALL=valgrind $(VALGRIND_OPTIONS) $(MAINTARGET)	
+endif
+
+

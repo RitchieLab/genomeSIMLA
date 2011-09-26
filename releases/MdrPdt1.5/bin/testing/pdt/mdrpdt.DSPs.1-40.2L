@@ -1,0 +1,107 @@
+//*************************************
+//                MDR configuration file
+//*************************************
+// Sample Config file created by Lance W. Hahn
+//
+//*************************************
+//               Data set definition parameters
+//*************************************
+// INDIVIDLIMIT			The name of the data file.
+INPUTFILE     DSPs.Model1.40.ped
+
+// INDIVIDLIMIT       [1:10000]  - The number of individuals in the data set
+INDIVIDLIMIT       10000
+
+// INPUTTYPE          [0:4]      - 0 is GASP format, 1 is text format, 2 is triad-ped format
+//                                 3 is DSP-text, 4 is Extended pedigree sibships
+INPUTTYPE              4
+
+//AFFECTEDINPUTVALUE   - the value in the text file representing affected status
+//                       Usually 2 for ped format and usually 1 for text format
+AFFECTEDINPUTVALUE       2
+
+UNAFFECTEDINPUTVALUE       1
+
+//GENOPDT [ON:OFF]  - Whether or ot to use the genopdt calculation for model selection
+GENOPDT ON
+
+// MDRPDTTHRESH  - models with a MDR-PDT T statistic value greater than or equal to this value
+//                 will be printed/displayed.
+MDRPDTTHRESH   5.02571
+
+// SHOWTRANSFER [ON:OFF]  - whether or not to show the data tranformed into Transfer data
+SHOWTRANSFER ON
+
+//LEGALMAXGENOTYPE   - the maximum legal genotype value
+LEGALMAXGENOTYPE      3
+//LEGALMINGENOTYPE    - the minimum legal genotype value
+LEGALMINGENOTYPE           0
+
+FORCEPT  OFF
+//*************************************
+//               MDR analysis parameters
+//*************************************
+// MDRRANDOMSEED          [0:MAXINT] - Random seed used in shuffle.
+MDRRANDOMSEED              2
+
+RANDOMSHUFFLE OFF
+
+// LOCICONSIDERED     [1:11]      - How many loci to consider when creating the partition
+LOCICONSIDERED       2
+
+// FORCELOCI          [OFF:ON]     - Force an analysis on the specified loci
+FORCELOCI      OFF
+// The Loci to be considered.
+//LOCI0   60 
+//LOCI1   2
+//LOCI2   6 
+//LOCI3          
+//LOCI4          
+//LOCI5
+//LOCI6
+//LOCI7
+//LOCI8
+//LOCI9
+//LOCI10
+// THRESHOLDRATIO [Real number] - what threshold (>=) should be used for associating
+//                                affected/unaffected likelihood ratios with high-risk
+//                                disease status?
+// DIFFERENCE***!!
+//THRESHOLDRATIO 1.0
+THRESHOLDRATIO 0.0
+
+// NOTRECOGNIZEDRESPONSE [ -1:+1]       - When a pattern is encountered that fits neither the affected nor the unaffected
+//                                        how should this individual be classified?
+//                                        -1 - as unknown,  0 - as unaffected, 1 - as affected
+
+NOTRECOGNIZEDRESPONSE     -1
+//  TIECELLVALUE [ -1:+1]       - When building the model we may encounter a data cell that contains an equal number
+//                                of affected and unaffected individuals.
+//                                How should this cell be classified?
+//                                -1 - as unknown,  0 - as unaffected, 1 - as affected
+TIECELLVALUE        1
+
+MISSINGALLELECODE 0
+MISSINGGENOTYPECODE 0
+MISSINGACTION 1
+// missing action 1 - ignore all missing values
+// SHOWBESTPARTITION [OFF:ON] - show the cells that comprise the best partition.
+SHOWBESTPARTITION ON
+
+// SHOWCOMBOMISCLASS [OFF:ON] - show the misclassifications for all of the loci
+//             combinations that were considered in the combinatorial search.
+SHOWCOMBOMISCLASS ON
+
+// SHOWMAINEFFECT [OFF:ON] - show a table of the number of individuals grouped by locus & genotype
+SHOWMAINEFFECT     ON
+
+//VERBOSE  [OFF:ON] - print statements about how things are progressing.
+VERBOSE   OFF
+
+//*************************************
+//              Cross-validation parameters
+//*************************************
+// CROSSVALTESTINGCOUNT - how many individuals should form the testing group?
+//                        Ex.  For 10-fold cross-validation with a 100 individual dataset
+//						       this should be 10.
+CROSSVALTESTINGCOUNT 

@@ -1,0 +1,27 @@
+Tips for compiling MDR-PDT:
+
+
+Make targets you might be interested in:
+For this version, there are no special targets you should be interested. However, the following is a summary of the targets that are available for convenience. These are only applicable from the root directory created from the archive. When calling make from within the source directories, behavior might be different. 
+
+	* make clean		- This is the standard clean function. It will remove all object code as well as the executables. If you are having trouble linking or are unsure of the state of the application, it is recommended that you clean prior to recompiling. 
+	* make debug		- This will add debug symbols to the executable as well as turn off any optimization. This allows users to determine where problems are occuring, if they are familiar with the use of gdb (gnu debugger). 
+	* make (no target)	- This will compile the application for release. This is recommended when compiling the program for normal use. If no variables are defined to modify the optimizations, the application will be optimized to allow reasonable performance on intel architecture. 
+
+Make Variables:
+The following variables might be helpful when being built on systems that differ from the systems here at vanderbilt (redhat/gcc 3.2 on intel)
+
+	ARCH=""			- Add any optimizations you wish to apply that apply specifically for your machine's architecture (add the settings between the double quotes). If you are compiling for something other than linux on intel, setting the variable to "" will turn off all optimizations. 
+	PREPROCESS=1		- This will turn on preprocessing and allow advanced users to determine the cause of certain types of compiler errors
+	USE_DRAND48=1		- If you are using gcc version 4, you will need to provide this flag in order to allow MDR-PDT to use to correct random seed function. 
+	COMPAT=32		- Replace 32 with a meaningful compatability mode. This allows the person compiling the application to specify an alternate gcc compiler based on RedHat's naming scheme. For instance, setting this flag to 32 will cause the compiler gcc32 which allows machines with gcc 4.x to compile programs that are compatible with older systems. 
+
+Example make calls:
+
+The following command will clean up after a debug/gcc32 compilation.
+> make debug COMPAT=32 clean
+
+The following command will compile a release mode version on a system where the typical optimizations are turned off but the seed function to be used is drand48. Notice that no actual target is specified. 
+> make ARCH="" USE_DRAND48=1 
+
+

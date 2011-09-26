@@ -1,0 +1,58 @@
+# -----------------------------------------------------------------------------
+# Makefile for Multilocus Penetrance Table  Project - Marylyn Ritchie adapted from Bill White 3/27/02
+# -----------------------------------------------------------------------------
+
+# Set these paths to the location of the GA library and headers.
+
+# Set these paths to the location of the GA library and headers.
+GA_BASE_PATH = ../galib246
+#GA_BASE_PATH = ../galib245
+GA_INC_DIR       = $(GA_BASE_PATH)/
+GA_LIB_DIR       = $(GA_BASE_PATH)/ga
+GA_INC_DIRS  = -I$(GA_INC_DIR)
+GA_LIB_DIRS  = -lga -L$(GA_LIB_DIR)
+
+# GA_INC_DIRS  = -I$(GA_INC_DIR)
+# GA_LIB_DIRS  = -L$(GA_LIB_DIR) -libga.a
+
+DATASIM_BASE = ../genomeSIM/
+DATASIM_DIR = $(DATASIM_BASE)/src/datasim
+DATASIM_INC_DIR = -I$(DATASIM_DIR)
+DATASIM_LIB_DIR = -L$(DATASIM_BASE)/bin/lib
+
+# compiler
+C++C = /usr/bin/g++
+#32
+
+# compiler flags
+#CCFLAGS = -Wall -g $(GA_INC_DIRS)
+#CCFLAGS = -g $(GA_INC_DIRS)
+CCFLAGS = -Wall -g $(GA_INC_DIRS) $(DATASIM_INC_DIR) -I.
+
+OBJS = simpen.o simpenMath.o SimPreferences.o PrefExcept.o simpenMDR.o Stringmanip.o
+LIBS = -lm -lc -lstdc++
+INTERFACES = simpen.h simpenMath.h SimPreferences.h PrefExcept.h tree.hh \
+	node.h simpenMDR.h
+PROG_NAME = simpen
+
+
+$(PROG_NAME): $(OBJS)
+	mkdir -p ../bin
+	$(C++C) -o ../bin/$(PROG_NAME) $(OBJS) $(GA_LIB_DIRS) $(DATASIM_LIB_DIR) $(LIBS)
+
+%.o: %.C $(INTERFACES)
+	$(C++C) -c $(CCFLAGS) $<
+
+%.o: %.cpp $(INTERFACES)
+	$(C++C) -c $(CCFLAGS) $<
+
+clean:
+	rm -f *.o *~ core 
+
+reallyclean:
+	rm -f *.o *~ core $(PROG_NAME) $(GM1_PROG_NAME) \
+	$(PROG_NAME4) $(GM1_4_PROG_NAME)
+
+tarball:
+	tar cvfz /export/dls/archive/multilocus_source_`date '+%Y%m%d'`.tar.gz \
+	*.C *.h* Makefile* *.pl
