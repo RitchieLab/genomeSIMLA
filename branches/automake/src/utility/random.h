@@ -1,7 +1,33 @@
-#ifndef __UTILITY_RANDOM_H
-#define __UTILITY_RANDOM_H
+// Ran2.h
 
-#include <boost/random.hpp>
+//////////////////////////////////////////////////////////////////////////
+//                                                                      //
+// This file is distributed as part of the genomeSIM source code package//
+// and may not be redistributed in any form without written permission  //
+// from Dr. Marylyn Ritchie (ritchie@chgr.mc.vanderbilt.edu).           //
+// Permission is granted to modify this file for your own personal      //
+// use, but modified versions must retain this notice and must not be   //
+// distributed.                                                         //
+//                                                                      //
+// This application is provided "as is" without express or implied      //
+// warranty.                                                            //
+//                                                                      //  
+//////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////// 
+//
+// Pseudo-random number generator used within the library.
+// Uses standard C/C++ random number generator.
+// Can be replaced easily by changing these 
+//
+/////////////////////////////////////////////////////////////////////
+
+#ifndef __RANDOM_NUMBER_GENERATOR_H__
+#define __RANDOM_NUMBER_GENERATOR_H__
+#include <iostream>
+#include "types.h"
+//using namespace std;
+
 
 #ifdef USE_MPI
 #include <pthread.h>
@@ -19,78 +45,75 @@
 #define RND_LOCK
 #define RND_UNLOCK
 
-#endif   //USE_MPI
+#endif 	//USE_MPI
 
-namespace Utility{
+#include "random/randomc.h"
 
-using namespace boost::random;
+namespace Utility {
 
-class Random: public mt19937{
-  
+using namespace std;
+
+typedef CRandomMersenne TRandomMersenne;
+
+/**
+ * @brief Base class for all random number generators. 
+ * @Note It would seem reasonable to allow the application (or configuration) to set this object up and 
+ * pass it to any object that requires a random number generator 
+ */
+class Random {
+
 public:
-  Random() : mt19937() {RND_INIT}
-  explicit Random (uint32_t seed) : mt19937(seed) {RND_INIT}
-  
-  ~Random() {RND_DESTROY}
-    
-  inline void Seed(long randomSeed){
-		RND_LOCK
-		this->seed(randomSeed);
-		seed_val = randomSeed;
-		RND_UNLOCK
-  }
-  
-  inline long lrand(){ return lrand(this->min(), this->max()); }
-  
-  inline long lrand(int min_v, int max_v){ 
-    uniform_int_distribution<> dist;
-    RND_LOCK
-    long result = dist(*this);
-    RND_UNLOCK
-    return result;
-  }
-
-  inline double drand(){
-    uniform_01<> dist;
-  	RND_LOCK
-  	double result = dist(*this);
-  	RND_UNLOCK
-  	return result;
-  }
-
-  inline long Reset(long increment = 0){
-  	RND_LOCK
-		seed_val+=increment;
-		this->seed(seed_val);
-		RND_UNLOCK
-	  return seed_val;
+	Random(long seed=1371) : gen(seed) {
+		RND_INIT
 	}
-  
-  	/**
+	virtual ~Random() {
+		RND_DESTROY
+	}
+
+	virtual double Seed(long randomSeed);
+	virtual long lrand(); 
+	virtual long lrand(int min, int max);
+
+	virtual double drand();
+
+	virtual long Reset(long increment = 0);
+
+	/**
 	 * Used by STL
 	 */
-	inline long operator()(long v){ return v>0 ? lrand(0, v-1) : 0;};
-	inline int operator()(int v){return v>0 ? lrand(0, v-1) : 0;};
-	inline double operator()(double v){return v>0 ? drand()*v : 0;};
-	inline float operator()(float v){return v>0 ? drand()*v : 0;};
-	//long operator()(){return drand();};
-	inline uint32_t operator()(){return lrand();}
+	long operator()(long v);
+	int operator()(int v);
+	double operator()(double n);
+	float operator()(float v);
+	float operator()();
+
+	float min(){return 0.0;};
+	float max(){return 1.0;};
 	
-  inline long GetSeed() { 			
-		return seed_val; 
+	typedef float result_type;
+
+	/**
+	 * Keep up with the seed used
+	 */
+	long GetSeed() { 			
+		return seed; 
 	}
-    
-  static Random globalGenerator;
-  
+
+	static Random globalGenerator;
+
 protected:
 #ifdef USE_MPI
-  ///<Since the calculation is mildly complex and we want deterministic results for a given seed, we should be safe
-  pthread_mutex_t lock;      
+	///<Since the calculation is mildly complex and we want deterministic results for a given seed, we should be safe
+	pthread_mutex_t lock;			
 #endif
-	long seed_val;
+	TRandomMersenne gen;
+	long seed;
 };
+
+
+
 
 }
 
-
 #endif
+
