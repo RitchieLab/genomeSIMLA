@@ -25,6 +25,35 @@ libgenetics_la_SOURCES=allelicdecoder.cpp \
 	snprecipient.cpp \
 	snprepository.cpp \
 	snprepostxtsorted.cpp \
-	snpverificationmethod.cpp
+	snpverificationmethod.cpp \
+	allelicdecoder.h \
+	binarygenoparser.h \
+	eliminategenotypeerrors.h \
+	familyevaluation.h \
+	familynode.h \
+	familymember.h \
+	familyrepoevaluationbasic.h \
+	familyrepoevaluation.h \
+	familyrepository.h \
+	fixtrios.h \
+	genotypedata.h \
+	gtevaluation.h \
+	gtfileparser.h \
+	gtfileparserbuffered.h \
+	gtlineparser.h \
+	locuslog.h \
+	modelstatistics.h \
+	ptestdistribution.h \
+	resultsrepository.h \
+	sibship.h \
+	snpaligned.h  \
+	snpevalsuite.h \
+	snpevaluation.h \
+	snppool.h \
+	snpcontainer.h \
+	snprecipient.h \
+	snprepository.h \
+	snprepostxtsorted.h \
+	snpverificationmethod.h
 	
-AM_CPPFLAGS=-I..
+AM_CPPFLAGS=-I$(top_srcdir)/src

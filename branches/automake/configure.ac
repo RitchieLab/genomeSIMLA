@@ -21,6 +21,5 @@ AC_CONFIG_FILES([Makefile
                  src/simpen/Makefile
                  src/simulation/Makefile
                  src/utility/Makefile
-                 src/wxgenomesimla/Makefile
                  ])
 AC_OUTPUT

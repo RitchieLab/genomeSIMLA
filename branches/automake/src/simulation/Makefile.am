@@ -37,6 +37,57 @@ libsimulation_la_SOURCES=basicsample.cpp \
 	poolmanager.cpp \
 	richardslogistic.cpp \
 	simlamodel.cpp \
-	templatedpedigree.cpp
+	templatedpedigree.cpp \
+	allelesource.h \
+	basicsample.h \
+	blocklistnode.h \
+	blocklistnodefourgammetes.h \
+	chromosome.h \
+	chrompool.h \
+	cpair.h \
+	cpool.h \
+	cpoolxy.h \
+	diseaselocus.h \
+	diseasemodel.h \
+	distmappingfn.h \
+	exponentialgrowth.h \
+	gamodel.h \
+	growthrate.h \
+	haplotypeblock.h \
+	individual.h \
+	kinshipcalculator.h \
+	ldcalculator.h \
+	ldfooterregion.h \
+	ldlabelregion.h \
+	ldlineplot.h \
+	ldlocationbar.h \
+	ldmafregion.h \
+	ldplotmanager.h \
+	ldplotter.h \
+	ldpngcomponent.h \
+	ldprimepngwriter.h \
+	ldwriter.h \
+	lineargrowth.h \
+	locreport.h \
+	locselection.h \
+	locus.h \
+	locusassociation.h \
+	locusmanager.h \
+	locusxy.h \
+	logisticgrowth.h \
+	meantable.h \
+	minchrom.h \
+	modelmanager.h \
+	par_region.h \
+	pedigreereferencesample.h \
+	pedigreesample.h \
+	penetranceeval.h \
+	penetrancemodel.h \
+	penfilemodel.h \
+	poolmanager.h\
+	richardslogistic.h \
+	simlamodel.h \
+	simulation.h \
+	templatedpedigree.h
 	
-AM_CPPFLAGS=-I.. $(FREETYPE_CPPFLAGS)
+AM_CPPFLAGS=-I$(top_srcdir)/src $(FREETYPE_CPPFLAGS)

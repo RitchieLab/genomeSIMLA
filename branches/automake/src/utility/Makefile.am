@@ -16,6 +16,29 @@ libutility_la_SOURCES=application.cpp \
 	stringlookup.cpp \
 	strings.cpp \
 	typelookup.cpp \
-	types.cpp
+	types.cpp\
+	application.h \
+	array2d.h \
+	basiclog.h \
+	binarrayparser.h \
+	casecontrolstatus.h \
+	configurationparser.h \
+	exception.h \
+	executionlog.h \
+	filebuffer.h \
+	functors.h \
+	generatereport.h \
+	genobplookup.h \
+	genolookup.h \
+	genotypeparser.h \
+	lineparser.h \
+	random.h\
+	rbtree.h \
+	stat.h \
+	stringlookup.h \
+	strings.h \
+	typelookup.h \
+	types.h \
+	utility.h
 	
-AM_CPPFLAGS=-I..
+AM_CPPFLAGS=-I$(top_srcdir)/src

@@ -1,6 +1,6 @@
 noinst_LTLIBRARIES=libpngwriter.la
 
-libpngwriter_la_SOURCES=pngwriter.cpp
+libpngwriter_la_SOURCES=pngwriter.cpp pngwriter.h
 
 AM_LDFLAGS=$(FREETYPE_LDFLAGS)
 AM_CPPFLAGS=$(FREETYPE_CPPFLAGS)
