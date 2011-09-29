@@ -884,12 +884,7 @@ void PoolManager::GenerateReport(ostream &os, uint headerWidth) {
 	size_t count = pools.size();
 	os<<setw(headerWidth)<<"Chromosome Pool Count: "<<count<<endl;
 	os<<setw(headerWidth)<<"Chromosome Intialization Method:";
-	if (ChromPool::UseAdamEve) 
-		os<<"2 Founder Chromosomes\n";
-	else if (ChromPool::UseEden)
-		os<<"2 Founders Crossed to Produce Initial Population\n";
-	else 
-		os<<"Randomized\n";
+	os<<"Randomized\n";
 
 	for (uint i=0; i<count; i++) {
 		os<<setw(headerWidth)<<pools[i]->GetLabel()<<"\n";

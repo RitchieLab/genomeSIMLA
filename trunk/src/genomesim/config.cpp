@@ -138,8 +138,6 @@ const char *Config::ConfigKeywords::TargetPopSize			= "TARGET_POP_SIZE";
 
 const char *Config::ConfigKeywords::LociPerChromReported	= "MAX_LOCI_PER_CHROM_REPORTED";
 
-const char *Config::ConfigKeywords::UseAdamEve 			= "INITIAL_POPULATION_ADAM_EVE";
-const char *Config::ConfigKeywords::UseEden				= "INITIAL_POPULATION_EDEN";
 const char *Config::ConfigKeywords::FounderCount			= "FOUNDER_COUNT";
 const char *Config::ConfigKeywords::FounderDistortion		= "FOUNDER_DISTORTION";
 const char *Config::ConfigKeywords::MaxRepeatCount		= "MAX_REPEAT_COUNT";
@@ -342,10 +340,6 @@ bool Config::SetValues(const char *key, const char *value, const char *line) {
 		generalSettings.AddSelector( line );
 	else if (strcmp(key, ConfigKeywords::AddRegion) == 0) 
 		generalSettings.AddSelectorRegion( line );
-	else if (strcmp(key, ConfigKeywords::UseAdamEve) == 0)
-		ChromPool::UseAdamEve = true;
-	else if (strcmp(key, ConfigKeywords::UseEden) == 0)
-		ChromPool::UseEden = true;
 	else if (strcmp(key, ConfigKeywords::FounderCount) == 0)
 		ChromPool::FounderCount = atoi(value);
 	else if (strcmp(key, ConfigKeywords::FounderDistortion) == 0)

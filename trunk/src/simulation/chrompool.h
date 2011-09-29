@@ -247,9 +247,7 @@ public:
 	 * Builds up the pool of blocks
 	 */
 	void BuildPool(uint expressionCount);
-/*	void BuildPool_Eden(uint expressionCount);
-	void BuildPool_AdamEve(uint expressionCount);
-*/	/**
+	/**
 	 * @brief Forces the allele frequency to be al1 and al2 at locus, locusID
 	 * @param locusID The index (0 based) of the locus of interest
 	 * @param al1 The first allele's frequency
@@ -345,8 +343,6 @@ public:
 	static string cssFilename;			///<The file that holds the CSS information
 	static uint reportWidth;			///<The max width of the report (for images to be inline/resized)
 	static uint targetPop;				///<The size of the pool where advancement will not continue
-	static bool UseAdamEve; 			///<2 founder chromosomes expressed expression/2 times each
-	static bool UseEden;				///<2 founders who reproduce expression times to produce initial pop
 	static int FounderCount;
 	static double FounderDistortion;	///<Alter each founder chromosomes by this amount
 	static int MaxRepeatCount;

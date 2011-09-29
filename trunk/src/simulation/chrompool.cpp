@@ -58,8 +58,6 @@ uint 	ChromPool::minOffspring				= 1;
 uint 	ChromPool::maxOffspring				= 1;
 uint 	ChromPool::targetPop 				= 0;
 bool	ChromPool::continueRunning			= true;
-bool 	ChromPool::UseAdamEve				= false;
-bool 	ChromPool::UseEden					= false;
 int		ChromPool::FounderCount				= 25;
 double	ChromPool::FounderDistortion		= 0.25;
 int		ChromPool::MaxRepeatCount			= 5;
@@ -120,113 +118,6 @@ bool ChromPool::UseMapInfoFile() {
 	return positionsDefined;
 }
 
-
-/**
- * @NOTE The following functions, BuildPool_Eden and BuildPool_AdamEve were
- * used for experimentation, and aren't considered to be suitable for 
- * generating valid chromosome pools. 
-
-void ChromPool::BuildPool_Eden(uint expressionCount) {
-	Chromosome adam(&loci, poissonLambda, &recombIndexLookup);
-	Chromosome eve(&loci, poissonLambda, &recombIndexLookup);
-	adam.InitLoci();
-	cout<<"** Eden Based Pool Initialization\n";
-	cout<<"Founder Count:            "<<FounderCount<<"\n";
-	cout<<"Founder Distortion Level: "<<FounderDistortion<<"\n";
-	cout<<"Max Repeats:	             "<<MaxRepeatCount<<"\n";
-	cout<<"Parent Distortion:        "<<ParentDistortion<<"\n";
-	cout<<"Child Distortion:         "<<ChildDistortion<<"\n";
-	
-	vector<Chromosome> initPop;
-		
-	for (int i=0; i<FounderCount; i++) {
-		adam.Distort(FounderDistortion);
-		int repeatCount = rnd.lrand(1, MaxRepeatCount-1);
-
-		for (int n=0; n<repeatCount; n++) {
-			initPop.push_back(adam);
-		}
-		eve = adam;
-		eve.Invert();
-		//eve.Distort(FounderDistortion);	
-		repeatCount = rnd.lrand(1, MaxRepeatCount-1);
-
-		for (int n=0; n<repeatCount; n++)	{
-			initPop.push_back(eve);
-		}
-	}
-	int founderCount = initPop.size() - 1;
-	cout<<"Total Founder Count:       "<<founderCount+1<<"\n";
-	//If this fails, then we didn't initialize the loci vector
-	assert(loci.size() > 0);
-	size_t eventCount;
-	if (seedSource.length() == 0) {
-		for (uint i=0; i<expressionCount; i++) {
-			Chromosome ch(&loci, poissonLambda, &recombIndexLookup);
-			int idx1=rnd.lrand(0, founderCount);
-			int idx2=rnd.lrand(0, founderCount);
-			Chromosome mom = initPop[idx1];
-			Chromosome dad = initPop[idx2];
-			mom.Distort(ParentDistortion);
-			dad.Distort(ParentDistortion);
-			ch = mom.CrossImmediate(dad, eventCount);
-			ch.Distort(ChildDistortion);
-			pool.push_back(ch);
-		}	
-	}
-	else 	
-		LoadSeedData(expressionCount);
-	
-}
- */
-
-/*
-/// Initializes the the pool with expressionCount/2 copies of Adam and expressionCount/2 copies of eve
-void ChromPool::BuildPool_AdamEve(uint expressionCount) {
-	Chromosome founder(&loci, poissonLambda, &recombIndexLookup);
-	founder.InitLoci();
-	cout<<"** Adam/Eve Based Pool Initialization\n";
-	cout<<"Founder Count:            "<<FounderCount<<"\n";
-	cout<<"Founder Distortion Level: "<<FounderDistortion<<"\n";
-	cout<<"Max Repeats:	             "<<MaxRepeatCount<<"\n";
-	cout<<"Child Distortion:         "<<ChildDistortion<<"\n";
-	
-	vector<Chromosome> initPop;
-		
-	for (int i=0; i<FounderCount; i++) {
-		Chromosome newFounder(&loci, poissonLambda, &recombIndexLookup);
-		newFounder = founder;
-		//newFounder = founder;
-		newFounder.Distort(FounderDistortion);
-		int repeatCount = rnd.lrand(1, MaxRepeatCount-1);
-		for (int n=0; n<repeatCount; n++)
-			initPop.push_back(newFounder);
-
-		newFounder.Invert();
-		newFounder.Distort(FounderDistortion);
-	
-		repeatCount = rnd.lrand(1, MaxRepeatCount-1);
-		for (int n=0; n<repeatCount; n++)
-			initPop.push_back(newFounder);
-	}
-	int founderCount = initPop.size() - 1;
-	cout<<"Total Founder Count:       "<<founderCount<<"\n";
-	//If this fails, then we didn't initialize the loci vector
-	assert(loci.size() > 0);
-
-	if (seedSource.length() == 0) {
-		for (uint i=0; i<expressionCount; i++) {
-			Chromosome ch(&loci, poissonLambda, &recombIndexLookup);
-			int idx = rnd.lrand(0,founderCount);
-			ch = initPop[idx];
-			ch.Distort(ChildDistortion);
-			pool.push_back(ch);
-		}
-	}
-	else 	
-		LoadSeedData(expressionCount);
-}
-*/
 	
 double ChromPool::XOLambda() {
 	return poissonLambda;
@@ -237,15 +128,7 @@ void ChromPool::BuildPool(uint expressionCount) {
 		grid = new LocusAssociationGrid();
 		grid->Load(gridSource.c_str());
 	}
-/*	if (UseAdamEve) {
-		BuildPool_AdamEve(expressionCount);	
-		return;
-	}
-	else if (UseEden) {
-		BuildPool_Eden(expressionCount);
-		return;
-	}
-*/
+
 	//If this fails, then we didn't initialize the loci vector
 	assert(loci.size() > 0);
 	if (seedSource.length() == 0) {

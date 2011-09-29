@@ -282,8 +282,6 @@ public:
 		static const char *TargetPopSize;			///<Pop. Size where GS will stop once it is reached
 		static const char *LociPerChromReported;	///<Max Number of loci / chromosomes to be reported
 
-		static const char *UseAdamEve;
-		static const char *UseEden;
 		static const char *FounderCount;
 		static const char *FounderDistortion;
 		static const char *MaxRepeatCount;

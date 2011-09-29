@@ -353,14 +353,6 @@ int GenomeSim::ParseCmd(int curr, int argc, char **argv) {
 	else if (strcmp(argv[curr], "-s")==0 || strcmp(argv[curr], "--seed")==0) {
 		configuration.SetRandomSeed(atoi(argv[nextCmd++]));
 	}		
-	else if (strcmp(argv[curr], "-i")==0 || strcmp(argv[curr], "--init")==0) {
-		string initType = argv[nextCmd++];
-		if (initType == "ADAMEVE") 
-			ChromPool::UseAdamEve = true;
-		else if (initType == "EDEN")
-			ChromPool::UseEden = true;
-		
-	}
 	else {
 		cout<<"Unknown argument: "<<argv[curr]<<"\n";
 		return -1;
