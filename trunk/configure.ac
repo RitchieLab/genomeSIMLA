@@ -9,7 +9,7 @@ AM_INIT_AUTOMAKE([1.9 foreign])
 AC_CONFIG_SRCDIR([src/genomesim/genomesim.cpp])
 AC_CONFIG_HEADER([config.h])
 
-m4_include([make/configure.base.ac])
+m4_include([make/configure.ac])
 
 AC_CONFIG_FILES([Makefile
 		 src/ga/Makefile
