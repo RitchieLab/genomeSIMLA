@@ -1,7 +1,0 @@
-#!/bin/bash
-
-# This is just an easy way to remember how to compile. 
-# Currently, this only works for linux
-cmake .
-make -f Makefile
-cp libldspline.so /usr/lib

@@ -87,7 +87,10 @@ public:
 	float operator()(float v);
 	float operator()();
 
-
+	float min(){return 0.0;};
+	float max(){return 1.0;};
+	
+	typedef float result_type;
 
 	/**
 	 * Keep up with the seed used

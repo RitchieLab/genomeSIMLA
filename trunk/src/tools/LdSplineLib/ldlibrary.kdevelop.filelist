@@ -1,7 +1,0 @@
-# KDevelop Custom Project File List
-CMakeLists.txt
-ldspline.cpp
-ldspline.h
-ldstringency.cpp
-ldstringency.h
-msql.h
