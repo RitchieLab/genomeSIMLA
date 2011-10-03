@@ -87,9 +87,7 @@ public:
 	 * @brief Loads the chromosome (loci positions)
 	 */
 	void LoadChromosome(const char *line);
-#ifdef USE_XY
-	void LoadChromosomeXY(const char *line);
-#endif //USE_XY
+
 	void LoadAssocChromosome(const char *line);
 	/**
 	 * @brief Loads Initiates the parsing of the configuration file

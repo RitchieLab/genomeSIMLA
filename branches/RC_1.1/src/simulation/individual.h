@@ -22,9 +22,6 @@
 #ifdef CPPUNIT
 #include <cppunit/extensions/HelperMacros.h>
 #endif
-#ifdef USE_XY
-#include "cpair.h"
-#endif
 
 namespace Simulation {
 
@@ -121,20 +118,6 @@ public:
 	virtual bool IsAffected();
 	
 	uint GetStatus();
-#ifdef USE_XY
-	virtual int GetGenotypeXY(uint locus);
-	virtual bool ChangeGenotypeXY(uint locus, uint errorDir);
-	virtual bool ClearLocusXY(uint loc);
-//	virtual bool SetChromosomalData(uint chromID, Chromosome &p, Chromosome &m);
-//	virtual bool MissingGenotype(uint chrID, uint locus);
-	AlleleSource<LocusXY>* DLCrossXY();
-	AlleleSource<LocusXY>* CrossXY();
-
-	void SetXX(AlleleSource<LocusXY>* x, AlleleSource<LocusXY>* y, PAR_Region<LocusXY>* par);
-	void SetXY(AlleleSource<LocusXY>* x, AlleleSource<LocusXY>* y, PAR_Region<LocusXY>* par);
-	bool VerifyChromosomeIs(AlleleSource<LocusXY>* chromosome, bool isX);
-	bool VerifyChromosomeIs(bool isX);
-#endif
 
 	void WriteChromosome(std::ostream& os, uint chrID);
 
@@ -264,10 +247,6 @@ protected:
 
 	std::vector<uint> chrID1;			///<Used for remote chromosome pool resolution
 	std::vector<uint> chrID2;			///< ^ ^ ^ ^ ^ 
-#ifdef USE_XY
-	CPairXY chromXY;					///<Is responsible for compiling genotypes
-	PAR_Region<LocusXY> *par;			///<Used to generate XO events in Males
-#endif
 
 
 };

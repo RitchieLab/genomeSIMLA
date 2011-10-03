@@ -218,10 +218,6 @@ bool Config::SetValues(const char *key, const char *value, const char *line) {
 		AddChromosome(line);
 	else if (strcmp(key, ConfigKeywords::LoadChromosome) == 0)
 		LoadChromosome(line);
-#ifdef USE_XY
-	else if (strcmp(key, ConfigKeywords::LoadChromosomeXY) == 0)
-		LoadChromosomeXY(line);
-#endif //USE_XY
 	else if (strcmp(key, ConfigKeywords::AssocChromosome) == 0)
 		LoadAssocChromosome(line);
 	else if (strcmp(key, ConfigKeywords::SeedChromosome) == 0)
@@ -689,34 +685,7 @@ void Config::LoadAssocChromosome(const char *line) {
 	
 	currPool = pools.AddChromosome(filename.c_str(), gridFilename.c_str(), label.c_str());
 }
-#ifdef USE_XY
-void Config::LoadChromosomeXY(const char *line) {
-	string filename, cmd, label;
-	stringstream ss(line);
-	
-	ss>>cmd;
-	filename = ParseFilename(ss, "XY Chromosome File");
 
-	ss>>label;
-	while (!ss.eof()) {
-		string s;
-		ss>>s;
-		label=label + " " + s;
-	}
-
-	if (filename.length() < 1) {
-		stringstream ss;
-		ss<<"Misconfigured XY Chromosome: \n\t"<<line<<"\n";
-		ss<<"Correct syntax: \n\tLOAD_CHROMOSOME_XY chromosome_file [label]\n";
-		
-		throw Utility::Exception::General(ss.str().c_str());
-	}
-
-	if (label.length() < 1)
-		label = Utility::ExtractBaseFilename(filename.c_str());
-	pools.AddChromosomeXY(filename.c_str(), label.c_str(), Utility::Random::globalGenerator);
-}
-#endif //USE_XY
 void Config::LoadChromosome(const char *line) {
 //	uint wordCount = CountColumns(line);
 	string filename, cmd, label;

@@ -230,11 +230,7 @@ DiseaseLocus PenetranceModel::GetLocus(istream& ss) {
 
 	if (word.length() == 0)
 		return l;
-#ifdef USE_XY
-	if (chrID == 0) {
-#else
 	if (chrID < 1) {
-#endif //USE_XY
 		string errMsg;
 		errMsg = "Invalid Chromosome ID, " + word + ". Chromosome indices start with 1";
 		throw Utility::Exception::General(errMsg.c_str());
@@ -248,13 +244,7 @@ DiseaseLocus PenetranceModel::GetLocus(istream& ss) {
 			errMsg = "Invalid Locus ID, " + word + ". Locus IDs must be valid numbers greater than 0\n";
 			throw Utility::Exception::General(errMsg.c_str());
 		}
-#ifdef USE_XY
-		if (chrID == -1) {
-			l.chromosome = -1;
-		}
-		else 
-#endif //USE_XY
-			l.chromosome = chrID - 1;
+		l.chromosome = chrID - 1;
 		l.locusIdx   = locID - 1;
 	}
 	return l;
