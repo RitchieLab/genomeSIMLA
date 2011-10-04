@@ -1,4 +1,5 @@
 #include "random.h"
+#include <cstring>
 
 #if defined (WIN32)
 	#include <windows.h>

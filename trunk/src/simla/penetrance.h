@@ -3,6 +3,7 @@
 
 #include <math.h>
 #include <stdlib.h>
+#include <cstring>
 #include "random.h"
 #include "cdflib.h"
 
