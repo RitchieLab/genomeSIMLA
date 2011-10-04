@@ -16,6 +16,8 @@
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/uniform_01.hpp>
 
+using namespace boost::random;
+
 #ifdef USE_MPI
 #include <boost/thread/mutex.hpp>
 #define RND_LOCK mx.lock();
@@ -30,7 +32,7 @@
 
 namespace Utility{
 
-template<class T = boost::random::mt19937>
+template<class T = mt19937>
 class TSRandom {
 
 public:
@@ -134,7 +136,7 @@ private:
 	}
 
 	//! A Helper distribution to generate #s in [0,1)
-	static boost::random::uniform_01<> unif01_dist;
+	static uniform_01<> unif01_dist;
 	//! The actual PRNG
 	static T* gen;
 	//! A pointer to an instance of this class (for speed / backward compatibility)
@@ -151,7 +153,7 @@ boost::mutex TSRandom<T>::mx;
 #endif
 
 template<class T>
-boost::random::uniform_01<> TSRandom<T>::unif01_dist;
+uniform_01<> TSRandom<T>::unif01_dist;
 
 template<class T>
 T* TSRandom<T>::gen = 0;

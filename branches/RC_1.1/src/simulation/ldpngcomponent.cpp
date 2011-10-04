@@ -18,7 +18,7 @@ namespace Visualization {
 uint ImageParameters::standardBlockSize 	= 32;
 uint ImageParameters::tinyBlockSize     	= 2;
 uint ImageParameters::medBlockSize	   		= 8;
-string ImageParameters::font 		   		= "FreeMonoBold.ttf";
+string ImageParameters::font 		   		= "/usr/share/fonts/liberation/LiberationMono-Bold.ttf";
 uint ImageParameters::maxSnpsPerRow	   		= 3500;
 uint ImageParameters::imageCompressionLevel	= 3;
 
