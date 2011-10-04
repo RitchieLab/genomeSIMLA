@@ -15,7 +15,8 @@
 #include "penetrancemodel.h"
 #include <boost/random/normal_distribution.hpp>
 #include <boost/shared_ptr.hpp>
-#include "utility/random.h"
+//#include "utility/random.h"
+#include "utility/tsrandom.h"
 #include "diseasemodel.h"
 #include "utility/lineparser.h"
 #include "simulation/poolmanager.h"
@@ -46,7 +47,7 @@ struct NormalDistribution {
 	/**
 	 * @brief Perform the drawn (pass it a copy of the appropriate generator)
 	 */
-	float GetOutcome(Random& rnd) {
+	float GetOutcome(Utility::TSRandom<>& rnd) {
 
 		return distribution(rnd);
 	}

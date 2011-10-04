@@ -273,7 +273,7 @@ int ContinuousModel::DetermineStatus(float outcome) {
 	return status;
 }
 int ContinuousModel::DrawPopulationStatus(float& outcome) {
-	outcome = globalDistribution.GetOutcome(Random::globalGenerator);
+	outcome = globalDistribution.GetOutcome(TSRandom<>::globalGenerator());
 	return DetermineStatus(outcome);
 
 }
@@ -283,7 +283,7 @@ int ContinuousModel::GetStatus(std::vector<uint>& genotypes, float& outcome) {
 	cout<<"IsAffected: ";
 #endif
 	uint index = BuildGenotypeIndex(genotypes);
-	outcome = dist[index]->GetOutcome(Random::globalGenerator);
+	outcome = dist[index]->GetOutcome(TSRandom<>::globalGenerator());
 	return DetermineStatus(outcome);
 }
 
