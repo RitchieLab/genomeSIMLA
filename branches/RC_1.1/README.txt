@@ -20,7 +20,13 @@ to configure are:
 	to fix it, but running in debug mode will likely result in MUCH slower 
 	execution times.
 	
-
+Ubuntu Requirements
+===================
+In addition to the standard build tools, building the software for Ubuntu (tested with
+10.04) requires the following packages:
+libboost-all-dev
+libpng-dev
+libfreetype6-dev
 	
 Font Files
 ==========
