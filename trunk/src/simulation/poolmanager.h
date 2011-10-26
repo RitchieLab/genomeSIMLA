@@ -18,9 +18,6 @@
 #include "diseasemodel.h"
 #include "locreport.h"
 
-#ifdef USE_XY
-#include "cpoolxy.h"
-#endif //USE_XY
 namespace Simulation {
 
 class Sample;
@@ -132,11 +129,6 @@ public:
 	ChromPool *AddChromosome(const char *locFilename, const char *label);
 	ChromPool *AddChromosome(const char *locfilena, const char *gridFilename, const char *label);
 
-#ifdef USE_XY
-	void AddChromosomeXY(const char *locFilename, const char *label, Utility::Random& rnd);	
-	AlleleSource<LocusXY> *DrawX();
-	AlleleSource<LocusXY> *DrawY();
-#endif //USE_XY
 	/**
 	 * @brief Brings the pools up with the proper data according to the generation
 	 */

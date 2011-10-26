@@ -9,12 +9,12 @@ AM_INIT_AUTOMAKE([1.9 foreign])
 AC_CONFIG_SRCDIR([src/genomesim/genomesim.cpp])
 AC_CONFIG_HEADER([config.h])
 
-m4_include([make/configure.ac])
+RL_CONFIGURE([1.40.0],[HAVE_PNG HAVE_BOOST])
 
 AC_CONFIG_FILES([Makefile
-		 src/ga/Makefile
-                 src/genetics/Makefile
                  src/genomesim/Makefile
+                 src/ga/Makefile
+                 src/genetics/Makefile
                  src/pngwriter/Makefile
                  src/random/Makefile
                  src/simla/Makefile

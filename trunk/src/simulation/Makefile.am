@@ -46,7 +46,6 @@ libsimulation_la_SOURCES=basicsample.cpp \
 	chrompool.h \
 	cpair.h \
 	cpool.h \
-	cpoolxy.h \
 	diseaselocus.h \
 	diseasemodel.h \
 	distmappingfn.h \
@@ -73,7 +72,6 @@ libsimulation_la_SOURCES=basicsample.cpp \
 	locus.h \
 	locusassociation.h \
 	locusmanager.h \
-	locusxy.h \
 	logisticgrowth.h \
 	meantable.h \
 	minchrom.h \

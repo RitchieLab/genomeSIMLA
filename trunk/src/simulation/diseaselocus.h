@@ -24,11 +24,7 @@ struct DiseaseLocus {
 	/**
 	 * @Brief returns true of contents <I>appear</I> to be legitimate. 
 	 */
-#ifdef USE_XY
-	bool ValidIdx() { return (chromosome > -2) && locusIdx > -1; }
-#else
 	bool ValidIdx() { return chromosome > -1 && locusIdx > -1; }
-#endif //USE_XY
 	/**
 	 * @brief Checks that the allele frequencies fit together well enough
 	 */

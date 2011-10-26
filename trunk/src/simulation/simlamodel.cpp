@@ -132,11 +132,7 @@ bool SimlaModel::Init(istream& ss, PoolManager *pools) {
 				}
 				//al2 = l.locus->GetAlleleFreq(1);
 			}
-#ifdef USE_XY
-			if (loc.chromosome > 0 || loc.chromosome == -1) {
-#else
 			if (loc.chromosome >= 0) {
-#endif
 				float beta = 0, modelType = 0;
 				ss>>beta>>modelType;			
 

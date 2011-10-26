@@ -33,9 +33,6 @@ float Individual::minAlFreqThreshold		= 0.00;
 Individual::Individual(uint id, uint pedID, uint chrCount /*=1*/) : id(id), pedID(pedID), patID(0), 
 			matID(0), includeInDataset(true), status(0), gender(0), chromosomeCount(chrCount), mom(NULL), 
 			dad(NULL), chrID1(chrCount), chrID2(chrCount)
-#ifdef USE_XY
-			,par(NULL)
-#endif
 
 {
 	matChrom = new Chromosome[chrCount];
@@ -47,9 +44,6 @@ Individual::Individual(uint id, uint pedID, uint chrCount /*=1*/) : id(id), pedI
 Individual::Individual() : id(0), pedID(0), patID(0), matID(0), includeInDataset(true), status(0), gender(0),
 		 matChrom(NULL), patChrom(NULL), chromosomeCount(0), genePoolIDs(NULL), mom(NULL), 
 		dad(NULL), chrID1(0), chrID2(0) 
-#ifdef USE_XY
-			,par(NULL)
-#endif
 
 { 
 }
@@ -106,29 +100,6 @@ void Individual::SetDLPedigreeMeta(Individual *dad, Individual *mom) {
 	this->matID=mom->GetID();
 	this->dad=dad;
 	this->mom=mom;
-#ifdef USE_XY
-	if (dad->chromXY.chrom1) {
-		bool isFemale = Random::globalGenerator.drand() < FtoM_BirthRatio;
-		if (isFemale) {
-			AlleleSource<LocusXY> *d = dad->chromXY.Draw(Random::globalGenerator, dad->par, isFemale);
-			assert(VerifyChromosomeIs(d, true));
-			assert(dad->VerifyChromosomeIs(false));
-			AlleleSource<LocusXY> *m = mom->chromXY.Draw(Random::globalGenerator, NULL, isFemale);
-			assert(mom->VerifyChromosomeIs(true));
-			assert(VerifyChromosomeIs(m, true));
-			SetXX(m, d, dad->par);
-		}
-		else {
-			AlleleSource<LocusXY> *d = dad->chromXY.Draw(Random::globalGenerator, dad->par, isFemale);
-			assert(VerifyChromosomeIs(d, false));
-			assert(dad->VerifyChromosomeIs(false));
-			AlleleSource<LocusXY> *m = mom->chromXY.Draw(Random::globalGenerator, NULL, isFemale);
-			assert(mom->VerifyChromosomeIs(true));
-			assert(VerifyChromosomeIs(m, true));
-			SetXY(m, d, dad->par);
-		}
-	}
-#endif
 	SetChromosomalData(dad->DLCross(), mom->DLCross());
 }
 
@@ -160,10 +131,6 @@ void Individual::SetChromosomalData(Chromosome *p, Chromosome *m) {
 	patChrom = p;
 	
 	int chromCount = chromosomeCount;
-#ifdef USE_XY
-	if (chromXY.chrom1) 
-		chromCount--;
-#endif
 	for (int i=0; i<chromCount; i++)
 		missingData[i].resize(p[i].LociCount(), false);
 }
@@ -252,9 +219,6 @@ Individual *Individual::Clone() {
 		for (uint i=0; i<chromosomeCount; i++) 
 			ind->patChrom[i] = patChrom[i];
 	}
-#ifdef USE_XY
-	ind->chromXY = chromXY;
-#endif
 	for (uint i=0; i<chromosomeCount; i++) {
 		ind->genePoolIDs[i]=genePoolIDs[i];
 		ind->missingData[i]=missingData[i];
@@ -375,10 +339,6 @@ Individual *Individual::Cross(Individual *father, size_t id) {
 
 Chromosome *Individual::DLCross() {	
 	int chromCount = chromosomeCount;
-#ifdef USE_XY
-	if (chromXY.chrom1)
-		chromCount--;
-#endif
 	Chromosome *newChr = NULL;
 	if (chromCount > 0) {
 		newChr = new Chromosome[chromCount];
@@ -400,10 +360,6 @@ Chromosome *Individual::Cross() {
 
 int Individual::GetGenotype(uint chrID, uint locus) {
 
-#ifdef USE_XY 
-	if (chrID == (uint)-1)
-		return chromXY.GetGenotype(locus);
-#endif //USE_XY
 	if (chromosomeCount <= chrID || locus >= matChrom[chrID].LociCount() || locus >= patChrom[chrID].LociCount()) {
 		cout<<"-------------------------- "<<chrID<<" < "<<chromosomeCount<<" && "<<matChrom[chrID].LociCount()<<" < "<<locus<<" > "<<patChrom[chrID].LociCount()<<"\n";
 		cout<<"--------------------------We asked for an invalid memory location! (individual.cpp:196)\n";
@@ -423,10 +379,6 @@ int Individual::GetSnpCount() {
 	uint lociCount = 0;
 	for (uint chID=0; chID<chromosomeCount; chID++) 
 		lociCount+=patChrom[chID].LociCount();
-#ifdef USE_XY
-	if (chromXY.chrom1)
-		lociCount+=chromXY.chrom1->GetLocusCount();
-#endif //USE_XY
 	return lociCount;
 }
 
@@ -543,12 +495,6 @@ void Individual::WriteForMendel(std::ostream& meta, std::ostream& genotypes) {
 		}
 	}
 
-#ifdef USE_XY
-	cerr<<"Ooops, we haven't set mendel files up to work with XY chromosomes!\n";
-	assert(0);
-	if (chromXY.chrom1)
-		chromXY.chrom1->WriteBinary(genotypes);
-#endif //USE_XY
 	uint totalBlocks = (data.size() / boost::dynamic_bitset<unsigned char>::bits_per_block) + 1;
 assert(boost::dynamic_bitset<unsigned char>::bits_per_block == 8);
 	dynamic_bitset<unsigned char>::block_type raw[totalBlocks];
@@ -586,10 +532,6 @@ void Individual::WritePedigree(std::ostream& meta, std::ostream&genotypes, bool 
 	for (uint chID=0; chID<chromosomeCount; chID++) 
 		patChrom[chID].WriteBinary(genotypes);
 
-#ifdef USE_XY
-	if (chromXY.chrom1)
-		chromXY.chrom1->WriteBinary(genotypes);
-#endif //USE_XY
 
 	for (uint chID=0; chID<chromosomeCount; chID++) 
 		matChrom[chID].WriteBinary(genotypes);
@@ -606,10 +548,6 @@ void Individual::WritePedigree(std::ostream& meta, std::ostream&genotypes, bool 
 			genotypes.write((char*)&raw, (sizeof(dynamic_bitset<>::block_type)*totalBlocks));	
 		}
 	}
-#ifdef USE_XY
-	if (chromXY.chrom2)
-		chromXY.chrom2->WriteBinary(genotypes);
-#endif //USE_XY
 }
 
 float Individual::EvaluateKinship(const Individual& other) {
@@ -626,13 +564,6 @@ float Individual::EvaluateKinship(const Individual& other) {
 		totalKinship+=patChrom[i].EvaluateKinship(other.patChrom[i]);
 		genomeSize+=matChrom[i].LociCount();
 	}
-
-#ifdef USE_XY
-	if (chromXY.chrom1) {
-		totalKinship+=chromXY.chrom1->EvaluateKinship(other.chromXY.chrom1);
-		totalKinship+=chromXY.chrom2->EvaluateKinship(other.chromXY.chrom2);
-	}
-#endif //USE_XY
 	return (float)totalKinship/(float)(4*genomeSize);
 }
 
@@ -661,18 +592,6 @@ void Individual::WritePedigreeMetaData(std::ostream& os) {
 			}
 		}
 	}
-
-#ifdef USE_XY
-	if (chromXY.chrom1) {
-		LocusManager<LocusXY>* loci = chromXY.chrom1->GetLoci();
-		int locusCount = chromXY.chrom1->GetLocusCount();
-		os<<" ";
-		if (chromXY.chrom1) 
-			//I need to add an XY version of this routine
-			assert(0);
-			chromXY.ShowGenotypesPedigree(os, minAlFreqThreshold, -1, ' ', NULL);
-	}
-#endif //USE_XY
 	
   os << std::endl;
 }
@@ -698,10 +617,6 @@ void Individual::WritePedigree(std::ostream& os, uint *genotypeCounts, bool writ
 	if (writeOutcome)
 		os<<outcome<<" ";
 	int chromCount = chromosomeCount;
-#ifdef USE_XY
-	if (chromXY.chrom1) 
-		chromCount--;
-#endif
 	int locPos = 0;
 	//Write each of the chromosomes to the line
 	for (int chID=0; chID<chromCount; chID++) {
@@ -742,108 +657,10 @@ void Individual::WritePedigree(std::ostream& os, uint *genotypeCounts, bool writ
 				cout<<"Skipping locus "<<locID + 1<<" frequency "<<MinorAlleleFreq(chID, locID)<<"\n";
 		}
 	}
-#ifdef USE_XY
-	if (chromXY.chrom1) {
-		LocusManager<LocusXY>* loci = chromXY.chrom1->GetLoci();
-		int locusCount = chromXY.chrom1->GetLocusCount();
-		os<<" ";
-		if (chromXY.chrom1) 
-			chromXY.ShowGenotypesPedigree(os, minAlFreqThreshold, -1, ' ', genotypeCounts);
-	}
-#endif //USE_XY
 	
   os << std::endl;
 }
 
-
-
-#ifdef USE_XY
-int Individual::GetGenotypeXY(uint locus) {
-	return chromXY.GetGenotype(locus);
-}
-
-bool Individual::ChangeGenotypeXY(uint locus, uint errorDir) {
-	//This doens't make any sense with the current approach for the chromosomes
-	cerr<<"Attempt to change genotype without verification to it's \"completeness\" has occured\n";
-	exit(1);
-}
-
-bool Individual::ClearLocusXY(uint loc) {
-	//This doens't make any sense with the current approach for the chromosomes
-	cerr<<"Attempt to change genotype without verification to it's \"completeness\" has occured\n";
-	exit(1);
-
-}
-
-
-void Individual::SetXX(AlleleSource<LocusXY>* x1, AlleleSource<LocusXY>* x2, PAR_Region<LocusXY>* par) {
-	this->par = par;
-	chromXY.Init(x1, x2, x1->GetLoci());
-	assert(VerifyChromosomeIs(chromXY.chrom1, true));
-	assert(VerifyChromosomeIs(chromXY.chrom2, true));
-	chromXY.IsXX(true);
-}
-
-void Individual::SetXY(AlleleSource<LocusXY>* x, AlleleSource<LocusXY>* y, PAR_Region<LocusXY>* par) {
-	this->par = par;
-	assert(VerifyChromosomeIs(x, true));
-	assert(VerifyChromosomeIs(y, false));
-	
-	chromXY.Init(x, y, x->GetLoci());
-	assert(VerifyChromosomeIs(chromXY.chrom1, true));
-	assert(VerifyChromosomeIs(chromXY.chrom2, false));
-	chromXY.IsXX(false);
-}
-
-
-bool Individual::VerifyChromosomeIs(bool isX) {
-	//Always should be X
-	VerifyChromosomeIs(chromXY.chrom1, true);
-	VerifyChromosomeIs(chromXY.chrom2, isX);
-}
-
-bool Individual::VerifyChromosomeIs(AlleleSource<LocusXY>* chromosome, bool isX) {
-	stringstream ss1, ss2;
-	LocusManager<LocusXY> *loci = chromosome->GetLoci();
-	int locCount = loci->LocusCount();
-	bool allClear = true;
-
-	for (int i=0; i<locCount; i++) {
-		LocusXY *loc = loci->At(i);
-		ss1<<chromosome->At(i)<<" ";
-		if (isX) {
-			if (loc->type == LocusXY::Y_Only || loc->type == LocusXY::Y_Homolog) {
-				if (chromosome->At(i)) {
-					ss2<<"X ";
-					allClear = false;
-				}
-				else 
-					ss2<<"  ";
-			}
-			else 
-				ss2<<"  ";
-		
-		} else {
-			if (loc->type == LocusXY::X_Only || loc->type == LocusXY::X_Homolog) {
-				if (chromosome->At(i)) {
-					ss2<<"X ";
-					allClear = false;
-				}
-				else 
-					ss2<<"  ";
-			}
-			else 
-				ss2<<"  ";
-		}
-
-	}
-	if (!allClear)
-		cerr<<ss1.str()<<"\n"<<ss2.str()<<"\n";
-	return allClear;
-}
-
-
-#endif //USE_XY
 
 void Individual::WriteContinuous(std::ostream&os, uint *genotypeCounts, bool doWriteStatus /*=true*/) {
 
@@ -873,15 +690,6 @@ void Individual::WriteContinuous(std::ostream&os, uint *genotypeCounts, bool doW
 		}
 	}
 
-#ifdef USE_XY
-	if (chromXY.chrom1) {
-		LocusManager<LocusXY>* loci = chromXY.chrom1->GetLoci();
-		int locusCount = chromXY.chrom1->GetLocusCount();
-		os<<" ";
-		if (chromXY.chrom1) 
-			chromXY.ShowGenotypes(os, minAlFreqThreshold, -1, ' ', genotypeCounts);
-	}
-#endif //USE_XY
   os << std::endl;
 }
 
@@ -913,15 +721,6 @@ void Individual::WriteMDR(std::ostream&os, uint *genotypeCounts, bool doWriteSta
 		}
 	}
 
-#ifdef USE_XY
-	if (chromXY.chrom1) {
-		LocusManager<LocusXY>* loci = chromXY.chrom1->GetLoci();
-		int locusCount = chromXY.chrom1->GetLocusCount();
-		os<<" ";
-		if (chromXY.chrom1) 
-			chromXY.ShowGenotypes(os, minAlFreqThreshold, -1, ' ', genotypeCounts);
-	}
-#endif //USE_XY
   os << std::endl;
 }
 
@@ -931,18 +730,8 @@ void Individual::ReadBinaryMdr(std::ifstream *genotypes, bool readMissingData, b
 		
 	for (uint chID=0; chID<chromosomeCount; chID++) 
 		patChrom[chID].ReadBinary(*genotypes, chrSize[chID], NULL, true);
-#ifdef USE_XY
-	if (chromXY.chrom1) {
-		chromXY.chrom1->ReadBinary(*genotypes, NULL);
-	}
-#endif //USE_XY
 	for (uint chID=0; chID<chromosomeCount; chID++) 
 		matChrom[chID].ReadBinary(*genotypes, chrSize[chID], NULL, true);
-#ifdef USE_XY
-	if (chromXY.chrom2) {
-		chromXY.chrom2->ReadBinary(*genotypes, NULL);
-	}
-#endif //USE_XY
 	
 	if (readMissingData) {
 		for (uint chID=0; chID<chromosomeCount; chID++) {
@@ -952,13 +741,6 @@ void Individual::ReadBinaryMdr(std::ifstream *genotypes, bool readMissingData, b
 			missingData[chID] = dynamic_bitset<>(&raw[0], &raw[totalBlocks]);
 			missingData[chID].resize(chrSize[chID]);
 		}
-#ifdef USE_XY
-		uint totalBlocks = (chromXY.chrom1->GetLocusCount() / boost::dynamic_bitset<>::bits_per_block) + 1;
-		dynamic_bitset<>::block_type raw[totalBlocks];
-		genotypes->read((char *)raw[0], (sizeof(dynamic_bitset<>::block_type)*totalBlocks));
-		chromXY.missingData = dynamic_bitset<>(&raw[0], &raw[totalBlocks]);
-		chromXY.missingData.resize(chromXY.chrom1->GetLocusCount());
-#endif //USE_XY
 	}
 	
 }
@@ -970,17 +752,9 @@ void Individual::WriteContinuous(std::ostream& meta, std::ostream&genotypes, boo
 		
 	for (uint chID=0; chID<chromosomeCount; chID++) 
 		patChrom[chID].WriteBinary(genotypes);
-#ifdef USE_XY
-	if (chromXY.chrom1) 
-		chromXY.chrom1->WriteBinary(genotypes);
-#endif //USE_XY
 
 	for (uint chID=0; chID<chromosomeCount; chID++) 
 		matChrom[chID].WriteBinary(genotypes);
-#ifdef USE_XY
-	if (chromXY.chrom2) 
-		chromXY.chrom2->WriteBinary(genotypes);
-#endif //USE_XY
 	
 	if (writeMissingData) {
 		for (uint chID=0; chID<chromosomeCount; chID++) {
@@ -994,16 +768,6 @@ void Individual::WriteContinuous(std::ostream& meta, std::ostream&genotypes, boo
 			genotypes.write((char*)&raw, (sizeof(dynamic_bitset<>::block_type)*totalBlocks));	
 		}
 	}
-#ifdef USE_XY
-		BitSetType &misses = chromXY.missingData;
-		uint totalBlocks = (misses.size() / boost::dynamic_bitset<>::bits_per_block) + 1;
-		dynamic_bitset<>::block_type raw[totalBlocks];
-
-		//Convert the bitset to raw data
-		to_block_range(misses, raw);
-
-		genotypes.write((char*)&raw, (sizeof(dynamic_bitset<>::block_type)*totalBlocks));	
-#endif //USE_XY
 }
 
 void Individual::WriteMDR(std::ostream& meta, std::ostream&genotypes, bool writeMissingData, bool doWriteStatus /*=true*/) {
@@ -1014,17 +778,9 @@ void Individual::WriteMDR(std::ostream& meta, std::ostream&genotypes, bool write
 		
 	for (uint chID=0; chID<chromosomeCount; chID++) 
 		patChrom[chID].WriteBinary(genotypes);
-#ifdef USE_XY
-	if (chromXY.chrom1) 
-		chromXY.chrom1->WriteBinary(genotypes);
-#endif //USE_XY
 
 	for (uint chID=0; chID<chromosomeCount; chID++) 
 		matChrom[chID].WriteBinary(genotypes);
-#ifdef USE_XY
-	if (chromXY.chrom2) 
-		chromXY.chrom2->WriteBinary(genotypes);
-#endif //USE_XY
 	
 	if (writeMissingData) {
 		for (uint chID=0; chID<chromosomeCount; chID++) {
@@ -1038,30 +794,11 @@ void Individual::WriteMDR(std::ostream& meta, std::ostream&genotypes, bool write
 			genotypes.write((char*)&raw, (sizeof(dynamic_bitset<>::block_type)*totalBlocks));	
 		}
 	}
-#ifdef USE_XY
-		BitSetType &misses = chromXY.missingData;
-		uint totalBlocks = (misses.size() / boost::dynamic_bitset<>::bits_per_block) + 1;
-		dynamic_bitset<>::block_type raw[totalBlocks];
-
-		//Convert the bitset to raw data
-		to_block_range(misses, raw);
-
-		genotypes.write((char*)&raw, (sizeof(dynamic_bitset<>::block_type)*totalBlocks));	
-#endif //USE_XY
 }
 
 void Individual::WriteChromosome(std::ostream& os, uint chrID) {
 	patChrom[chrID].ShowGenotypes(100, '\t');
-#ifdef USE_XY
-	/************ I'm not sure about this, these above don't do low MAF...that might be wrong */
-	if (chromXY.chrom1) 
-		chromXY.chrom1->ShowGenotypes(os, 100, '\t');
-#endif //USE_XY
 	matChrom[chrID].ShowGenotypes(100, '\t');
-#ifdef USE_XY
-	if (chromXY.chrom2) 
-		chromXY.chrom2->ShowGenotypes(os, 100, '\t');
-#endif //USE_XY
 }
 
 /**
@@ -1081,12 +818,6 @@ void Individual::WritePhased(std::ostream& os, uint indID, bool useFreqThreshold
 			}
 		}
 	}
-#ifdef USE_XY
-	if (chromXY.chrom1) 
-		s1<<chromXY.chrom1;
-	if (chromXY.chrom2)
-		s2<<chromXY.chrom2;
-#endif //USE_XY
 
  	os << s1.str() << std::endl;
  	os << s2.str() << std::endl;

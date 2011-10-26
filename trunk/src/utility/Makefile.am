@@ -39,6 +39,10 @@ libutility_la_SOURCES=application.cpp \
 	strings.h \
 	typelookup.h \
 	types.h \
-	utility.h
+	utility.h \
+	tsrandom.h
 	
-AM_CPPFLAGS=-I$(top_srcdir)/src
+AM_CPPFLAGS=-I$(top_srcdir)/src $(BOOST_CPPFLAGS)
+
+libutility_la_LDFLAGS=$(BOOST_LDFLAGS)
+libutility_la_LIBADD=$(BOOST_THREAD_LIB)

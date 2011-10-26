@@ -36,17 +36,9 @@ pthread_mutex_t PoolManager::summaryLock	= PTHREAD_MUTEX_INITIALIZER;	///<Lock d
 using namespace PopulationGrowth;
 
 PoolManager::PoolManager() : currGeneration(0), poolIsPopulated(false), threadedPoolIdx(0){
-#ifdef USE_XY
-	poolxy = NULL;
-	locusXY = NULL;
-#endif //USE_XY
 }
 
 size_t PoolManager::GetPoolCount() {
-#ifdef USE_XY
-	if (poolxy)
-		return pools.size() + 1;
-#endif //USE_XY
 	return pools.size();
 }
 
@@ -55,13 +47,6 @@ PoolManager::~PoolManager() {
 	size_t count = pools.size();
 	for (uint i=0; i<count; i++) 
 		delete pools[i];
-#ifdef USE_XY
-	if (poolxy)
-		delete poolxy;
-
-	if (locusXY)
-		delete locusXY;
-#endif //USE_XY
 }
 
 
@@ -75,11 +60,6 @@ string PoolManager::GenerateMarkerInfoFilename(uint pos, uint chr, const char *p
 	string dsPortion = "";
 	if (forDataset)
 		dsPortion = ".dataset";
-#ifdef USE_XY
-	if (chr == (uint)-1)
-		ss<<prj<<"."<<pos<<"."<<poolxy->GetLabel()<<dsPortion<<"."<<startLoci<<".info";
-	else
-#endif //USE_XY
 		ss<<prj<<"."<<pos<<"."<<pools[chr]->GetLabel()<<dsPortion<<"."<<startLoci<<".info";
 	return ss.str();
 }
@@ -90,11 +70,6 @@ string PoolManager::GenerateMarkerInfoFilename(uint gen, uint chr, const char *p
 	string dsPortion = "";
 	if (forDataset)
 		dsPortion = ".dataset";
-#ifdef USE_XY
-	if (chr == (uint)-1)
-		ss<<prj<<"."<<gen<<"."<<poolxy->GetLabel()<<dsPortion<<".info";
-	else
-#endif //USE_XY
 		ss<<prj<<"."<<gen<<"."<<pools[chr]->GetLabel()<<dsPortion<<".info";
 	return ss.str();
 }
@@ -142,12 +117,6 @@ string PoolManager::GenerateSampleMarkerInfo(const char *prj, float minFreq) {
 		ChromPool *ch = pools[i];
 		ch->WriteMarkerInfo(file, minFreq);
 	}
-#ifdef USE_XY
-	cerr<<"string PoolManager::GenerateSampleMarkerInfo(const char *prj, float minFreq)\n";
-	cerr<<"This is just not a good idea! We are trying to squeeze locus information from non-XY and XY chromosomes into a single file! If we really need this to happen, we should consider changing the standard chromosome's output format to work reasonably well with the XY stuff\n";
-	assert(false);
-
-#endif //USE_XY
 
 	return filename.str();
 }
@@ -181,10 +150,6 @@ string PoolManager::WritePhasedOverview(const char *project, bool forDataset) {
 
 		outputFilename = filename;
 	}
-#ifdef USE_XY
-	if (poolxy)
-		poolxy->Save(currGeneration);
-#endif //USE_XY
 
 	return outputFilename;
 }
@@ -223,10 +188,6 @@ string PoolManager::WriteMarkerInfoOverview(const char *project, bool forDataset
 		file.close();
 		outputFilename = filename;
 	}
-#ifdef USE_XY
-	if (poolxy) 
-		OOOOPS("poolmanager.cpp:224");
-#endif //USE_XY
 
 	return outputFilename;
 }
@@ -339,19 +300,6 @@ string PoolManager::ProduceOverviewLD(const char *project, bool forDataset, bool
 	//Do some work ourselves
 	ProduceOverviewLD((void*)&thArgs);
 
-
-#ifdef USE_XY
-		//XY stuff is so different, we're cheating for now, and not trying to work it into the threading model
-		if (poolxy) {
-			char filename[32768];
-			sprintf(filename, "%s.%d.%s.ld", projectName.c_str(), currGeneration, poolxy->GetLabel().c_str());
-			poolxy->Refresh(currGeneration);
-			poolxy->WriteLdData(filename, summary, locusReport, 0.0);
-			cout<<"XY LD Completed\n";
-			poolxy->Suspend();
-		}
-#endif //USE_XY
-
 	//Let's catch up before we move on
 	for (size_t i = 0; i<maxThreadCount; i++) {
 		pthread_join(threads[i], NULL);
@@ -378,12 +326,6 @@ bool PoolManager::Dump(const char *prj) {
 		ch->CalculateAlleleFrequencies(0);
 		ch->SaveLoci(prj);
 	}
-#ifdef USE_XY
-	if (poolxy) {
-		poolxy->CalculateAlleleFrequencies(0);
-		poolxy->Save(currGeneration);
-	}
-#endif //USE_XY
 	return success;
 }			
 
@@ -407,38 +349,6 @@ ChromPool *PoolManager::AddChromosome(const char *locFilename, const char *label
 	return ch;
 }
 
-#ifdef USE_XY
-
-void PoolManager::AddChromosomeXY(const char *locFilename, const char *label, Utility::Random& rnd) {
-	if (poolxy) {
-		cerr<<"Previous XY pool exists. Unwilling to load more than one XY\n";
-		exit(1);
-	}
-	locusXY = new LocusManagerFileBased<LocusXY>(projectName.c_str(), -1);
-	((LocusManagerFileBased<LocusXY>*)locusXY)->Load(locFilename);
-	
-	poolxy = new CPoolXY(99, projectName.c_str(), label);
-	poolxy->Init(locusXY, rnd);
-}
-
-
-AlleleSource<LocusXY> *PoolManager::DrawX() {
-	AlleleSource<LocusXY> *chrom = NULL;
-
-	if (poolxy)
-		chrom = poolxy->DrawX(Utility::Random::globalGenerator);
-	return chrom;
-}
-
-AlleleSource<LocusXY> *PoolManager::DrawY() {
-	AlleleSource<LocusXY> *chrom = NULL;
-
-	if (poolxy)
-		chrom = poolxy->DrawY(Utility::Random::globalGenerator);
-	return chrom;
-
-}
-#endif //USE_XY
 ChromPool *PoolManager::GetChromosome(uint idx) {
 	ChromPool *pool = NULL;
 
@@ -481,13 +391,6 @@ bool PoolManager::Close() {
 void PoolManager::InsertModel(DiseaseModel *model) {
 	size_t poolCount = GetPoolCount();
 	vector<uint> relLoci;
-#ifdef USE_XY
-	if (poolxy) {
-		model->GetDiseaseLoci(-1, relLoci);
-		poolxy->SetModelLoci(relLoci);
-		poolCount--;
-	}
-#endif //USE_XY
 	for (size_t i=0; i<poolCount; i++) {
 		relLoci.clear();
 		model->GetDiseaseLoci( i, relLoci);
@@ -503,11 +406,6 @@ bool PoolManager::PrepForSampling(const char *project, uint generation, DiseaseM
 	bool success = true;
 	if (!poolIsPopulated) {
 		size_t poolCount = GetPoolCount();
-#ifdef USE_XY
-		if (poolxy) 
-			//I don't think we actually need to do anything to the new pools
-			poolCount--;
-#endif //USE_XY
 
 		//BitSetType requiredChroms = model->AssociatedChromosomes(poolCount);
 
@@ -531,11 +429,7 @@ bool PoolManager::ResolveGenotypes(vector<Individual*>& people, DiseaseModel *mo
 	bool success = true;
 	if (!poolIsPopulated) {
 		size_t poolCount = GetPoolCount();
-#ifdef USE_XY 
-		// The new pool object requires much less moderation, so this isn't necessary...lets just skip it
-		if (poolxy)
-			poolCount--;
-#endif
+
 		BitSetType chromsAlreadyInMem = model->AssociatedChromosomes(poolCount);
 	
 		for (uint i=0; success && i<poolCount; i++) {
@@ -566,11 +460,6 @@ bool PoolManager::ResolveGenotypes(const char *project, uint generation, Sample 
 	bool success = true;
 	if (!poolIsPopulated) {
 		size_t poolCount = GetPoolCount();
-#ifdef USE_XY 
-		// The new pool object requires much less moderation, so this isn't necessary...lets just skip it
-		if (poolxy)
-			poolCount--;
-#endif
 		BitSetType chromsAlreadyInMem = model->AssociatedChromosomes(poolCount);
 	
 		for (uint i=0; success && i<poolCount; i++) {
@@ -605,14 +494,6 @@ bool PoolManager::LoadLoci(const char *project, uint generation) {
 		success = success && LoadLoci(project, generation, i);
 	}
 	
-
-#ifdef USE_XY
-		if (locusXY) {	
-			((LocusManagerFileBased<LocusXY>*)locusXY)->SetPrefix(project);
-			((LocusManagerFileBased<LocusXY>*)locusXY)->Refresh(generation);
-			success = success && true;
-		}
-#endif //USE_XY
 	if (success)
 		currGeneration = generation;
 
@@ -620,11 +501,6 @@ bool PoolManager::LoadLoci(const char *project, uint generation) {
 }
 
 void PoolManager::SetPoolGeneration(uint generation) {
-#ifdef USE_XY
-	if (poolxy) 
-		if (generation > 0)
-			poolxy->Refresh(generation);
-#endif //USE_XY
 	uint poolCount = pools.size();
 	locusMap.clear();
 	for (uint i=0; i<poolCount; i++) 
@@ -717,11 +593,6 @@ void PoolManager::DrawIndividual(Individual& ind, bool isXX) {
 	for (int i=0; i<size; i++)  {
 		pools[i]->DrawIndividual( &ind );
 	}
-#ifdef USE_XY
-	if (poolxy)  {
-		poolxy->DrawIndividual(ind, isXX, Utility::Random::globalGenerator);
-	}
-#endif	
 }
 
 void PoolManager::DrawIndividual(Individual& ind) {
@@ -731,14 +602,6 @@ void PoolManager::DrawIndividual(Individual& ind) {
 bool PoolManager::GetAlleleFrequency(uint chrID, uint locId, float &al1, float &al2) {
 	bool success = false;
 	
-#ifdef USE_XY
-	if (chrID == -1)	
-		if (poolxy)
-			success = poolxy->GetAlleleFrequencies(locId, al1, al2);
-		else
-			throw Utility::Exception::General("One or more disease loci were assigned to the X/Y chromosome, but none has been configured");
-	else 
-#endif
 	if (chrID < pools.size() ) 
 		success = pools[chrID]->GetAlleleFrequencies(locId, al1, al2);
 	return success;
@@ -819,21 +682,6 @@ bool PoolManager::AdvanceGenerations(uint moreGenerations, GrowthRate *f, bool l
 	for (size_t i=0; i<maxThreadCount; i++) 
 		pthread_join(threads[i], NULL);
 
-#ifdef USE_XY
-	//Cheating by not incorporating the XY stuff into the threading model
-	if (poolxy) {
-		int curGen = poolxy->GetCurrentGeneration();
-		poolxy->Wake();
-		curGen = poolxy->AdvanceGenerations(moreGenerations, f, Utility::Random::globalGenerator, simultaneousChrom);
-		poolxy->Bake();
-		poolxy->CalculateAlleleFrequencies(poolxy->GetPopulationSize());
-		poolxy->Save(curGen);
-		((LocusManagerFileBased<LocusXY>*)locusXY)->Save(curGen, poolxy->GetLabel().c_str());
-		poolxy->Suspend();
-		currGeneration = poolxy->GetCurrentGeneration();
-	}
-	else
-#endif //USE_XY
 	//Changed since we might exit at target generation
 		currGeneration = pools[0]->GetGenerationCount();
 	//currGeneration+=moreGenerations;
@@ -841,21 +689,11 @@ bool PoolManager::AdvanceGenerations(uint moreGenerations, GrowthRate *f, bool l
 }
 
 size_t PoolManager::GetExpressionCount() {
-#ifdef USE_XY
-	if (poolxy) 
-		return poolxy->GetPopulationSize();
-#endif //USE_XY
 	assert(pools.size() > 0);
 	return pools[0]->GetExpressionCount();
 }
 
 void PoolManager::CreateInitialPopulation(uint populationCount, bool doDump,  bool closeAfterCreating) {
-#ifdef USE_XY
-	if (poolxy) {
-		poolxy->BuildInitialPopulation(Utility::Random::globalGenerator, populationCount);
-		poolxy->Suspend();
-	}
-#endif //USE_XY
 	uint count = pools.size();
 	doDump = doDump || closeAfterCreating;			///<We want to make sure we dump if we are about to close
 	for (uint i=0; i<count; i++) {
@@ -940,11 +778,6 @@ bool PoolManager::InitializeLoci(uint startGen, const char *prj, bool doLoad) {
 		}
 		for (uint i=0; i<forcedFrequencies.size(); i++) {
 			ForcedAF f=forcedFrequencies[i];
-#ifdef USE_XY
-			if (f.chrID == (uint)-2) 
-				locusXY->ForceAlleleFrequency(f.locus, f.af1, f.af2);
-			else 
-#endif	
 			if (f.chrID >= pools.size() || !pools[f.chrID]->ForceAlleleFrequency(f.locus, f.af1, f.af2, locusMap)) 
 				cout<<"\nAn error was encountered trying to force allele frequencies: "<<f.chrID<<" "<<f.locus<<" "<<f.af1<<" "<<f.af2<<"\n";
 		}
@@ -954,11 +787,6 @@ bool PoolManager::InitializeLoci(uint startGen, const char *prj, bool doLoad) {
 		poolIsPopulated = LoadLoci(prj, startGen);
 
 	}
-#ifdef USE_XY
-		if (locusXY) {	
-			locusXY->BuildLocusMap(locusMap);
-		}
-#endif //USE_XY
 
 	return poolIsPopulated;
 }
@@ -968,10 +796,6 @@ bool PoolManager::InitializePools(uint startGen, uint poolSize, const char *prj,
 //	size_t count = pools.size();
 	bool success = false;
 	projectName = prj;
-#ifdef USE_XY
-		if (locusXY)
-			((LocusManagerFileBased<LocusXY>*)locusXY)->SetPrefix(prj);
-#endif	
 	//Create our own loci if we are starting at the beginning
 //	uint startID = 0;
 	if (!doLoad && startGen == 0) {
@@ -987,15 +811,6 @@ bool PoolManager::InitializePools(uint startGen, uint poolSize, const char *prj,
 //		if (!closeAfterCreating)
 		success = LoadPoolContents(prj, startGen, closeAfterCreating);
 //		else
-#ifdef USE_XY
-		if (locusXY)
-			((LocusManagerFileBased<LocusXY>*)locusXY)->SetPrefix(prj);
-		if (poolxy) {
-			poolxy->SetProject(prj);
-			poolxy->Open(locusXY, Random::globalGenerator);
-			poolxy->Refresh(startGen);
-		}
-#endif			
 	}
 
 	return success;

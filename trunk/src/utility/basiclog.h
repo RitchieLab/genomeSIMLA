@@ -101,7 +101,7 @@ protected:
 
 inline
 string AsciiLog::GetFilename() {	
-	if (strlen(filename.c_str())==0)
+	if (filename.length()==0)
 		return "Standard Out\n";
 	return filename;
 }

@@ -218,19 +218,6 @@ void BasicSample::BuildSample(PoolManager &pools, PenetranceModel *model) {
 /*
 			PoolManager::Iterator itr = pools.GetIterator();
 			ChromPool *pool = itr.GetNext();
-#ifdef USE_XY
-			pool
-			AlleleSource<LocusXY> *x = pools.DrawX();
-
-			if (Utility::Random::globalGenerator.drand() < 0.5) {
-				AlleleSource<LocusXY> *x2 = pools.DrawX();
-				newPerson->SetXX(x, x2);
-			}
-			else	{
-				AlleleSource<LocusXY> *y = pools.DrawX();
-				newPerson->SetXY(x, y);
-			}
-#endif 
 			while (pool) {
 				pool->ApplyChromosomeIDs(newPerson);
 				//At this point, the pools may or may not be in memory
