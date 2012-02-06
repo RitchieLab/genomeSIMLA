@@ -1,0 +1,72 @@
+PROJECT_COMPILER_FLAGS=$(FLAGS_DOPT) $(FLAGS_CV) $(FLAGS_MPI)
+
+PROJECTNAME=simulation
+
+#DEFINE THE sources
+#	haplotypeblock.cpp 
+
+SRCS=basicsample.cpp \
+	blocklistnode.cpp \
+	blocklistnodefourgammetes.cpp \
+	chromosome.cpp \
+	chrompool.cpp \
+	diseasemodel.cpp \
+	distmappingfn.cpp \
+	exponentialgrowth.cpp \
+	gamodel.cpp \
+	growthrate.cpp \
+	ldfooterregion.cpp \
+	ldprimepngwriter.cpp \
+	ldlabelregion.cpp \
+	ldlineplot.cpp \
+	ldlocationbar.cpp \
+	ldmafregion.cpp \
+	ldpngcomponent.cpp \
+	ldplotter.cpp \
+	ldwriter.cpp \
+	locus.cpp \
+	locreport.cpp \
+	locselection.cpp \
+	logisticgrowth.cpp \
+	lineargrowth.cpp \
+	individual.cpp \
+	minchrom.cpp \
+	pedigreesample.cpp \
+	penetranceeval.cpp \
+	penetrancemodel.cpp \
+	penfilemodel.cpp \
+	poolmanager.cpp \
+	richardslogistic.cpp \
+	simlamodel.cpp 
+	
+#DEFINE THE ROOTPATH - This is the top level where there will be a make, dist, and others
+ROOTPATH=../..
+
+#OVERRIDE the path to sources if necessary
+SRCPATHS=.. /usr/include/freetype2 $(3RDPARTY)/include/freetype2
+
+
+#list the projects which build into libraries
+#LOCAL_LIBS=genetics utility
+#Any additional libraries required
+EXTERNAL_LINKS=`freetype-config --cflags` `freetype-config --libs` -lz -lpng -lpngwriter
+
+#Uncomment this line for executables
+LIBRARY_MAKE=1
+
+#Uncomment this line for test applications
+#IS_TEST=0
+
+
+MAKEPATH=$(ROOTPATH)
+include $(MAKEPATH)/make.base
+
+
+#I need to figure out how to use wildcards without catching multiple files model and 
+#$(OBJS): $(SRCS)
+#	$(SUPRESS)mkdir -p $(OBJECT_PATH)
+#	$(SUPRESS)$(CPP) -c $(CPPFLAGS) $(filter $(*F).cpp, $^) -o $(OBJECT_PATH)/$(*F).o
+
+
+
+
