@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
-AC_INIT(genomeSIMLA, 1.1.0, bugs@ritchielab.psu.edu)
+AC_INIT(genomeSIMLA, 1.1.1, software@ritchielab.psu.edu)
 
 AM_INIT_AUTOMAKE([1.9 foreign])
 
