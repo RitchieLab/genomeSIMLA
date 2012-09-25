@@ -52,7 +52,7 @@ GenomeSim::GenomeSim() : startGeneration(0), additionalGenerations(0) {
 	cout<<"those seen in real data.\n\n";
 	cout<<"This version of genomeSIMLA is considered under beta. We highly recommend that you \n";
 	cout<<"check the genomeSIMLA website to make sure that you are running the latest version: \n";
-	cout<<"\thttp://chgr.mc.vanderbilt.edu/genomeSIMLA\n\n";
+	cout<<"\thttp://ritchielab.psu.edu/\n\n";
 #ifdef DEBUG
 	cerr<<"-------------------------------------DEBUG-----------------------------------\n";
 	cerr<<"(This has been compiled for debugging, and might run considerably slower than in release model)\n";
@@ -245,7 +245,11 @@ void GenomeSim::WriteDatasets() {
 	
 	string sampleMarkerInfo;
 
-	cout<<"Model use: "<<model->Details()<<"\n";
+	if(model){
+		cout<<"Model use: "<<model->Details()<<"\n";
+	}else{
+		cout << "No model used\n";
+	}
 
 	//Iterate through the various samples that are to be created
 	for (uint i=0; i<sampleCount; i++) {
@@ -292,14 +296,20 @@ void GenomeSim::WriteDatasets() {
 					configuration.datasetSettings.samples[i]->WriteSnpDetails(filename.str().c_str(), pools);
 				observations = configuration.datasetSettings.samples[i]->WriteDataset(filename.str().c_str(), gtCount);
 			}
-			configuration.datasetSettings.samples[i]->AppendGenotypeCountsToReport(model->GetDiseaseLoci());
+			if(configuration.datasetSettings.samples[i]->requireModel()){
+				configuration.datasetSettings.samples[i]->AppendGenotypeCountsToReport(model->GetDiseaseLoci());
+			}
 			//configuration.datasetSettings.samples[i]->ReportGenotypeCounts(model->GetDiseaseLoci());
 			configuration.datasetSettings.samples[i]->Purge();
 			delete[] gtCount;
 		}
 
 		cout<<"\n";
-		configuration.datasetSettings.samples[i]->ReportGenotypeCounts(model->GetDiseaseLoci(), cout);
+		if(model){
+			configuration.datasetSettings.samples[i]->ReportGenotypeCounts(model->GetDiseaseLoci(), cout);
+		}else{
+			cout << "No model given.\n";
+		}
 	}
 }
 

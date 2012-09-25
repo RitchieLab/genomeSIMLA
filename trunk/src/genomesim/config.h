@@ -228,6 +228,7 @@ public:
 		static const char *AddFamilyRandom;
 		static const char *AddFamilyType;
 		static const char *AddCC;
+		static const char *AddCMV;
 		static const char *AddRefPed;
 		static const char *AddCont;
 		static const char *AddContTails;

@@ -1,7 +1,0 @@
-#ifndef DEFAULT_SETTINGS_H
-
-#define DEFAULT_SEED 1371 
-#define DEFAULT_POOL_SIZE 75000
-
-#endif
-

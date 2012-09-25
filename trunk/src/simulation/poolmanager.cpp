@@ -460,10 +460,13 @@ bool PoolManager::ResolveGenotypes(const char *project, uint generation, Sample 
 	bool success = true;
 	if (!poolIsPopulated) {
 		size_t poolCount = GetPoolCount();
-		BitSetType chromsAlreadyInMem = model->AssociatedChromosomes(poolCount);
+		BitSetType chromsAlreadyInMem;
+		if(model){
+			chromsAlreadyInMem = model->AssociatedChromosomes(poolCount);
+		}
 	
 		for (uint i=0; success && i<poolCount; i++) {
-			bool doLoadChrom = !chromsAlreadyInMem[i];
+			bool doLoadChrom = model && !chromsAlreadyInMem[i];
 			doLoadChrom = true;
 			if (doLoadChrom) 
 				success = success && LoadPoolContents(project, generation, i, false);

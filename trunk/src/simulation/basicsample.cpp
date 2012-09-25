@@ -83,45 +83,6 @@ Individual *Sample::DrawIndividual(int id, int pedID, PoolManager *pools, Penetr
 	return ind;
 }
 
-void BasicSample::ApplyPhenocopyError(PoolManager *pools, PenetranceModel* model) {
-	uint sampleSize = people.size();
-	uint errorCount = (uint)((float)affCount * phenoError);
-	uint topID = people[sampleSize - 1]->GetID();
-	
-	vector<int> indices;
-	for (uint i=0; i<sampleSize; i++) 
-		indices.push_back(i);
-	random_shuffle(indices.begin(), indices.end(), Utility::Random::globalGenerator);
-
-	BitSetType tested(sampleSize, false);
-
-	Individual *individual=NULL;
-	int n=0;
-
-	for (uint i=0; i<errorCount; i++) {
-		bool isAffected = false;
-		int idx;
-		while (!isAffected) {
-			idx = indices[n++];
-			if (!tested[idx]) {
-				individual = people[idx];
-				isAffected = individual->IsAffected();
-				tested[idx]=true;
-			}
-		}
-
-		
-		assert(individual->IsAffected());
-		delete individual;
-		bool isFemale = Random::globalGenerator.drand() < Individual::FtoM_BirthRatio;
-		individual = DrawIndividual(++topID, topID, pools, model, 0, isFemale);
-assert(!individual->IsAffected());
-		individual->SetStatus( true );
-		people[idx] = individual;
-	}
-
-}
-
 bool Sample::ResolveGenotypes(ChromPool *pool, size_t chrID, bool justLoadedChrom) {
 	vector<Individual *>::iterator itr = people.begin();
 	vector<Individual *>::iterator end = people.end();
@@ -192,112 +153,6 @@ void Sample::Purge() {
 
 
 
-void BasicSample::BuildSample(PoolManager &pools, PenetranceModel *model) {
-	uint affecteds 		= affCount;			//Affecteds/lower tail
-	uint unaffecteds 	= unaffCount;		//unaffecteds/upper tail
-	uint midrange  		= midCount;			//Mid section (only on continuous)
-	affCount = 0;
-
-	//Let's inspect the first 10 chromosomes in the pool. Something is killing the
-	//Windows version...gotta figure out where
-	//ChromPool *pool = pools.GetIterator().GetNext();
-/*	pool->SamplePool(20, 20);
-	cerr<<"--SamplePool(10, 20)\n";
-*/	
-	uint id=0;					///<We have to keep up with individuals separately
-
-	bool isViable = false;
-	//For now, lets make this as simple as possible. However, eventually, we will need to consider balancing
-	//the different models
-	while (affecteds > 0 || unaffecteds > 0 || midrange > 0) {
-		bool validIndividual=false;
-		isViable=false;
-		while (!validIndividual) {
-			Individual *newPerson = new Individual(id, id, pools.GetPoolCount());
-			pools.DrawIndividual(*newPerson);
-/*
-			PoolManager::Iterator itr = pools.GetIterator();
-			ChromPool *pool = itr.GetNext();
-			while (pool) {
-				pool->ApplyChromosomeIDs(newPerson);
-				//At this point, the pools may or may not be in memory
-				pool->ApplyPresentGenotypes(newPerson, true);
-				pool=itr.GetNext();
-			}
-*/
-			//At this point, we have all the data associated with our person
-			//Time to assign status 
-			int status = newPerson->ApplyStatus(model);
-			PoolManager::Iterator itr = pools.GetIterator();
-			ChromPool *pool = itr.GetNext();
-			if (status == 1) {
-				if (affecteds > 0) {
-					id++;
-					affecteds--;
-					people.push_back(newPerson);
-					validIndividual = true;
-					affCount++;
-					pool = itr.GetNext();
-					while (pool) {
-						pool->ReserveIndividual( newPerson);
-						pool=itr.GetNext();
-					}
-					isViable =true;
-				}
-			}
-			else if (status == 0) {
-				if (unaffecteds > 0) {
-					id++;
-					unaffecteds--;
-					people.push_back(newPerson);
-					validIndividual = true;
-
-					pool = itr.GetNext();
-					while (pool) {
-						pool->ReserveIndividual( newPerson);
-						pool=itr.GetNext();
-					}
-
-					isViable=true;
-				}
-			}
-			//Midrange for continuous
-			else if (status == 2) {
-				if (midrange > 0) {
-					id++;
-					midrange--;
-					people.push_back(newPerson);
-					validIndividual = true;
-
-					pool = itr.GetNext();
-					while (pool) {
-						pool->ReserveIndividual( newPerson);
-						pool=itr.GetNext();
-					}
-
-					isViable=true;
-				}
-
-			}
-			if (!isViable) {
-				itr=pools.GetIterator();
-				pool=itr.GetNext();
-				delete newPerson;
-			}
-		}
-	}
-/*
-	PoolManager::Iterator itr = pools.GetIterator();
-	pool = itr.GetNext();
-	while (pool) {	
-		//This will call populate each individual with their genotypes
-		//If the pool is asleep, it will be awakened first, then put back to sleep
-		pool->ResolveGenotypes(people);
-		pool = pool->GetNext();
-		
-	}
-*/
-}
 
 /**
  * @brief Dump the contents of the sample population to the stream
@@ -407,18 +262,6 @@ void ContinuousSample::ReportGenotypeCounts(vector<StatusModel::DiseaseLocus> lo
 
 }
 
-/**
- * @brief Dump the contents of the sample population to the stream
- * @param os The stream to which the sample will be written
- * @note if percentAffected is 0.0, we will not be writing the status
- */
-int BasicSample::WriteDataset(ostream &os, uint *gtCounts) {
-	uint count = people.size();
-	for (uint i=0; i<count; i++) 
-		people[i]->WriteMDR(os, gtCounts, affCount > 0);
-
-	return count;
-}
 
 
 uint Sample::GetMultiplier(uint genotype, uint position, uint modelSize) {
@@ -583,11 +426,6 @@ void Sample::WriteConfiguration(ostream& file) {
 	file<<GetDetails()<<"\n";
 }
 
-string BasicSample::GetDetails() {
-	stringstream ss;
-	ss<<"DATASET CC "<<description<<" "<<affCount<<" "<<unaffCount<<" "<<genoError<<" "<<phenoError<<" "<<missingData;
-	return ss.str();
-}
 
 Sample *Sample::ParseBinaryFile(const char *gtFilename, const char *metaFilename, uint fileVersion) {
 	uint version, bpb, flags;
@@ -691,6 +529,173 @@ void Sample::WriteBinaryHeader(ostream &genotypes, uint fileVersion, const char 
 	}
 
 }
+
+
+void BasicSample::ApplyPhenocopyError(PoolManager *pools, PenetranceModel* model) {
+	uint sampleSize = people.size();
+	uint errorCount = (uint)((float)affCount * phenoError);
+	uint topID = people[sampleSize - 1]->GetID();
+
+	vector<int> indices;
+	for (uint i=0; i<sampleSize; i++)
+		indices.push_back(i);
+	random_shuffle(indices.begin(), indices.end(), Utility::Random::globalGenerator);
+
+	BitSetType tested(sampleSize, false);
+
+	Individual *individual=NULL;
+	int n=0;
+
+	for (uint i=0; i<errorCount; i++) {
+		bool isAffected = false;
+		int idx;
+		while (!isAffected) {
+			idx = indices[n++];
+			if (!tested[idx]) {
+				individual = people[idx];
+				isAffected = individual->IsAffected();
+				tested[idx]=true;
+			}
+		}
+
+
+		assert(individual->IsAffected());
+		delete individual;
+		bool isFemale = Random::globalGenerator.drand() < Individual::FtoM_BirthRatio;
+		individual = DrawIndividual(++topID, topID, pools, model, 0, isFemale);
+assert(!individual->IsAffected());
+		individual->SetStatus( true );
+		people[idx] = individual;
+	}
+
+}
+
+
+void BasicSample::BuildSample(PoolManager &pools, PenetranceModel *model) {
+	uint affecteds 		= affCount;			//Affecteds/lower tail
+	uint unaffecteds 	= unaffCount;		//unaffecteds/upper tail
+	uint midrange  		= midCount;			//Mid section (only on continuous)
+	affCount = 0;
+
+	//Let's inspect the first 10 chromosomes in the pool. Something is killing the
+	//Windows version...gotta figure out where
+	//ChromPool *pool = pools.GetIterator().GetNext();
+/*	pool->SamplePool(20, 20);
+	cerr<<"--SamplePool(10, 20)\n";
+*/
+	uint id=0;					///<We have to keep up with individuals separately
+
+	bool isViable = false;
+	//For now, lets make this as simple as possible. However, eventually, we will need to consider balancing
+	//the different models
+	while (affecteds > 0 || unaffecteds > 0 || midrange > 0) {
+		bool validIndividual=false;
+		isViable=false;
+		while (!validIndividual) {
+			Individual *newPerson = new Individual(id, id, pools.GetPoolCount());
+			pools.DrawIndividual(*newPerson);
+/*
+			PoolManager::Iterator itr = pools.GetIterator();
+			ChromPool *pool = itr.GetNext();
+			while (pool) {
+				pool->ApplyChromosomeIDs(newPerson);
+				//At this point, the pools may or may not be in memory
+				pool->ApplyPresentGenotypes(newPerson, true);
+				pool=itr.GetNext();
+			}
+*/
+			//At this point, we have all the data associated with our person
+			//Time to assign status
+			int status = newPerson->ApplyStatus(model);
+			PoolManager::Iterator itr = pools.GetIterator();
+			ChromPool *pool = itr.GetNext();
+			if (status == 1) {
+				if (affecteds > 0) {
+					id++;
+					affecteds--;
+					people.push_back(newPerson);
+					validIndividual = true;
+					affCount++;
+					pool = itr.GetNext();
+					while (pool) {
+						pool->ReserveIndividual( newPerson);
+						pool=itr.GetNext();
+					}
+					isViable =true;
+				}
+			}
+			else if (status == 0) {
+				if (unaffecteds > 0) {
+					id++;
+					unaffecteds--;
+					people.push_back(newPerson);
+					validIndividual = true;
+
+					pool = itr.GetNext();
+					while (pool) {
+						pool->ReserveIndividual( newPerson);
+						pool=itr.GetNext();
+					}
+
+					isViable=true;
+				}
+			}
+			//Midrange for continuous
+			else if (status == 2) {
+				if (midrange > 0) {
+					id++;
+					midrange--;
+					people.push_back(newPerson);
+					validIndividual = true;
+
+					pool = itr.GetNext();
+					while (pool) {
+						pool->ReserveIndividual( newPerson);
+						pool=itr.GetNext();
+					}
+
+					isViable=true;
+				}
+
+			}
+			if (!isViable) {
+				itr=pools.GetIterator();
+				pool=itr.GetNext();
+				delete newPerson;
+			}
+		}
+	}
+/*
+	PoolManager::Iterator itr = pools.GetIterator();
+	pool = itr.GetNext();
+	while (pool) {
+		//This will call populate each individual with their genotypes
+		//If the pool is asleep, it will be awakened first, then put back to sleep
+		pool->ResolveGenotypes(people);
+		pool = pool->GetNext();
+
+	}
+*/
+}
+/**
+ * @brief Dump the contents of the sample population to the stream
+ * @param os The stream to which the sample will be written
+ * @note if percentAffected is 0.0, we will not be writing the status
+ */
+int BasicSample::WriteDataset(ostream &os, uint *gtCounts) {
+	uint count = people.size();
+	for (uint i=0; i<count; i++)
+		people[i]->WriteMDR(os, gtCounts, affCount > 0);
+
+	return count;
+}
+
+string BasicSample::GetDetails() {
+	stringstream ss;
+	ss<<"DATASET CC "<<description<<" "<<affCount<<" "<<unaffCount<<" "<<genoError<<" "<<phenoError<<" "<<missingData;
+	return ss.str();
+}
+
 /*
 int BasicSample::LoadBinaryDataset(ostream &metadata, ostream &genotypes) {
 	uint count = LoadBinaryHeader(genotypes);
@@ -740,6 +745,23 @@ void BasicSample::LoadBinarySample(ifstream *genotypes, ifstream *meta, uint peo
 	}
 }
 
+/**
+ * @brief Dump the contents of the sample population to the stream (in phased haploview format)
+ * @param os The stream to which the sample will be written
+
+void BasicSample::WritePhased(ostream &os) {
+	uint count = people.size();
+	for (uint i=0; i<count; i++)
+		people[i]->WritePhased(os, i+1);
+
+} */
+void BasicSample::GenerateReport(ostream &os, uint padding) {
+	os<<setw(padding - 15)<<""<<setprecision(2)<<setw(8)<<(genoError*100.0)<<"% Genotype Error "<<endl;
+	os<<setw(padding - 15)<<""<<setprecision(2)<<setw(8)<<(phenoError*100.0)<<"% Phenocopy Error "<<endl;
+	os<<setw(padding - 15)<<""<<setprecision(2)<<setw(8)<<(missingData*100.0)<<"% Missing Data "<<endl;
+	os<<setw(padding - 5)<<"Case Control Sample : "<<affCount<<"A/"<<unaffCount<<"U"<<endl;
+}
+
 bool ContinuousSample::Verify(PenetranceModel* model) {
 	bool isValid = model->IsContinuous();
 	if (isValid) {
@@ -755,22 +777,7 @@ bool ContinuousSample::Verify(PenetranceModel* model) {
 	}
 	return isValid;
 }
-/**
- * @brief Dump the contents of the sample population to the stream (in phased haploview format)
- * @param os The stream to which the sample will be written	
 
-void BasicSample::WritePhased(ostream &os) {
-	uint count = people.size();
-	for (uint i=0; i<count; i++) 
-		people[i]->WritePhased(os, i+1);
-
-} */
-void BasicSample::GenerateReport(ostream &os, uint padding) {
-	os<<setw(padding - 15)<<""<<setprecision(2)<<setw(8)<<(genoError*100.0)<<"% Genotype Error "<<endl;
-	os<<setw(padding - 15)<<""<<setprecision(2)<<setw(8)<<(phenoError*100.0)<<"% Phenocopy Error "<<endl;
-	os<<setw(padding - 15)<<""<<setprecision(2)<<setw(8)<<(missingData*100.0)<<"% Missing Data "<<endl;
-	os<<setw(padding - 5)<<"Case Control Sample : "<<affCount<<"A/"<<unaffCount<<"U"<<endl;
-}
 
 
 void ContinuousSample::ApplyPhenocopyError(PoolManager *pools, PenetranceModel* model) {

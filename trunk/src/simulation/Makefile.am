@@ -1,5 +1,9 @@
 noinst_LTLIBRARIES=libsimulation.la
 
+libsimulation_la_LIBADD=\
+	../utility/libutility.la \
+	$(GSL_LIBS)
+
 libsimulation_la_SOURCES=basicsample.cpp \
 	blocklistnode.cpp \
 	blocklistnodefourgammetes.cpp \
@@ -86,6 +90,10 @@ libsimulation_la_SOURCES=basicsample.cpp \
 	richardslogistic.h \
 	simlamodel.h \
 	simulation.h \
-	templatedpedigree.h
+	templatedpedigree.h \
+	ContinuousMultivarSample.h \
+	ContinuousMultivarSample.cpp 
 	
-AM_CPPFLAGS=-I$(top_srcdir)/src $(FREETYPE_CPPFLAGS)
+AM_CPPFLAGS=-I$(top_srcdir)/src $(FREETYPE_CPPFLAGS) $(GSL_CFLAGS)
+
+AM_LDFLAGS=$(GSL_LDFLAGS)

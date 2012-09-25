@@ -116,9 +116,21 @@ public:
 	virtual bool UsesMeta() { return false; }
 
 	/**
+	 * Do we need a model to simulate this data?
+	 */
+	virtual bool requireModel() { return true; }
+
+	/**
 	 * @brief returns t/f regarding the compatibility between the model and the dataset
 	 */
-	virtual bool Verify(PenetranceModel* model) { if (model->IsContinuous()) { cerr<<"Unable to mix discrete datasets with continuous disease models.\n"; return false;} return true; }
+	virtual bool Verify(PenetranceModel* model) {
+		if (model && model->IsContinuous()) {
+			cerr
+					<< "Unable to mix discrete datasets with continuous disease models.\n";
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * @brief Initiates the valid type for the dataset if descibed in the file's contents

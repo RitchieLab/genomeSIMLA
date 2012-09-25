@@ -28,6 +28,7 @@
 #include <map>
 #include <sys/time.h>
 #include "simulation/lineargrowth.h"
+#include "simulation/ContinuousMultivarSample.h"
 namespace GenomeSIM {
 
 using namespace std;
@@ -82,6 +83,7 @@ const char *Config::ConfigKeywords::AddRefPed				= "PED_REFERENCE";
 const char *Config::ConfigKeywords::AddFamilyRandom		= "FLEXIPED";
 const char *Config::ConfigKeywords::AddFamilyType			= "FAMTYPE";
 const char *Config::ConfigKeywords::AddCC					= "CC";
+const char *Config::ConfigKeywords::AddCMV				= "CMV" ;
 const char *Config::ConfigKeywords::AddCont				= "CONT";
 const char *Config::ConfigKeywords::AddContTails			= "CONT_TAILS";
 const char *Config::ConfigKeywords::IncludeConfiguration 	= "INCLUDE";
@@ -512,6 +514,22 @@ void Config::AddDataset(const char *line) {
 
 		sample=new BasicSample(affCount, unaffCount, 0, genotypeError, phenocopyError, missingData, desc.c_str());
 	}
+	else if (strcmp(type.c_str(), ConfigKeywords::AddCMV) == 0){
+		uint n_indiv = 0;
+		float genotypeError = 0.0, phenocopyError = 0.0, missingData = 0.0;
+		string desc, effect_fn, covar_fn;
+
+		if (columns != 9) {
+			cout << "Unexpected format: " << line << "\n";
+			cout << "-- Unable to configure Continuous Multivariable dataset\n";
+			cout << "Correct syntax: \n\tDATASET CMV name [num indiv] [effect file] [covariance file] [genotype error] [phenocopy error] [missing data]\n";
+			abort();
+		}
+		ss >> desc >> n_indiv >> effect_fn >> covar_fn;
+		ss >> genotypeError >> phenocopyError >> missingData;
+
+		sample = new ContinuousMultivarSample(genotypeError, phenocopyError, missingData, n_indiv, effect_fn, covar_fn, desc);
+	}
 	else if (strcmp(type.c_str(), ConfigKeywords::AddCont) == 0) {
 		uint individuals = 0;
 		float  genotypeError=0.0, phenocopyError=0.0, missingData=0.0;
@@ -854,7 +872,11 @@ bool Config::PostLoad() {
 	bool success = pools.InitializeLoci(generalSettings.firstGeneration, generalSettings.outputName.c_str(), generalSettings.doLoad);
 	if (success) {
 		cout<<"."; cout.flush();
-		PenetranceModel *model = statusSettings.InitModel(&pools, datasetSettings.writeDatasets);
+		bool needModel = false;
+		for(unsigned int i = 0; i< datasetSettings.samples.size(); i++){
+			needModel |= datasetSettings.samples[i]->requireModel();
+		}
+		PenetranceModel *model = statusSettings.InitModel(&pools, needModel);
 		if (model) 
 			pools.InsertModel(model);
 
@@ -881,10 +903,12 @@ bool Config::Validate() {
 
 
 PenetranceModel *Config::Status::LoadModel(const char *project, PoolManager *poolMgr) {
-	poolMgr->PrepForSampling(project, poolMgr->GetCurrentGeneration(), model);
+	if(model){
+		poolMgr->PrepForSampling(project, poolMgr->GetCurrentGeneration(), model);
 
-	model->Refresh(poolMgr);
-	model->Load();
+		model->Refresh(poolMgr);
+		model->Load();
+	}
 	return model;
 }
 

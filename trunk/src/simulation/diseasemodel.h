@@ -34,7 +34,7 @@ public:
 	 * @param modelID The unique ID for the model	
  	 * @param prob The probability an individual will be affected with this type
 	 */
-	DiseaseModel(uint modelID = 0) : modelID(modelID) {}
+	DiseaseModel(uint modelID = 0) : modelID(modelID), loci() {}
 	virtual ~DiseaseModel() {}
 
 	/**
