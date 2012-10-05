@@ -267,6 +267,7 @@ void PenFileModel::Load(const char *filename) {
 		}else if(penList[i] > 0.99999999){
 			++fixedOne;
 		}
+	}
 	
 	if (fixedOne == penCount || fixedZero == penCount) {
 		throw Utility::Exception::General("The Penetrance table specified seems broken (it seems impossible to generate both Cases and Controls). Please verify that the table is correct. If it is, please contact us at software@ritchielab.psu.edu to report a problem.");
