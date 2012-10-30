@@ -4,3 +4,7 @@ ACLOCAL_AMFLAGS=-I ./make/m4
 
 SUBDIRS=src/random src/utility src/ga src/genetics src/pngwriter src/simla \
 				src/simpen src/simulation src/genomesim
+
+EXTRA_DIST=scripts/getCovariance.py
+
+bin_SCRIPTS=scripts/getCovariance.py
