@@ -1,7 +1,9 @@
 import argparse
 import os
 import sys
+import random
 from operator import mul
+
 
 def genModelInteraction(values, indices):
 	return reduce(mul, (list[i] for i in indices))
@@ -100,15 +102,20 @@ def printTwoFile(f_in, model, name_idx, header=False):
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser(description="Calculate a model output given a model definition")
 	
-	parser.add_argument("--stddev", "-s", type=float, help="Standard deviation", default=1)
 	parser.add_argument("--result", "-r", nargs="*", type=argparse.FileType('r'), help="Result File(s)")
 	parser.add_argument("--map", "-m", help="Filename of names of SNP variables", type=argparse.FileType('r'))
-	parser.add_argument("--expression", "-e", help="Filename of names of expression variables", type=argparse.FileType('r'))
+	parser.add_argument("--expression", "-x", help="Filename of names of expression variables", type=argparse.FileType('r'))
 	parser.add_argument("--model", "-d", help="Filename of the model specification", required=True, type=argparse.FileType('r'))
 	parser.add_argument("--format", "-f", help="Format of the output", choices=["one_file", "two_file"], default="one_file")
 	parser.add_argument("--header", "-a", help="Include header in output", action="store_true")
+	parser.add_argument("--stddev", "-s", type=float, help="Standard deviation", default=1)
+	parser.add_argument("--seed", "-e", type=int, help="Random number seed", default=None)
 	
 	options = parser.parse_args()
+	
+	# Set the random number seed
+	if options.seed is not None:
+		random.seed(options.seed)
 	
 	name_idx = {}
 	# Read the map and expression files and convert them to indices
@@ -132,7 +139,7 @@ if __name__ == "__main__":
 	
 	model_fns = []
 	# Read the model definition file
-	# Note: if not found int the index above, try converting to an integral index
+	# Note: if not found in the index above, try converting to an integral index
 	for l in options.model:
 		l = l.strip()
 		if not l.startswith("#"):
@@ -145,11 +152,11 @@ if __name__ == "__main__":
 				if m in name_idx:
 					idx_list.append(name_idx[m])
 				else:
-					idx_list.append(int(m)-1)
+					idx_list.append(int(m)-1*(int(m)>0))
 			
 			model_fns.append(lambda x: genModelInteraction(x,idx_list))
 	
-	final_model = lambda x: sum((f(x) for x in model_fns))
+	final_model = lambda x: random.gauss(sum((f(x) for x in model_fns)), options.stddev)
 	
 	for r in options.result:
 		if options.format=="one_file":
