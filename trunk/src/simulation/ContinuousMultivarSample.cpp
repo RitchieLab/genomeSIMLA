@@ -20,6 +20,7 @@
 #include <gsl/gsl_linalg.h>
 #include <gsl/gsl_vector.h>
 #include <gsl/gsl_blas.h>
+#include <gsl/gsl_eigen.h>
 #include <math.h>
 
 #include <boost/algorithm/string.hpp>
@@ -82,6 +83,7 @@ ContinuousMultivarSample::ContinuousMultivarSample(float genoError,
 		string next_line;
 		getline(covar_file, next_line);
 		stringstream l(next_line);
+		col = 0;
 
 		if(next_line.size() && row >= n_effects){
 			//Throw an exception, b/c we're too big!
@@ -101,27 +103,68 @@ ContinuousMultivarSample::ContinuousMultivarSample(float genoError,
 			++col;
 		}
 
-		if(col < n_effects){
+		if(next_line.size() && col < n_effects){
 			//Throw exception
 			throw Utility::Exception::General("Uneven number of columns in covariance matrix (too few)");
 		}
 		++row;
 	}
 
+	// Copy the covariance matrix into a spare variable
+	gsl_matrix* covar_mat_tmp = gsl_matrix_alloc(n_effects, n_effects);
+	gsl_matrix_memcpy(covar_mat_tmp, covar_matrix);
+
 	// OK, now we've read the covariance matrix, we need to check it for
 	// positive definiteness using the cholesky factorization.
 	gsl_error_handler_t* err_h = gsl_set_error_handler_off();
-	int err = gsl_linalg_cholesky_decomp(covar_matrix);
+	int err = gsl_linalg_cholesky_decomp(covar_mat_tmp);
 	// restore the old error handler
 	gsl_set_error_handler(err_h);
 
 	if (err == GSL_EDOM){
-		// Raise not positive definite
-		throw Utility::Exception::General("Covariance matrix invalid (not positive definite)");
-	}else if(err != GSL_SUCCESS){
+		// A constant to add to the diagonal (makes a positive semidefinite matrix
+		// positive definite while only affecting the output slightly)
+		double epsilon = 1.001;
+
+		// First, try raising the diagonal by the smallest (most negative)
+		// eigenvalue
+		gsl_matrix_memcpy(covar_mat_tmp, covar_matrix);
+		gsl_eigen_symm_workspace* w = gsl_eigen_symm_alloc(n_effects);
+		gsl_vector* eval = gsl_vector_calloc(n_effects);
+		gsl_eigen_symm(covar_mat_tmp, eval, w);
+		gsl_eigen_symm_free(w);
+		double min_eval = gsl_vector_min(eval)*epsilon;
+		gsl_vector_free(eval);
+
+		std::cerr << "WARNING: Covariance matrix not positive definite, raising "
+				<< "the diagonal by " << -min_eval << " to ensure success."
+				<< std::endl;
+
+		// Now, raise the diagonal of covar_matrix
+		for (int i=0; i<n_effects; i++){
+			gsl_matrix_set(covar_matrix, i, i, gsl_matrix_get(covar_matrix, i,i) - min_eval);
+		}
+
+		// OK, let's try this again!
+		gsl_matrix_memcpy(covar_mat_tmp, covar_matrix);
+
+		// OK, now we've read the covariance matrix, we need to check it for
+		// positive definiteness using the cholesky factorization.
+		gsl_error_handler_t* err_h = gsl_set_error_handler_off();
+		err = gsl_linalg_cholesky_decomp(covar_mat_tmp);
+		// restore the old error handler
+		gsl_set_error_handler(err_h);
+	}
+
+	if(err != GSL_SUCCESS){
 		// Raise unknown error
 		throw Utility::Exception::General("Unknown error checking covariance matrix");
 	}
+
+	// Now, we know we were successful, so let's put the tmp matrix back
+	gsl_matrix_memcpy(covar_matrix, covar_mat_tmp);
+	gsl_matrix_free(covar_mat_tmp);
+
 
 	// Now, read the effect matrix
 	ifstream eff_file(effect_fn.c_str());
