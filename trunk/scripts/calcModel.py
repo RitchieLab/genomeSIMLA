@@ -1,12 +1,18 @@
+#!/usr/bin/env python
+
 import argparse
 import os
 import sys
 import random
+import copy
 from operator import mul
 
 
 def genModelInteraction(values, indices):
-	return reduce(mul, (list[i] for i in indices))
+	return reduce(mul, (values[i] for i in indices))
+	
+def modelInteraction(indices):
+	return lambda x: genModelInteraction(x, indices)
 
 def getModelResult(line, model):
 	"""
@@ -19,7 +25,7 @@ def printOneFile(f_in, model, name_idx, header=False):
 	Prints the output in one file mode
 	"""
 	fn_in = os.path.splitext(f_in.name)
-	f_out = file(fn_in[0] + ".model" + fn_in[1], 'w')
+	f_out = file(fn_in[0] + fn_in[1] + ".model", 'w')
 	
 	if header:
 		expr_vars = [(v,k) for (k,v) in name_idx.iteritems() if v >=0]
@@ -32,11 +38,11 @@ def printOneFile(f_in, model, name_idx, header=False):
 		l = "#"
 		while l.startswith("#"):
 			l = f_in.next().strip()
-		
-		mid_names = []
-		if len(l.strip()) > len(expr_vars) + len(snp_vars):
+
+		mid_names = []				
+		if len(l.strip().split()) > len(expr_vars) + len(snp_vars):
 			mid_names = [str(i) for i in xrange(len(expr_vars)+1, len(l.strip()) - len(snp_vars) + 1)]
-		
+					
 		print >> f_out, "#result",
 		print >> f_out, expr_str,
 		if mid_names:
@@ -58,8 +64,8 @@ def printTwoFile(f_in, model, name_idx, header=False):
 	Prints the output in two file mode
 	"""
 	fn_in = os.path.splitext(f_in.name)
-	f_out_model = file(fn_in[0] + ".model" + fn_in[1], 'w')
-	f_out_expr = file(fn_in[0] + ".expr" + fn_in[1], 'w')
+	f_out_model = file(fn_in[0] + fn_in[1] + ".model", 'w')
+	f_out_expr = file(fn_in[0] + fn_in[1] + ".expr", 'w')
 	
 	expr_vars = [(v,k) for (k,v) in name_idx.iteritems() if v >=0]
 	expr_vars.sort()
@@ -125,7 +131,7 @@ if __name__ == "__main__":
 		for l in options.map:
 			l = l.strip()
 			if not l.startswith("#"):
-				snp_list.append(l)
+				snp_list.append(l.split()[1])
 		
 		name_idx = dict(zip(snp_list,(i-len(snp_list) for i in xrange(len(snp_list)))))
 		
@@ -143,7 +149,7 @@ if __name__ == "__main__":
 	for l in options.model:
 		l = l.strip()
 		if not l.startswith("#"):
-			(models, coeff) = l.split('\t')
+			(coeff, models) = l.split('\t')
 			models = models.split(',')
 			coeff = float(coeff)
 			idx_list = []
@@ -153,17 +159,13 @@ if __name__ == "__main__":
 					idx_list.append(name_idx[m])
 				else:
 					idx_list.append(int(m)-1*(int(m)>0))
+					
+			model_fns.append(modelInteraction(idx_list))
 			
-			model_fns.append(lambda x: genModelInteraction(x,idx_list))
-	
-	final_model = lambda x: random.gauss(sum((f(x) for x in model_fns)), options.stddev)
+	final_model = lambda x: random.gauss(sum((f(x) for f in model_fns)), options.stddev)
 	
 	for r in options.result:
 		if options.format=="one_file":
 			printOneFile(r, final_model, name_idx, options.header)
 		elif options.format == "two_file":
 			printTwoFile(r, final_model, name_idx, options.header)
-	
-	
-	
-	
