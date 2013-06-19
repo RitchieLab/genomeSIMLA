@@ -1,0 +1,78 @@
+noinst_LTLIBRARIES=libga.la
+
+libga_la_SOURCES=garandom.C \
+	gaerror.C \
+	GAParameter.C \
+	GAStatistics.C \
+	GABaseGA.C \
+	GASStateGA.C \
+	GASimpleGA.C \
+	GAIncGA.C \
+	GADemeGA.C \
+	GADCrowdingGA.C \
+	GASelector.C \
+	GAScaling.C \
+	GAPopulation.C \
+	GAGenome.C \
+	GABinStr.C \
+	gabincvt.C \
+	GAAllele.C \
+	GAStringGenome.C \
+	GARealGenome.C \
+	GA1DBinStrGenome.C \
+	GA2DBinStrGenome.C \
+	GA3DBinStrGenome.C \
+	GABin2DecGenome.C \
+	GA1DArrayGenome.C \
+	GA2DArrayGenome.C \
+	GA3DArrayGenome.C \
+	GATreeBASE.C \
+	GATree.C \
+	GATreeGenome.C \
+	GAListBASE.C \
+	GAList.C \
+	GAListGenome.C \
+	GA1DArrayGenome.h \
+GA1DBinStrGenome.h \
+GA2DArrayGenome.h \
+GA2DBinStrGenome.h \
+GA3DArrayGenome.h \
+GA3DBinStrGenome.h \
+GAAllele.h \
+GAArray.h \
+GABaseGA.h \
+GABin2DecGenome.h \
+gabincvt.h \
+GABinStr.h \
+gaconfig.h \
+GADCrowdingGA.h \
+GADemeGA.h \
+gaerror.h \
+GAEvalData.h \
+GAGenome.h \
+ga.h \
+gaid.h \
+GAIncGA.h \
+GAListBASE.h \
+GAListGenome.h \
+GAList.h \
+GAMask.h \
+GANode.h \
+GAParameter.h \
+GAPopulation.h \
+garandom.h \
+GARealGenome.h \
+GAScaling.h \
+GASelector.h \
+GASimpleGA.h \
+GASStateGA.h \
+GAStatistics.h \
+GAStringGenome.h \
+GATreeBASE.h \
+GATreeGenome.h \
+GATree.h \
+gatypes.h \
+gaversion.h \
+std_stream.h 
+
+AM_CPPFLAGS=-I$(top_srcdir)/src
