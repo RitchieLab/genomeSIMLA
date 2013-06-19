@@ -18,6 +18,8 @@
 #include <assert.h>
 #include <set>
 #include <stdlib.h>
+#include <unistd.h>
+
 namespace Utility {
 
 using namespace std;
