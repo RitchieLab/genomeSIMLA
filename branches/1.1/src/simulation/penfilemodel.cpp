@@ -257,16 +257,19 @@ void PenFileModel::Load(const char *filename) {
 	BuildGenotypeLabels(pentable, modelSize);
 
 	//We want to avoid meaningless tables like all zeros or 1.0s.
-	uint fixedCells = 0;
+	uint fixedZero = 0;
+	uint fixedOne = 0;
 
 	for (uint i=0; i<penCount; i++)	{
 		cout<<"              "<<pentable[i]<<" : "<<penList[i]<<"\n";
-		if	(penList[i] < 0.00000001 || penList[i] > 0.99999999)
-			fixedCells++;
-	}
+		if	(penList[i] < 0.00000001){
+			++fixedZero;
+		}else if(penList[i] > 0.99999999){
+			++fixedOne;
+		}
 	
-	if (fixedCells == penCount) {
-		throw Utility::Exception::General("The Penetrance table specified seems broken (it seems impossible to generate both Cases and Controls). Please verify that the table is correct. If it is, please contact us at genomesimla@chgr.mc.vanderbilt.edu to report a problem.");
+	if (fixedOne == penCount || fixedZero == penCount) {
+		throw Utility::Exception::General("The Penetrance table specified seems broken (it seems impossible to generate both Cases and Controls). Please verify that the table is correct. If it is, please contact us at software@ritchielab.psu.edu to report a problem.");
 	}
 
 		
