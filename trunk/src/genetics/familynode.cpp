@@ -83,7 +83,7 @@ FamilyMember *FamilyNode::CreateVirtualSib(FamilyMember *member) {
 	
 	//If both parents aren't missing, then we can't do anything with them
 	if ((father == NULL && mother == NULL) || member->MarkForDeletion() )  {
-		return false;
+		return NULL;
 	}
 	
 	if (member->IsAffected()) {
