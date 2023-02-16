@@ -1,0 +1,122 @@
+# genomeSIMLA example config file #1
+# 10/8/2007 1:50:20 PM
+
+###############################################################################
+#                 General Configuration Parameters                            #
+###############################################################################
+
+SEED 2400
+
+MIN_ALLELE_FREQ_THRESH 0.0	# Minimum minor allele frequency to be written to samples (datasets)
+                                # Problematic with nonzero values. Please do not use at this time.
+
+FIRST_DROP_POINT 450		# First generation to drop a report
+DROP_FREQUENCY 	 0		# Generation count between drops
+DROP_COUNT  	 1		# The number of drops to be performed
+
+GENERATE_LD_PLOTS ON 		# Required to generate LD plots
+MAX_SNPS_PER_ROW  500    	# Columns used in overview before the wrapping occurs
+BLOCK_REPORT_SIZE 4		# How many blocks you want to generate LD plots/reports for.
+
+MAX_SNP_DISTANCE 500000         # Max number of basepairs between two snps for consideration of LD
+CLOSE_POOLS_BETWEEN_DROPS Yes   # Required for working with large scale pool data
+
+FONT ./FreeMonoBold.ttf   #location of font to be used in report
+CSS_FILENAME /home/holziner/genomeSIMLA/genomesim.css            # Style sheet position
+
+LD_REPORT_BUFFER_SIZE 	50      # How many SNPs around the target block included in detailed view.
+WRITE_LD_REPORT		Yes	# Write each LD value into a text report
+DRAW_RSQUARED_PLOTS	Yes
+DRAW_DPRIME_PLOTS	Yes
+
+ 
+
+
+###############################################################################
+#                 Loci Generation                                             #
+###############################################################################
+
+
+##### Load a chromosome from file #####
+## LOAD_CHROMOSOME <locus file name> <chromosome label>
+#LOAD_CHROMOSOME metaDimSimTest.sim.450.sim_chr01.loc Chrom-01
+
+
+##### Define the chromosome ourselves #####
+
+## ADD_CHROMOSOME <#blocks> <label>
+ADD_CHROMOSOME 4 sim_chr01
+
+## ADD_BLOCK <min #SNPs> <max #SNPs> <between_block_min_recomb> <between_block_max_recomb> <within_block_min_recomb> <within_block_max_recomb> <frequency at which this definition is used>
+#ADD_BLOCK 20 50   0.0004 0.00006   0.000001 0.00001   .4
+ADD_BLOCK  25 25 0.01 0.05 0.001 0.005 0.25
+ADD_BLOCK  25 25 0.01 0.05 0.001 0.005 0.25
+ADD_BLOCK  25 25 0.01 0.05 0.001 0.005 0.25
+ADD_BLOCK  25 25 0.01 0.05 0.001 0.005 0.25
+
+## DEFAULT_BLOCK <min #SNPs> <max #SNPs> <between_block_min_recomb> <between_block_max_recomb> <within_block_min_recomb> <within_block_max_recomb>
+DEFAULT_BLOCK   5 100 0.0001 0.0005 1e-05 5e-05
+
+## Range for random allele frequencies at population initialization at generation zero.
+DEFAULT_ALLELE_FREQ 0.1 0.5
+
+## Force minor allele frequencies (use if you are defining chromosome manually and not advancing generations)
+## ALLELE_FREQUENCY <chr. index> <locus index> <minor allele freq>
+ALLELE_FREQUENCY 1 1 0.7 0.3
+ALLELE_FREQUENCY 1 50 0.7 0.3
+
+###############################################################################
+#                 Locus Reporting                                             #
+###############################################################################
+LOCUS_SELECTOR rare_loci 0.2 0.1 0.35 3 2 10 #Moderately rare loci in a block
+
+###############################################################################
+#                 Population                                                  #
+###############################################################################
+MAX_POOL_SIZE 	1000000	# Hard max for growth. a pool can not EVER exceed this number
+MIN_POOL_SIZE 	200000	# Hard minium for pool size. Only the initial population can fall below this value
+#POOL_SIZE       75000
+
+## GROWTH_RATE LOGISTIC <InitPopn> <variance> <GrowthRate> <CarryingCapacity>
+#GROWTH_RATE LINEAR 100000 0.03 1 500000
+
+## GROWTH_RATE RICHARDS A Var B C M T
+# GROWTH_RATE RICHARDS 500 0.03 0.01 900000 325 0.1
+
+GROWTH_RATE RICHARDS 600 0.00 0.010000 120000 335 0.200000
+###############################################################################
+#                 DATASETS                                                    #
+###############################################################################
+
+DATASET_COUNT  100
+BINARY_DATASETS	No		# compressed format usable by plato
+
+##### Defining case-control datasets: #####
+## DATASET CC <name> <num aff cases> <num unaff ctrls> <genotype error> <phenocopy error> <missing data>
+
+DATASET CC athena 2000 2000 0 0 0
+
+
+##### Defining pedigree datasets: #####
+## DATASET PED <name> <genotype error> <phenocopy error> <missing data>
+## DATASET FAMTYPE <num aff sibs> <num unaff sibs> <extra sibs> <number of families of this type>
+
+#DATASET PED fam1 0.01 0.001 0.005
+#DATASET FAMTYPE 1 1 0 250
+#DATASET FAMTYPE 1 0 0 200
+
+#USE_STD_PEDIGREE_HEADER ON	# When on, pedigree header is 20 columns. Otherwise it's 6
+
+
+###############################################################################
+#                 Model Generation                                            #
+###############################################################################
+
+# DEFINE_MODEL PENTABLE INDEX <model.smod file> <chromosome number> <SNP number>
+#  example: DEFINE_MODEL PENTABLE INDEX null.smod 1 5
+# 
+# DEFINE_MODEL PENTABLE LABEL <model.smod file> <locus name spelled exactly>
+#  example: DEFINE_MODEL PENTABLE LABEL null.smod rl-128
+
+DEFINE_MODEL PENTABLE INDEX disease.pen 1 10
+ 
