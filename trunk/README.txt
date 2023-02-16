@@ -37,3 +37,10 @@ to the FONT directive in the configuration file.
 
 Also, the default value for the FONT directive has changed to:
 /usr/share/fonts/liberation/LiberationMono-Bold.ttf
+
+Test genomeSIMLA
+====================
+
+To test with sample inputs, change to sample directory:
+cd sample
+./testGenomeSIMLA.sh
